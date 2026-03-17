@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/questionnaire", "dest": "/questionnaire.html" },
+    { "src": "/sondage", "dest": "/questionnaire.html" }
+  ]
+}

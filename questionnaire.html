@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scellia — Questionnaire de validation prix</title>
+<meta name="description" content="Aidez-nous à créer le meilleur service d'entraide pour l'envoi de colis entre l'Europe et la RDC. 3 minutes, anonyme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-90: #243656;
+  --navy-80: #2D4268;
+  --navy-dark: #111D33;
+  --coral: #E8624A;
+  --coral-light: #F07A65;
+  --coral-dark: #D04A32;
+  --coral-glow: rgba(232,98,74,0.12);
+  --orange: #F5943B;
+  --orange-light: #FEBA6A;
+  --gold: #D4A843;
+  --gold-light: #E8C76A;
+  --gold-soft: rgba(212,168,67,0.10);
+  --cream: #FFF9F5;
+  --warm-50: #FEF6F0;
+  --warm-100: #FCE8DA;
+  --warm-200: #F5D4C0;
+  --white: #FFFFFF;
+  --gray-50: #FAFAF9;
+  --gray-100: #F3F2F0;
+  --gray-200: #E5E3E0;
+  --gray-400: #9B978F;
+  --gray-600: #6B6760;
+  --gray-800: #2D2A26;
+  --green: #22A559;
+  --green-soft: #E6F7ED;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 1px 3px rgba(27,42,74,0.06);
+  --shadow-md: 0 4px 20px rgba(27,42,74,0.08);
+  --shadow-lg: 0 8px 36px rgba(27,42,74,0.10);
+  --shadow-coral: 0 8px 32px rgba(232,98,74,0.20);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--gray-800); line-height: 1.65; font-size: 16px;
+  background: var(--cream); -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy); line-height: 1.2; font-weight: 800; }
+
+/* ─── HEADER ─── */
+.header {
+  background: var(--navy); padding: 48px 24px 56px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.header::before {
+  content: ''; position: absolute; top: -40%; right: -15%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(232,98,74,0.18) 0%, rgba(245,148,59,0.08) 40%, transparent 70%);
+  border-radius: 50%;
+}
+.header::after {
+  content: ''; position: absolute; bottom: -50%; left: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 60%);
+  border-radius: 50%;
+}
+.header-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.header-logo {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none; margin-bottom: 28px;
+}
+.header-logo-mark {
+  width: 40px; height: 40px; background: rgba(255,255,255,0.12);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.header-logo-mark::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(to top, var(--coral), transparent); opacity: 0.7;
+}
+.header-logo-mark span { position: relative; z-index: 1; color: white; font-weight: 800; font-size: 20px; }
+.header-logo-text { font-weight: 800; font-size: 22px; color: white; letter-spacing: -0.5px; }
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,98,74,0.18); border: 1px solid rgba(232,98,74,0.3);
+  padding: 7px 18px; border-radius: 100px; margin-bottom: 20px;
+  font-size: 13px; color: var(--coral-light); font-weight: 600;
+}
+.header-badge .dot {
+  width: 8px; height: 8px; background: var(--green); border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+.header h1 {
+  font-size: clamp(28px, 4vw, 40px); color: white; margin-bottom: 16px; letter-spacing: -0.5px;
+}
+.header h1 .accent {
+  background: linear-gradient(135deg, var(--coral-light), var(--orange));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.header p {
+  font-size: 17px; color: rgba(255,255,255,0.65); max-width: 540px;
+  margin: 0 auto; line-height: 1.7;
+}
+.header-stats {
+  display: flex; justify-content: center; gap: 32px; margin-top: 28px;
+  flex-wrap: wrap;
+}
+.header-stat {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8);
+}
+.header-stat-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar-wrap {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gray-100);
+  padding: 14px 24px;
+}
+.progress-inner {
+  max-width: 720px; margin: 0 auto;
+  display: flex; align-items: center; gap: 16px;
+}
+.progress-text { font-size: 13px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+.progress-track {
+  flex: 1; height: 6px; background: var(--gray-100); border-radius: 6px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--coral), var(--orange));
+  border-radius: 6px; transition: width 0.4s ease;
+  width: 0%;
+}
+.progress-pct { font-size: 13px; font-weight: 700; color: var(--coral); min-width: 36px; text-align: right; }
+
+/* ─── FORM CONTAINER ─── */
+.form-container {
+  max-width: 720px; margin: 0 auto; padding: 32px 24px 64px;
+}
+
+/* ─── SECTION CARD ─── */
+.section-card {
+  background: white; border-radius: var(--radius-lg); padding: 36px 32px;
+  box-shadow: var(--shadow-sm); margin-bottom: 24px;
+  border: 1px solid var(--gray-100);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.section-card:hover { box-shadow: var(--shadow-md); }
+.section-card.active-section { border-color: var(--coral); box-shadow: 0 4px 24px rgba(232,98,74,0.08); }
+.section-header {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  padding-bottom: 20px; border-bottom: 2px solid var(--warm-50);
+}
+.section-num {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--navy); color: white;
+  font-size: 16px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.section-meta h2 { font-size: 18px; margin-bottom: 2px; }
+.section-meta span { font-size: 13px; color: var(--gray-400); font-weight: 500; }
+
+/* ─── QUESTION ─── */
+.question { margin-bottom: 28px; }
+.question:last-child { margin-bottom: 0; }
+.question-label {
+  display: block; font-size: 15px; font-weight: 700; color: var(--navy);
+  margin-bottom: 14px; line-height: 1.5;
+}
+.question-label .q-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--coral-glow); color: var(--coral);
+  font-size: 12px; font-weight: 800; margin-right: 8px; flex-shrink: 0;
+  vertical-align: middle;
+}
+.question-hint {
+  font-size: 13px; color: var(--gray-400); font-weight: 400;
+  margin-top: -8px; margin-bottom: 12px; font-style: italic;
+}
+
+/* ─── RADIO / CHECKBOX OPTIONS ─── */
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.option-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 12px;
+  border: 1.5px solid var(--gray-100);
+  cursor: pointer; transition: all 0.2s;
+  background: white;
+}
+.option-item:hover { border-color: var(--coral-light); background: var(--warm-50); }
+.option-item.selected { border-color: var(--coral); background: var(--coral-glow); }
+.option-item input[type="radio"],
+.option-item input[type="checkbox"] { display: none; }
+.option-radio {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--gray-200); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.option-item.selected .option-radio {
+  border-color: var(--coral); background: var(--coral);
+}
+.option-item.selected .option-radio::after {
+  content: ''; width: 8px; height: 8px; border-radius: 50%; background: white;
+}
+.option-check {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--gray-200); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-size: 12px; color: transparent;
+}
+.option-item.selected .option-check {
+  border-color: var(--coral); background: var(--coral); color: white;
+}
+.option-text { font-size: 14px; color: var(--gray-800); font-weight: 500; line-height: 1.4; }
+
+/* ─── RANKING (drag-style) ─── */
+.ranking-list { display: flex; flex-direction: column; gap: 8px; counter-reset: rank; }
+.ranking-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 12px;
+  border: 1.5px solid var(--gray-100); background: white;
+  cursor: grab; transition: all 0.2s; counter-increment: rank;
+}
+.ranking-item:hover { border-color: var(--coral-light); }
+.ranking-item.dragging { opacity: 0.5; border-color: var(--coral); }
+.ranking-item.drag-over { border-color: var(--coral); background: var(--coral-glow); }
+.rank-num {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--navy); color: white;
+  font-size: 13px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.rank-handle { color: var(--gray-400); font-size: 16px; margin-left: auto; cursor: grab; }
+.ranking-item .option-text { flex: 1; }
+
+/* ─── TEXT INPUT ─── */
+.text-input {
+  width: 100%; padding: 14px 18px; border-radius: 12px;
+  border: 1.5px solid var(--gray-200); font-family: inherit;
+  font-size: 15px; color: var(--gray-800);
+  transition: all 0.2s; background: white; outline: none;
+}
+.text-input:focus { border-color: var(--coral); box-shadow: 0 0 0 3px var(--coral-glow); }
+.text-input::placeholder { color: var(--gray-400); }
+
+/* ─── SECTION CRITIQUE BADGE ─── */
+.section-critique {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--coral), var(--orange));
+  color: white; padding: 4px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 8px;
+}
+
+/* ─── SUBMIT AREA ─── */
+.submit-card {
+  background: var(--navy); border-radius: var(--radius-xl); padding: 40px 32px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.submit-card::before {
+  content: ''; position: absolute; top: -30%; right: -20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232,98,74,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.submit-card h3 { color: white; font-size: 24px; margin-bottom: 12px; position: relative; z-index: 1; }
+.submit-card p {
+  color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 28px;
+  position: relative; z-index: 1; max-width: 460px; margin-left: auto; margin-right: auto;
+}
+.btn-submit {
+  background: var(--coral); color: white; border: none;
+  padding: 18px 48px; border-radius: 14px;
+  font-size: 17px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: all 0.25s;
+  box-shadow: var(--shadow-coral); position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-submit:hover { background: var(--coral-dark); transform: translateY(-2px); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ─── THANK YOU ─── */
+.thank-you {
+  display: none; text-align: center; padding: 80px 32px;
+  background: white; border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+.thank-you.visible { display: block; animation: fadeUp 0.5s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+.thank-you-icon {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--green-soft); color: var(--green);
+  font-size: 40px; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+}
+.thank-you h2 { font-size: 28px; margin-bottom: 12px; }
+.thank-you p { color: var(--gray-600); font-size: 16px; max-width: 440px; margin: 0 auto; line-height: 1.7; }
+
+/* ─── SHARE MESSAGE CARD ─── */
+.share-card {
+  background: white; border-radius: var(--radius-lg); padding: 28px;
+  box-shadow: var(--shadow-sm); margin-bottom: 24px;
+  border: 1px solid var(--warm-100); border-left: 4px solid var(--coral);
+}
+.share-card h3 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.share-card .msg-box {
+  background: var(--warm-50); border-radius: 12px; padding: 18px;
+  font-size: 14px; color: var(--gray-600); line-height: 1.7;
+  position: relative;
+}
+.copy-btn {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--coral); color: white; border: none;
+  padding: 6px 14px; border-radius: 8px; font-size: 12px;
+  font-weight: 700; cursor: pointer; font-family: inherit;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--coral-dark); }
+.copy-btn.copied { background: var(--green); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  .header { padding: 36px 20px 44px; }
+  .header h1 { font-size: 26px; }
+  .header-stats { gap: 16px; }
+  .section-card { padding: 24px 20px; }
+  .form-container { padding: 20px 16px 48px; }
+  .progress-inner { gap: 10px; }
+  .submit-card { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- BACK LINK -->
+<div style="background:var(--navy);padding:12px 24px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08)">
+  <a href="index.html" style="color:rgba(255,255,255,0.65);text-decoration:none;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">
+    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Retour sur le site Scellia
+  </a>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-content">
+    <div class="header-logo">
+      <div class="header-logo-mark"><span>S</span></div>
+      <span class="header-logo-text">Scellia</span>
+    </div>
+    <div class="header-badge"><span class="dot"></span> Etude de marche — Mars 2026</div>
+    <h1>Aidez-nous a creer <span class="accent">votre service d'envoi</span></h1>
+    <p>Ce questionnaire anonyme prend 3 minutes. Vos reponses nous aideront a concevoir un service d'entraide entre particuliers qui repond vraiment a vos attentes.</p>
+    <div class="header-stats">
+      <div class="header-stat"><div class="header-stat-icon">&#9201;</div> 3 min</div>
+      <div class="header-stat"><div class="header-stat-icon">&#128274;</div> Anonyme</div>
+      <div class="header-stat"><div class="header-stat-icon">&#128230;</div> 20 questions</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <span class="progress-text" id="progress-section">Section 1/5</span>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <span class="progress-pct" id="progress-pct">0%</span>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-container" id="form-container">
+
+  <!-- SHARE MESSAGE -->
+  <div class="share-card">
+    <h3>&#128172; Message de diffusion</h3>
+    <div class="msg-box" id="share-msg">
+      <button class="copy-btn" id="copy-btn" onclick="copyShareMsg()">Copier</button>
+      Bonjour la communaute ! Nous preparons un nouveau service d'entraide entre particuliers pour l'envoi de colis securise entre la France/Belgique et Kinshasa. Paiement securise, suivi de vol en temps reel, assurance colis incluse. Avant de lancer, nous souhaitons comprendre vos besoins et vos habitudes. Ce questionnaire anonyme prend 3 minutes. Vos reponses nous aideront a creer un service qui repond vraiment a vos attentes. Merci d'avance !
+    </div>
+  </div>
+
+  <!-- SECTION 1 — PROFIL -->
+  <div class="section-card" id="section-1" data-section="1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-meta">
+        <h2>Votre profil</h2>
+        <span>4 questions</span>
+      </div>
+    </div>
+
+    <div class="question" data-q="1">
+      <label class="question-label"><span class="q-num">1</span> Ou residez-vous actuellement ?</label>
+      <div class="options-list" data-type="radio" data-name="q1">
+        <label class="option-item"><input type="radio" name="q1" value="paris"><span class="option-radio"></span><span class="option-text">Paris / Ile-de-France</span></label>
+        <label class="option-item"><input type="radio" name="q1" value="bruxelles"><span class="option-radio"></span><span class="option-text">Bruxelles / Belgique</span></label>
+        <label class="option-item"><input type="radio" name="q1" value="france-autre"><span class="option-radio"></span><span class="option-text">Autre ville en France</span></label>
+        <label class="option-item"><input type="radio" name="q1" value="europe-autre"><span class="option-radio"></span><span class="option-text">Autre pays europeen</span></label>
+        <label class="option-item"><input type="radio" name="q1" value="autre"><span class="option-radio"></span><span class="option-text">Autre (precisez)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="2">
+      <label class="question-label"><span class="q-num">2</span> Quel est votre lien avec la RDC ?</label>
+      <div class="options-list" data-type="radio" data-name="q2">
+        <label class="option-item"><input type="radio" name="q2" value="congolais"><span class="option-radio"></span><span class="option-text">Je suis congolais(e) residant en Europe</span></label>
+        <label class="option-item"><input type="radio" name="q2" value="binational"><span class="option-radio"></span><span class="option-text">Je suis binational(e) (congolais et autre nationalite)</span></label>
+        <label class="option-item"><input type="radio" name="q2" value="famille"><span class="option-radio"></span><span class="option-text">J'ai de la famille en RDC</span></label>
+        <label class="option-item"><input type="radio" name="q2" value="pro"><span class="option-radio"></span><span class="option-text">J'ai des relations professionnelles en RDC</span></label>
+        <label class="option-item"><input type="radio" name="q2" value="autre"><span class="option-radio"></span><span class="option-text">Autre (precisez)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="3">
+      <label class="question-label"><span class="q-num">3</span> A quelle frequence envoyez-vous des colis ou des biens vers la RDC ?</label>
+      <div class="options-list" data-type="radio" data-name="q3">
+        <label class="option-item"><input type="radio" name="q3" value="plus-1x-mois"><span class="option-radio"></span><span class="option-text">Plus d'une fois par mois</span></label>
+        <label class="option-item"><input type="radio" name="q3" value="1x-mois"><span class="option-radio"></span><span class="option-text">1 fois par mois</span></label>
+        <label class="option-item"><input type="radio" name="q3" value="1x-2-3-mois"><span class="option-radio"></span><span class="option-text">1 fois tous les 2-3 mois</span></label>
+        <label class="option-item"><input type="radio" name="q3" value="3-4x-an"><span class="option-radio"></span><span class="option-text">3-4 fois par an</span></label>
+        <label class="option-item"><input type="radio" name="q3" value="1-2x-an"><span class="option-radio"></span><span class="option-text">1-2 fois par an</span></label>
+        <label class="option-item"><input type="radio" name="q3" value="jamais"><span class="option-radio"></span><span class="option-text">Jamais (passez directement a la question Q15)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="4">
+      <label class="question-label"><span class="q-num">4</span> Voyagez-vous personnellement vers la RDC ?</label>
+      <div class="options-list" data-type="radio" data-name="q4">
+        <label class="option-item"><input type="radio" name="q4" value="3plus"><span class="option-radio"></span><span class="option-text">Plus de 3 fois par an</span></label>
+        <label class="option-item"><input type="radio" name="q4" value="2-3"><span class="option-radio"></span><span class="option-text">2-3 fois par an</span></label>
+        <label class="option-item"><input type="radio" name="q4" value="1x"><span class="option-radio"></span><span class="option-text">1 fois par an</span></label>
+        <label class="option-item"><input type="radio" name="q4" value="moins-1"><span class="option-radio"></span><span class="option-text">Moins d'une fois par an</span></label>
+        <label class="option-item"><input type="radio" name="q4" value="jamais"><span class="option-radio"></span><span class="option-text">Jamais</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 — HABITUDES D'ENVOI -->
+  <div class="section-card" id="section-2" data-section="2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-meta">
+        <h2>Vos habitudes d'envoi actuelles</h2>
+        <span>5 questions</span>
+      </div>
+    </div>
+
+    <div class="question" data-q="5">
+      <label class="question-label"><span class="q-num">5</span> Comment envoyez-vous habituellement vos colis vers la RDC ?</label>
+      <p class="question-hint">Plusieurs reponses possibles</p>
+      <div class="options-list" data-type="checkbox" data-name="q5">
+        <label class="option-item"><input type="checkbox" name="q5" value="ami"><span class="option-check"></span><span class="option-text">Par un voyageur que je connais personnellement (famille, ami)</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="gp"><span class="option-check"></span><span class="option-text">Par un GP (voyageur trouve via WhatsApp/Facebook)</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="transitaire"><span class="option-check"></span><span class="option-text">Via un transitaire diaspora (KPM-TLC, Kin Paris Services, Zexfret, autre)</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="dhl"><span class="option-check"></span><span class="option-text">Via DHL, FedEx ou UPS</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="poste"><span class="option-check"></span><span class="option-text">Via La Poste / Colissimo</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="plateforme"><span class="option-check"></span><span class="option-text">Via une plateforme en ligne (Colis GP, Colisdays, autre)</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="moi-meme"><span class="option-check"></span><span class="option-text">J'apporte les colis moi-meme quand je voyage</span></label>
+        <label class="option-item"><input type="checkbox" name="q5" value="autre"><span class="option-check"></span><span class="option-text">Autre (precisez)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="6">
+      <label class="question-label"><span class="q-num">6</span> Combien payez-vous actuellement par kilo pour envoyer un colis vers Kinshasa ?</label>
+      <div class="options-list" data-type="radio" data-name="q6">
+        <label class="option-item"><input type="radio" name="q6" value="moins-10"><span class="option-radio"></span><span class="option-text">Moins de 10 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q6" value="10-12"><span class="option-radio"></span><span class="option-text">10-12 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q6" value="13-15"><span class="option-radio"></span><span class="option-text">13-15 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q6" value="15-18"><span class="option-radio"></span><span class="option-text">15-18 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q6" value="18-20"><span class="option-radio"></span><span class="option-text">18-20 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q6" value="plus-20"><span class="option-radio"></span><span class="option-text">Plus de 20 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q6" value="nsp"><span class="option-radio"></span><span class="option-text">Je ne sais pas exactement</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="7">
+      <label class="question-label"><span class="q-num">7</span> Quel poids moyen font vos envois habituels ?</label>
+      <div class="options-list" data-type="radio" data-name="q7">
+        <label class="option-item"><input type="radio" name="q7" value="moins-5"><span class="option-radio"></span><span class="option-text">Moins de 5 kg</span></label>
+        <label class="option-item"><input type="radio" name="q7" value="5-10"><span class="option-radio"></span><span class="option-text">5-10 kg</span></label>
+        <label class="option-item"><input type="radio" name="q7" value="10-15"><span class="option-radio"></span><span class="option-text">10-15 kg</span></label>
+        <label class="option-item"><input type="radio" name="q7" value="15-23"><span class="option-radio"></span><span class="option-text">15-23 kg (1 bagage)</span></label>
+        <label class="option-item"><input type="radio" name="q7" value="plus-23"><span class="option-radio"></span><span class="option-text">Plus de 23 kg</span></label>
+        <label class="option-item"><input type="radio" name="q7" value="variable"><span class="option-radio"></span><span class="option-text">Variable selon les envois</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="8">
+      <label class="question-label"><span class="q-num">8</span> Qu'envoyez-vous le plus souvent ?</label>
+      <p class="question-hint">Plusieurs reponses possibles</p>
+      <div class="options-list" data-type="checkbox" data-name="q8">
+        <label class="option-item"><input type="checkbox" name="q8" value="vetements"><span class="option-check"></span><span class="option-text">Vetements et chaussures</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="tech"><span class="option-check"></span><span class="option-text">Telephones, tablettes, ordinateurs</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="cosmetiques"><span class="option-check"></span><span class="option-text">Cosmetiques et produits capillaires</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="medicaments"><span class="option-check"></span><span class="option-text">Medicaments</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="alimentaire"><span class="option-check"></span><span class="option-text">Denrees alimentaires (non perissables)</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="documents"><span class="option-check"></span><span class="option-text">Documents</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="enfants"><span class="option-check"></span><span class="option-text">Jouets et articles pour enfants</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="menager"><span class="option-check"></span><span class="option-text">Articles menagers</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="pieces"><span class="option-check"></span><span class="option-text">Pieces detachees</span></label>
+        <label class="option-item"><input type="checkbox" name="q8" value="autre"><span class="option-check"></span><span class="option-text">Autre (precisez)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="9">
+      <label class="question-label"><span class="q-num">9</span> Quelle est la valeur moyenne de vos envois ?</label>
+      <div class="options-list" data-type="radio" data-name="q9">
+        <label class="option-item"><input type="radio" name="q9" value="moins-50"><span class="option-radio"></span><span class="option-text">Moins de 50 EUR</span></label>
+        <label class="option-item"><input type="radio" name="q9" value="50-100"><span class="option-radio"></span><span class="option-text">50-100 EUR</span></label>
+        <label class="option-item"><input type="radio" name="q9" value="100-200"><span class="option-radio"></span><span class="option-text">100-200 EUR</span></label>
+        <label class="option-item"><input type="radio" name="q9" value="200-500"><span class="option-radio"></span><span class="option-text">200-500 EUR</span></label>
+        <label class="option-item"><input type="radio" name="q9" value="plus-500"><span class="option-radio"></span><span class="option-text">Plus de 500 EUR</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — PROBLEMES RENCONTRES -->
+  <div class="section-card" id="section-3" data-section="3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-meta">
+        <h2>Les problemes rencontres</h2>
+        <span>3 questions</span>
+      </div>
+    </div>
+
+    <div class="question" data-q="10">
+      <label class="question-label"><span class="q-num">10</span> Avez-vous deja rencontre des problemes avec l'envoi de colis vers la RDC ?</label>
+      <p class="question-hint">Plusieurs reponses possibles</p>
+      <div class="options-list" data-type="checkbox" data-name="q10">
+        <label class="option-item"><input type="checkbox" name="q10" value="perdu"><span class="option-check"></span><span class="option-text">Colis perdu (jamais arrive)</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="endommage"><span class="option-check"></span><span class="option-text">Colis endommage ou articles manquants</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="injoignable"><span class="option-check"></span><span class="option-text">Voyageur/GP injoignable apres le depart</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="retard"><span class="option-check"></span><span class="option-text">Retard important (plus de 2 semaines)</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="douane"><span class="option-check"></span><span class="option-text">Probleme de douane a Kinshasa (saisie, taxes imprevues)</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="escroquerie"><span class="option-check"></span><span class="option-text">Escroquerie (paiement sans livraison)</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="prix"><span class="option-check"></span><span class="option-text">Prix final plus eleve que prevu</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="aucun"><span class="option-check"></span><span class="option-text">Aucun probleme rencontre</span></label>
+        <label class="option-item"><input type="checkbox" name="q10" value="autre"><span class="option-check"></span><span class="option-text">Autre (precisez)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="11">
+      <label class="question-label"><span class="q-num">11</span> A quelle frequence rencontrez-vous des problemes ?</label>
+      <div class="options-list" data-type="radio" data-name="q11">
+        <label class="option-item"><input type="radio" name="q11" value="chaque-fois"><span class="option-radio"></span><span class="option-text">A chaque envoi ou presque</span></label>
+        <label class="option-item"><input type="radio" name="q11" value="1-sur-3"><span class="option-radio"></span><span class="option-text">Environ 1 fois sur 3</span></label>
+        <label class="option-item"><input type="radio" name="q11" value="1-sur-5"><span class="option-radio"></span><span class="option-text">Environ 1 fois sur 5</span></label>
+        <label class="option-item"><input type="radio" name="q11" value="rarement"><span class="option-radio"></span><span class="option-text">Rarement (moins de 1 fois sur 10)</span></label>
+        <label class="option-item"><input type="radio" name="q11" value="jamais"><span class="option-radio"></span><span class="option-text">Jamais</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="12">
+      <label class="question-label"><span class="q-num">12</span> Quand un probleme survient, comment le resolvez-vous ?</label>
+      <div class="options-list" data-type="radio" data-name="q12">
+        <label class="option-item"><input type="radio" name="q12" value="contact-voyageur"><span class="option-radio"></span><span class="option-text">Je contacte directement le voyageur/GP</span></label>
+        <label class="option-item"><input type="radio" name="q12" value="aucun-recours"><span class="option-radio"></span><span class="option-text">Je n'ai aucun recours</span></label>
+        <label class="option-item"><input type="radio" name="q12" value="intermediaire"><span class="option-radio"></span><span class="option-text">Je passe par un intermediaire (ami commun, communaute)</span></label>
+        <label class="option-item"><input type="radio" name="q12" value="abandon"><span class="option-radio"></span><span class="option-text">J'abandonne et j'accepte la perte</span></label>
+        <label class="option-item"><input type="radio" name="q12" value="autre"><span class="option-radio"></span><span class="option-text">Autre (precisez)</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — PRIX ET VALEUR -->
+  <div class="section-card" id="section-4" data-section="4">
+    <div class="section-header">
+      <div class="section-num" style="background: linear-gradient(135deg, var(--coral), var(--orange));">4</div>
+      <div class="section-meta">
+        <h2>Le prix et la valeur <span class="section-critique">Section critique</span></h2>
+        <span>5 questions</span>
+      </div>
+    </div>
+
+    <div class="question" data-q="13">
+      <label class="question-label"><span class="q-num">13</span> Si un service d'entraide entre particuliers vous proposait d'envoyer vos colis vers Kinshasa avec les garanties suivantes : suivi de vol en temps reel, paiement securise (vous ne payez que si le colis arrive), photos de votre colis a chaque etape, assurance colis incluse en cas de perte ou dommage — quel prix maximum seriez-vous pret(e) a payer par kilo ?</label>
+      <div class="options-list" data-type="radio" data-name="q13">
+        <label class="option-item"><input type="radio" name="q13" value="moins-10"><span class="option-radio"></span><span class="option-text">Moins de 10 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q13" value="10-11"><span class="option-radio"></span><span class="option-text">10-11 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q13" value="12-13"><span class="option-radio"></span><span class="option-text">12-13 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q13" value="14-15"><span class="option-radio"></span><span class="option-text">14-15 EUR/kg (assurance comprise)</span></label>
+        <label class="option-item"><input type="radio" name="q13" value="16-18"><span class="option-radio"></span><span class="option-text">16-18 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q13" value="plus-18"><span class="option-radio"></span><span class="option-text">Plus de 18 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q13" value="tout-prix"><span class="option-radio"></span><span class="option-text">Quel que soit le prix si la securite est garantie</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="14">
+      <label class="question-label"><span class="q-num">14</span> Par rapport a ce que vous payez aujourd'hui a un GP, seriez-vous pret(e) a payer un peu plus pour avoir ces garanties (paiement securise, assurance colis, suivi) ?</label>
+      <div class="options-list" data-type="radio" data-name="q14">
+        <label class="option-item"><input type="radio" name="q14" value="1-2-plus"><span class="option-radio"></span><span class="option-text">Oui, je paierais 1-2 EUR/kg de plus pour la securite</span></label>
+        <label class="option-item"><input type="radio" name="q14" value="3-5-plus"><span class="option-radio"></span><span class="option-text">Oui, je paierais 3-5 EUR/kg de plus</span></label>
+        <label class="option-item"><input type="radio" name="q14" value="meme-prix"><span class="option-radio"></span><span class="option-text">Non, je veux payer le meme prix ou moins</span></label>
+        <label class="option-item"><input type="radio" name="q14" value="prix-seul"><span class="option-radio"></span><span class="option-text">Non, le prix est le seul critere qui compte pour moi</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="15">
+      <label class="question-label"><span class="q-num">15</span> Quel est le critere le plus important pour vous quand vous envoyez un colis ?</label>
+      <p class="question-hint">Faites glisser pour classer de 1 (le plus important) a 5</p>
+      <div class="ranking-list" id="ranking-q15">
+        <div class="ranking-item" draggable="true" data-rank-value="prix"><span class="rank-num">1</span><span class="option-text">Le prix au kilo</span><span class="rank-handle">&#9776;</span></div>
+        <div class="ranking-item" draggable="true" data-rank-value="certitude"><span class="rank-num">2</span><span class="option-text">La certitude que le colis arrivera</span><span class="rank-handle">&#9776;</span></div>
+        <div class="ranking-item" draggable="true" data-rank-value="rapidite"><span class="rank-num">3</span><span class="option-text">La rapidite de remise</span><span class="rank-handle">&#9776;</span></div>
+        <div class="ranking-item" draggable="true" data-rank-value="suivi"><span class="rank-num">4</span><span class="option-text">La possibilite de suivre le colis en temps reel</span><span class="rank-handle">&#9776;</span></div>
+        <div class="ranking-item" draggable="true" data-rank-value="assurance"><span class="rank-num">5</span><span class="option-text">L'existence d'une assurance / d'un remboursement si probleme</span><span class="rank-handle">&#9776;</span></div>
+      </div>
+    </div>
+
+    <div class="question" data-q="16">
+      <label class="question-label"><span class="q-num">16</span> Si vous etes voyageur : accepteriez-vous de transporter des colis verifies pour d'autres personnes contre remuneration, si le contenu est controle et le paiement garanti ?</label>
+      <div class="options-list" data-type="radio" data-name="q16">
+        <label class="option-item"><input type="radio" name="q16" value="oui"><span class="option-radio"></span><span class="option-text">Oui, certainement</span></label>
+        <label class="option-item"><input type="radio" name="q16" value="oui-prix"><span class="option-radio"></span><span class="option-text">Oui, si le prix est interessant</span></label>
+        <label class="option-item"><input type="radio" name="q16" value="peut-etre"><span class="option-radio"></span><span class="option-text">Peut-etre, j'aurais des questions</span></label>
+        <label class="option-item"><input type="radio" name="q16" value="non"><span class="option-radio"></span><span class="option-text">Non, trop de risques</span></label>
+        <label class="option-item"><input type="radio" name="q16" value="ne-voyage-pas"><span class="option-radio"></span><span class="option-text">Je ne voyage pas vers la RDC</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="17">
+      <label class="question-label"><span class="q-num">17</span> Voyageurs : quel montant minimum par kilo transporte vous inciterait a accepter ?</label>
+      <div class="options-list" data-type="radio" data-name="q17">
+        <label class="option-item"><input type="radio" name="q17" value="5-7"><span class="option-radio"></span><span class="option-text">5-7 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q17" value="8-10"><span class="option-radio"></span><span class="option-text">8-10 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q17" value="11-13"><span class="option-radio"></span><span class="option-text">11-13 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q17" value="plus-13"><span class="option-radio"></span><span class="option-text">Plus de 13 EUR/kg</span></label>
+        <label class="option-item"><input type="radio" name="q17" value="confiance"><span class="option-radio"></span><span class="option-text">Ce n'est pas une question de prix, c'est une question de confiance</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 — L'APPLICATION -->
+  <div class="section-card" id="section-5" data-section="5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-meta">
+        <h2>L'application</h2>
+        <span>3 questions</span>
+      </div>
+    </div>
+
+    <div class="question" data-q="18">
+      <label class="question-label"><span class="q-num">18</span> Utiliseriez-vous une application mobile pour envoyer vos colis vers la RDC de maniere securisee ?</label>
+      <div class="options-list" data-type="radio" data-name="q18">
+        <label class="option-item"><input type="radio" name="q18" value="oui-immediat"><span class="option-radio"></span><span class="option-text">Oui, immediatement</span></label>
+        <label class="option-item"><input type="radio" name="q18" value="oui-proches"><span class="option-radio"></span><span class="option-text">Oui, si des proches l'ont testee et approuvee</span></label>
+        <label class="option-item"><input type="radio" name="q18" value="peut-etre"><span class="option-radio"></span><span class="option-text">Peut-etre, je voudrais d'abord voir comment ca fonctionne</span></label>
+        <label class="option-item"><input type="radio" name="q18" value="non"><span class="option-radio"></span><span class="option-text">Non, je prefere les contacts directs (WhatsApp, en personne)</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="19">
+      <label class="question-label"><span class="q-num">19</span> Quelles fonctionnalites vous sembleraient les plus importantes dans cette application ?</label>
+      <p class="question-hint">Plusieurs reponses possibles</p>
+      <div class="options-list" data-type="checkbox" data-name="q19">
+        <label class="option-item"><input type="checkbox" name="q19" value="photos"><span class="option-check"></span><span class="option-text">Photos du colis a chaque etape</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="suivi"><span class="option-check"></span><span class="option-text">Suivi en temps reel (comme un colis DHL)</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="paiement"><span class="option-check"></span><span class="option-text">Paiement securise (je ne paie que si le colis arrive)</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="kyc"><span class="option-check"></span><span class="option-text">Verification d'identite des voyageurs</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="avis"><span class="option-check"></span><span class="option-text">Notation et avis sur les voyageurs</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="assurance"><span class="option-check"></span><span class="option-text">Assurance colis incluse</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="simulateur"><span class="option-check"></span><span class="option-text">Estimation du prix avant envoi (simulateur)</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="chat"><span class="option-check"></span><span class="option-text">Chat avec le voyageur dans l'app</span></label>
+        <label class="option-item"><input type="checkbox" name="q19" value="preuve"><span class="option-check"></span><span class="option-text">Preuve de remise avec photo</span></label>
+      </div>
+    </div>
+
+    <div class="question" data-q="20">
+      <label class="question-label"><span class="q-num">20</span> Laissez-nous votre email ou numero WhatsApp si vous souhaitez etre informe(e) du lancement et beneficier d'un tarif preferentiel.</label>
+      <p class="question-hint">Champ facultatif</p>
+      <input type="text" class="text-input" name="q20" placeholder="email@exemple.com ou +33 6 XX XX XX XX" id="q20-input">
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-card" id="submit-card">
+    <h3>Merci pour votre temps !</h3>
+    <p>Vos reponses nous aident a construire un service d'entraide qui repond vraiment aux besoins de la communaute.</p>
+    <button class="btn-submit" id="submit-btn" onclick="submitForm()">
+      Envoyer mes reponses <span>&#8594;</span>
+    </button>
+  </div>
+
+  <!-- THANK YOU (hidden by default) -->
+  <div class="thank-you" id="thank-you">
+    <div class="thank-you-icon">&#10003;</div>
+    <h2>Reponses enregistrees !</h2>
+    <p>Merci pour votre contribution. Ensemble, nous construisons un service d'entraide qui change la donne pour la diaspora. Si vous avez laisse vos coordonnees, nous vous contacterons au lancement.</p>
+  </div>
+
+</div>
+
+<!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// Initialize Supabase Client
+const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ─── Skip logic Q3 : si "Jamais", masquer sections 2-3 et aller a section 4 ───
+function applySkipLogic(inputName, inputValue) {
+  if (inputName === 'q3') {
+    const sec2 = document.getElementById('section-2');
+    const sec3 = document.getElementById('section-3');
+    if (inputValue === 'jamais') {
+      sec2.style.opacity = '0.4';
+      sec2.style.pointerEvents = 'none';
+      sec3.style.opacity = '0.4';
+      sec3.style.pointerEvents = 'none';
+      setTimeout(function() {
+        document.getElementById('section-4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 350);
+    } else {
+      sec2.style.opacity = '';
+      sec2.style.pointerEvents = '';
+      sec3.style.opacity = '';
+      sec3.style.pointerEvents = '';
+    }
+  }
+}
+
+// ─── Option selection logic ───
+document.querySelectorAll('.option-item').forEach(item => {
+  item.addEventListener('click', function() {
+    const input = this.querySelector('input');
+    if (input.type === 'radio') {
+      const name = input.name;
+      document.querySelectorAll('input[name="' + name + '"]').forEach(r => {
+        r.closest('.option-item').classList.remove('selected');
+      });
+      input.checked = true;
+      this.classList.add('selected');
+      applySkipLogic(name, input.value);
+    } else {
+      input.checked = !input.checked;
+      this.classList.toggle('selected', input.checked);
+    }
+    updateProgress();
+  });
+});
+
+// ─── Drag-and-drop ranking ───
+const rankingList = document.getElementById('ranking-q15');
+if (rankingList) {
+  let dragSrc = null;
+  rankingList.querySelectorAll('.ranking-item').forEach(item => {
+    item.addEventListener('dragstart', function(e) {
+      dragSrc = this;
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    item.addEventListener('dragend', function() {
+      this.classList.remove('dragging');
+      rankingList.querySelectorAll('.ranking-item').forEach(el => el.classList.remove('drag-over'));
+      updateRankNums();
+    });
+    item.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      this.classList.add('drag-over');
+    });
+    item.addEventListener('dragleave', function() {
+      this.classList.remove('drag-over');
+    });
+    item.addEventListener('drop', function(e) {
+      e.preventDefault();
+      if (dragSrc !== this) {
+        const allItems = [...rankingList.querySelectorAll('.ranking-item')];
+        const fromIdx = allItems.indexOf(dragSrc);
+        const toIdx = allItems.indexOf(this);
+        if (fromIdx < toIdx) {
+          rankingList.insertBefore(dragSrc, this.nextSibling);
+        } else {
+          rankingList.insertBefore(dragSrc, this);
+        }
+      }
+      this.classList.remove('drag-over');
+      updateRankNums();
+    });
+    // Touch support
+    let touchY = 0;
+    item.addEventListener('touchstart', function(e) {
+      dragSrc = this;
+      touchY = e.touches[0].clientY;
+      this.classList.add('dragging');
+    }, {passive: true});
+    item.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const elBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (elBelow) {
+        const targetItem = elBelow.closest('.ranking-item');
+        rankingList.querySelectorAll('.ranking-item').forEach(el => el.classList.remove('drag-over'));
+        if (targetItem && targetItem !== dragSrc) {
+          targetItem.classList.add('drag-over');
+        }
+      }
+    }, {passive: false});
+    item.addEventListener('touchend', function(e) {
+      this.classList.remove('dragging');
+      const overItem = rankingList.querySelector('.drag-over');
+      if (overItem && overItem !== dragSrc) {
+        const allItems = [...rankingList.querySelectorAll('.ranking-item')];
+        const fromIdx = allItems.indexOf(dragSrc);
+        const toIdx = allItems.indexOf(overItem);
+        if (fromIdx < toIdx) {
+          rankingList.insertBefore(dragSrc, overItem.nextSibling);
+        } else {
+          rankingList.insertBefore(dragSrc, overItem);
+        }
+      }
+      rankingList.querySelectorAll('.ranking-item').forEach(el => el.classList.remove('drag-over'));
+      updateRankNums();
+    });
+  });
+}
+
+function updateRankNums() {
+  rankingList.querySelectorAll('.ranking-item').forEach((item, i) => {
+    item.querySelector('.rank-num').textContent = i + 1;
+  });
+}
+
+// ─── Progress tracking ───
+const totalQuestions = 20;
+function updateProgress() {
+  let answered = 0;
+  // Count radio groups answered
+  const radioGroups = new Set();
+  document.querySelectorAll('input[type="radio"]:checked').forEach(r => {
+    radioGroups.add(r.name);
+  });
+  answered += radioGroups.size;
+  // Count checkbox groups with at least one checked
+  const checkGroups = new Set();
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(c => {
+    checkGroups.add(c.name);
+  });
+  answered += checkGroups.size;
+  // Q15 ranking always counts as 1
+  answered += 1;
+  // Q20 text field
+  const q20 = document.getElementById('q20-input');
+  if (q20 && q20.value.trim()) answered += 1;
+
+  const pct = Math.min(Math.round((answered / totalQuestions) * 100), 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+
+  // Update section indicator
+  const sections = document.querySelectorAll('.section-card');
+  let currentSection = 1;
+  sections.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight / 2) {
+      currentSection = parseInt(s.dataset.section);
+    }
+  });
+  document.getElementById('progress-section').textContent = 'Section ' + currentSection + '/5';
+}
+
+// Update progress on scroll for section indicator
+window.addEventListener('scroll', function() {
+  const sections = document.querySelectorAll('.section-card');
+  let currentSection = 1;
+  sections.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight / 2) {
+      currentSection = parseInt(s.dataset.section);
+    }
+  });
+  document.getElementById('progress-section').textContent = 'Section ' + currentSection + '/5';
+});
+
+// Update on text input
+const q20Input = document.getElementById('q20-input');
+if (q20Input) q20Input.addEventListener('input', updateProgress);
+
+// Initial progress
+updateProgress();
+
+// ─── Copy share message ───
+function copyShareMsg() {
+  const msg = document.getElementById('share-msg').innerText.replace('Copier', '').trim();
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copie !';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ─── Submit ───
+async function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = 'Enregistrement...';
+  btn.disabled = true;
+
+  // Collect all responses
+  const responses = {};
+  document.querySelectorAll('input[type="radio"]:checked').forEach(r => {
+    responses[r.name] = r.value;
+  });
+  document.querySelectorAll('.options-list[data-type="checkbox"]').forEach(list => {
+    const name = list.dataset.name;
+    const checked = [];
+    list.querySelectorAll('input:checked').forEach(c => checked.push(c.value));
+    if (checked.length) responses[name] = checked;
+  });
+  // Ranking
+  const rankItems = document.querySelectorAll('#ranking-q15 .ranking-item');
+  responses.q15_ranking = [...rankItems].map(item => item.dataset.rankValue);
+  // Text
+  const q20Val = document.getElementById('q20-input').value.trim();
+  if (q20Val) responses.q20 = q20Val;
+
+  console.log('Reponses questionnaire Scellia:', JSON.stringify(responses, null, 2));
+
+  try {
+    const { error } = await supabase
+      .from('questionnaire_responses')
+      .insert([{ responses: responses }]);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      alert("Une erreur s'est produite lors de l'enregistrement de vos réponses. Veuillez réessayer.");
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      return;
+    }
+
+    // Success - Show thank you
+    document.getElementById('submit-card').style.display = 'none';
+    document.querySelectorAll('.section-card').forEach(s => s.style.display = 'none');
+    document.querySelector('.share-card').style.display = 'none';
+    const ty = document.getElementById('thank-you');
+    ty.classList.add('visible');
+    ty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Set progress to 100%
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-pct').textContent = '100%';
+    document.getElementById('progress-section').textContent = 'Termine !';
+
+  } catch (err) {
+    console.error('Unexpected error:', err);
+    alert("Une erreur inattendue s'est produite.");
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
+}
+
+// ─── Active section highlight on scroll ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.section-card').forEach(s => s.classList.remove('active-section'));
+      entry.target.classList.add('active-section');
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.section-card').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
