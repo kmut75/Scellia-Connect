@@ -166,6 +166,83 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
   transition: all 0.25s;
 }
 .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+.btn-prototype {
+  background: transparent; color: rgba(255,255,255,0.72); padding: 16px 28px;
+  border-radius: 12px; font-size: 15px; font-weight: 600;
+  text-decoration: none; border: 1px solid rgba(212,168,67,0.35);
+  transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-prototype:hover {
+  background: rgba(212,168,67,0.10); border-color: rgba(212,168,67,0.65);
+  color: var(--gold); transform: translateY(-1px);
+}
+/* ─── Hero counter ─── */
+.hero-counter {
+  margin-top: 20px;
+  display: inline-flex !important;
+  animation: fadeInUp 0.5s ease both;
+}
+.hero-counter-inner {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 50px; padding: 7px 16px 7px 8px;
+  backdrop-filter: blur(10px);
+}
+.hero-counter-avatars { display: flex; }
+.hca {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 11px; font-weight: 700;
+  margin-right: -6px; border: 2px solid rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+.hero-counter-avatars .hca:last-child { margin-right: 0; }
+.hero-counter-num {
+  font-weight: 800; font-size: 15px; color: var(--gold);
+}
+.hero-counter-label {
+  font-size: 13px; color: rgba(255,255,255,0.72); font-weight: 500;
+}
+.hero-counter-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34,165,89,0.25);
+  animation: pulse-green 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-green {
+  0%,100% { box-shadow: 0 0 0 3px rgba(34,165,89,0.25); }
+  50%      { box-shadow: 0 0 0 6px rgba(34,165,89,0.10); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+/* Final-count amélioré */
+.final-count {
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.final-count.has-data {
+  font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 600;
+}
+.final-count .live-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34,165,89,0.3);
+  display: inline-block; animation: pulse-green 2s infinite;
+}
+/* Nav prototype link */
+.nav-prototype {
+  font-size: 14px; font-weight: 600; color: var(--navy);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--gold); border-radius: 8px; padding: 5px 12px;
+  transition: all 0.2s; background: var(--gold-soft);
+}
+.nav-prototype:hover { background: rgba(212,168,67,0.18); color: var(--navy); transform: translateY(-1px); }
 
 /* Hero card */
 .hero-visual { display: flex; justify-content: center; position: relative; }
@@ -241,8 +318,8 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
   font-size: 13px; font-weight: 700; color: var(--navy);
   animation: float 3s ease-in-out infinite;
 }
-.float-badge.a { top: -12px; right: -20px; animation-delay: 0s; }
-.float-badge.b { bottom: -12px; left: -20px; animation-delay: 1.5s; }
+.float-badge.a { top: -18px; right: -48px; animation-delay: 0s; }
+.float-badge.b { bottom: -18px; left: -48px; animation-delay: 1.5s; }
 @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)} }
 .float-icon {
   width: 36px; height: 36px; border-radius: 10px;
@@ -656,6 +733,8 @@ section { padding: 100px 0; }
       <a href="#tarif">Tarif</a>
       <a href="#corridor">Corridors</a>
       <a href="questionnaire.html" style="color:var(--coral);font-weight:700">&#128203; Sondage</a>
+      <!-- PROTOTYPE_URL : remplacer par l'URL Vercel après déploiement -->
+      <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="nav-prototype">&#128295; Prototype</a>
       <a href="#rejoindre" class="nav-cta">Rejoindre la liste d'attente</a>
     </div>
     <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
@@ -681,6 +760,26 @@ section { padding: 100px 0; }
           Envoyer un colis
         </a>
         <a href="#voyageur" class="btn-ghost">Je suis voyageur</a>
+        <!-- PROTOTYPE_URL : remplacer par l'URL Vercel après déploiement -->
+        <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="btn-prototype">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Voir la maquette interactive
+        </a>
+      </div>
+      <!-- Compteur temps réel waitlist -->
+      <div class="hero-counter" id="hero-counter" style="display:none;">
+        <div class="hero-counter-inner">
+          <div class="hero-counter-avatars">
+            <div class="hca" style="background:linear-gradient(135deg,#E8624A,#F5943B)">M</div>
+            <div class="hca" style="background:linear-gradient(135deg,#1B2A4A,#2D4268)">J</div>
+            <div class="hca" style="background:linear-gradient(135deg,#D4A843,#E8C76A)">S</div>
+          </div>
+          <div>
+            <span class="hero-counter-num" id="hero-counter-num">—</span>
+            <span class="hero-counter-label"> personnes sur la liste d'attente</span>
+          </div>
+          <div class="hero-counter-dot"></div>
+        </div>
       </div>
     </div>
     <div class="hero-visual">
@@ -974,33 +1073,169 @@ section { padding: 100px 0; }
 <section id="faq">
   <div class="container text-center">
     <div class="section-tag">FAQ</div>
-    <h2 class="section-title">Vos questions, nos reponses</h2>
-    <p class="section-desc ctr" style="margin-bottom:40px">Tout ce qu'il faut savoir sur le service d'entraide.</p>
+    <h2 class="section-title">Vos questions, nos réponses</h2>
+    <p class="section-desc ctr" style="margin-bottom:40px">Tout ce qu'il faut savoir avant d'envoyer votre premier colis ou de proposer votre premier trajet.</p>
     <div class="faq-list">
+
+      <!-- ── LÉGALITÉ ── -->
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Est-ce legal de transporter des colis dans ses bagages ?<span class="faq-chev">&#9660;</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Oui. Chaque passager est responsable du contenu de ses bagages (articles 4-1-9 et 5-4-1 du DGAC). Notre service structure cette pratique avec des verifications de contenu obligatoires, des photos a chaque etape, et une liste stricte d'articles interdits. Le voyageur conserve le plein controle de ce qu'il accepte de transporter.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Est-ce légal de transporter des colis dans ses bagages ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Oui, tout à fait.</strong> Le transport de biens pour autrui dans ses bagages personnels est une pratique courante et légale, encadrée par la réglementation aérienne. Chaque passager est légalement responsable du contenu de ses bagages — c'est précisément pourquoi Scellia exige une vérification du contenu avant toute acceptation.
+          <br><br>
+          Concrètement, le voyageur inspecte le colis, prend des photos avant de fermer le bagage, et atteste avoir vérifié l'absence d'articles interdits. Cette procédure est conforme aux exigences de la DGAC (Direction Générale de l'Aviation Civile) et protège le voyageur autant que l'expéditeur.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Ce que Scellia apporte</span> : une structure formelle à une pratique qui existe depuis toujours dans la communauté, en y ajoutant traçabilité, contrat numérique et protection pour les deux parties.
+        </div></div>
       </div>
+
+      <!-- ── SÉQUESTRE ── -->
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Comment fonctionne le sequestre ?<span class="faq-chev">&#9660;</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Votre contribution est bloquee sur un compte securise des la confirmation de l'accord. Le voyageur ne recoit le paiement qu'apres confirmation de la remise par le destinataire via un code de verification. En cas de litige, un delai de 48 a 72 heures permet la mediation.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Comment fonctionne le paiement en séquestre ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Le séquestre est le cœur du système de confiance Scellia. Voici comment il fonctionne en pratique :
+          <br><br>
+          <strong>1. À la confirmation du trajet</strong> — L'expéditeur paie le montant convenu. Les fonds sont immédiatement bloqués sur un compte sécurisé géré par <strong>Stripe</strong>, notre partenaire de paiement certifié PCI-DSS. Le voyageur ne peut pas y accéder à ce stade.
+          <br><br>
+          <strong>2. Pendant le transport</strong> — Les fonds restent bloqués, quelles que soient les circonstances. Ni l'expéditeur, ni le voyageur ne peuvent y toucher sans validation de l'autre partie.
+          <br><br>
+          <strong>3. À la livraison</strong> — Le destinataire reçoit un code OTP à 4 chiffres par WhatsApp. Il le communique au voyageur, qui le saisit sur la plateforme. Cette double validation débloque automatiquement le virement vers le voyageur dans les 2 à 3 jours ouvrés.
+          <br><br>
+          <strong>En cas de litige</strong> — Si la livraison est contestée dans les 48 heures, l'équipe Scellia intervient en médiateur neutre, s'appuie sur les preuves photo et le journal d'activité, et tranche dans un délai de 72 heures maximum.
+        </div></div>
       </div>
+
+      <!-- ── PERTE / DOMMAGE ── -->
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Que se passe-t-il si mon colis est endommage ou perdu ?<span class="faq-chev">&#9660;</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Chaque envoi est couvert par une assurance souscrite aupres d'un assureur agree. En cas de perte, vol ou dommage avere, vous etes indemnise sous 72 heures sur la base de la valeur declaree (plafond de 500 euros par envoi). Les photos horodatees a chaque etape constituent des preuves pour accelerer le traitement des sinistres.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Que se passe-t-il si mon colis est endommagé ou perdu ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Chaque envoi bénéficie d'une <strong>couverture protection colis</strong> incluse dans le tarif. Voici ce qu'elle couvre :
+          <br><br>
+          <strong>Perte totale</strong> — Vous êtes remboursé à hauteur de la valeur déclarée à l'inscription de l'envoi (plafond de 500 € par colis).
+          <br><br>
+          <strong>Dommages partiels</strong> — Les articles endommagés sont indemnisés sur présentation des photos prises au moment de la remise au voyageur et à la livraison. Le différentiel de valeur est remboursé.
+          <br><br>
+          <strong>Retard important</strong> — Si la livraison dépasse 5 jours après l'atterrissage sans explication, le séquestre est automatiquement restitué à l'expéditeur le temps de résoudre la situation.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Notre atout principal</span> : toutes les étapes sont photographiées et horodatées. En cas de sinistre, vous disposez d'un dossier de preuves complet, ce qu'aucun système informel ne peut offrir.
+        </div></div>
       </div>
+
+      <!-- ── DESTINATAIRE KINSHASA ── -->
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Comment le destinataire a Kinshasa est-il prevenu ?<span class="faq-chev">&#9660;</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Le destinataire recoit des notifications WhatsApp a chaque etape : confirmation d'envoi, depart du vol, atterrissage, arrivee du voyageur. Aucune application n'est necessaire. Un code a 4 chiffres est envoye par SMS pour valider la remise. Compatible avec les telephones basiques.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Comment le destinataire à Kinshasa est-il informé et prévenu ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Le destinataire est au cœur du système de suivi, <strong>sans avoir besoin d'installer quoi que ce soit</strong>. Tout se passe via WhatsApp et SMS, les outils qu'il utilise déjà au quotidien.
+          <br><br>
+          Il reçoit une notification à chaque étape clé :
+          <br><br>
+          📦 <strong>Envoi créé</strong> — Confirmation de l'envoi, nom du voyageur, date de départ prévue.<br>
+          🛫 <strong>Vol décollé</strong> — Numéro de vol, heure d'atterrissage estimée à Kinshasa.<br>
+          🛬 <strong>Atterrissage confirmé</strong> — Heure d'arrivée réelle, estimation de la livraison.<br>
+          🚗 <strong>Voyageur en route</strong> — Alerte 30 minutes avant l'arrivée estimée.<br>
+          🔐 <strong>Code OTP</strong> — Code à 4 chiffres envoyé par WhatsApp et SMS pour valider la remise.<br>
+          🎉 <strong>Livraison confirmée</strong> — Confirmation finale avec reçu numérique.
+          <br><br>
+          Le destinataire n'a pas besoin d'un smartphone récent. Le service est compatible avec n'importe quel téléphone capable de recevoir des SMS.
+        </div></div>
       </div>
+
+      <!-- ── PRIX ── -->
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Pourquoi 13 &euro;/kg au lieu de 6 &euro;/kg avec un GP informel ?<span class="faq-chev">&#9660;</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Le prix de 13 &euro;/kg inclut le sequestre, le suivi de vol, la protection colis, le contrat numerique, les notifications WhatsApp et la preuve de remise. Le systeme GP a 6 &euro;/kg n'offre aucune de ces garanties. En dessous de 15-20 &euro;/kg pratiques par la majorite des GP, c'est la securite en plus pour moins cher.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Pourquoi 13 €/kg et pas 6 €/kg comme un GP classique ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          C'est la question que tout le monde pose — et elle est légitime. Voici ce que vous payez réellement avec chaque option :
+          <br><br>
+          <strong>Le système GP à 6 €/kg</strong> — Pas de contrat, pas de suivi, pas de preuve de remise, pas de recours en cas de perte. Si le colis disparaît ou est endommagé, vous n'avez aucun moyen de vous faire rembourser. Vous payez moins, mais vous prenez le risque seul.
+          <br><br>
+          <strong>Scellia à 13 €/kg comprend</strong> : le séquestre Stripe, le suivi de vol en temps réel, les notifications WhatsApp au destinataire, les photos horodatées à chaque étape, le code OTP de livraison, la couverture protection colis jusqu'à 500 €, et le service de médiation en cas de litige.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Pour mettre en perspective</span> : DHL Express Paris → Kinshasa facture <strong>40 à 80 €/kg</strong>. Les voyageurs informels «fiables» pratiquent aujourd'hui <strong>15 à 20 €/kg</strong> dans beaucoup de réseaux. À 13 €/kg tout compris, Scellia est le choix le plus sûr ET le moins cher du marché structuré.
+        </div></div>
       </div>
+
+      <!-- ── ARTICLES AUTORISÉS ── -->
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Quels objets peut-on envoyer ?<span class="faq-chev">&#9660;</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Vetements, chaussures, produits alimentaires non perissables, medicaments (avec ordonnance), cosmetiques, electronique (hors batteries lithium), livres, jouets. Sont interdits : liquides inflammables, batteries lithium isolees, contrefacons, denrees perissables, produits illicites et tout article interdit en cabine ou soute.</div></div>
+        <button class="faq-q" onclick="toggleFaq(this)">Quels articles peut-on envoyer ? Que sont les articles interdits ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>✅ Articles autorisés</strong>
+          <br>
+          Vêtements, chaussures, accessoires · Produits alimentaires non périssables (conserves, café, thé, épices) · Médicaments (avec ordonnance pour les produits réglementés) · Cosmétiques et produits de beauté · Matériel électronique (téléphones, tablettes, petits appareils — <em>avec batterie intégrée</em>) · Livres, fournitures scolaires · Jouets et articles pour enfants · Produits ménagers non inflammables.
+          <br><br>
+          <strong>🚫 Articles strictement interdits</strong>
+          <br>
+          Batteries lithium isolées (powerbanks non fixés) · Liquides inflammables ou sous pression · Contrefaçons et articles piratés · Denrées périssables sans conditionnement adapté · Produits illicites · Armes et munitions · Billets de banque en grande quantité · Tout article interdit par la réglementation DGAC en cabine ou en soute.
+          <br><br>
+          En cas de doute sur un article, notre équipe répond en moins de 2 heures via le formulaire de contact. La liste complète est disponible dans nos Conditions Générales d'Utilisation.
+        </div></div>
       </div>
+
+      <!-- ── DEVENIR VOYAGEUR ── -->
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Comment devenir voyageur sur Scellia ? Combien peut-on gagner ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Devenir voyageur Scellia est simple. Il vous suffit de vous inscrire, de vérifier votre identité (copie de pièce d'identité), et de publier votre trajet en indiquant votre vol, la date, et les kilos disponibles dans vos bagages.
+          <br><br>
+          <strong>La procédure complète en 4 étapes :</strong>
+          <br><br>
+          <strong>1. Inscription et vérification d'identité</strong> — Profil complet + photo de pièce d'identité vérifiée. Processus rapide, 100% en ligne.<br>
+          <strong>2. Publication du trajet</strong> — Numéro de vol, date, kilos disponibles, prix souhaité par kg.<br>
+          <strong>3. Matching automatique</strong> — Scellia vous propose les demandes compatibles avec votre trajet. Vous choisissez celles que vous acceptez.<br>
+          <strong>4. Transport et livraison</strong> — Vous remettez le colis au destinataire à Kinshasa et saisissez le code OTP. Le paiement est viré sous 2 à 3 jours ouvrés.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Combien peut-on gagner ?</span> Un voyageur qui transporte 15 kg sur un trajet Paris–Kinshasa perçoit environ <strong>171 € net</strong> (15 kg × 11,44 €/kg après commission Scellia). Sur l'année, un voyageur régulier (4 à 6 trajets) peut générer <strong>700 à 1 000 € de revenus complémentaires</strong>.
+        </div></div>
+      </div>
+
+      <!-- ── VÉRIFICATION VOYAGEURS ── -->
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Comment les voyageurs sont-ils sélectionnés et vérifiés ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          La confiance dans le réseau Scellia repose sur un système de vérification et de réputation à plusieurs niveaux :
+          <br><br>
+          <strong>Vérification d'identité (KYC)</strong> — Chaque voyageur soumet une pièce d'identité officielle vérifiée par notre équipe. Aucun profil anonyme n'est accepté.
+          <br><br>
+          <strong>Vérification de vol</strong> — Le numéro de vol publié est croisé avec les données de vol réelles. Un vol inexistant ou annulé est automatiquement signalé.
+          <br><br>
+          <strong>Système de notation réciproque</strong> — Après chaque livraison, l'expéditeur note le voyageur (et réciproquement). Les profils avec une note inférieure à 3,5/5 sont suspendus pour enquête.
+          <br><br>
+          <strong>Badges de progression</strong> — Nouveau / Vérifié / Confirmé / Expert selon le nombre de trajets validés et la note cumulée. Les expéditeurs voient clairement l'expérience du voyageur avant de choisir.
+          <br><br>
+          <strong>Géolocalisation à l'embarquement</strong> — Le bouton de confirmation d'embarquement ne s'active qu'en présence GPS à l'aéroport, dans un rayon de 2 km. Cela garantit que le voyageur est bien sur place au moment déclaré.
+        </div></div>
+      </div>
+
+      <!-- ── DESTINATAIRE : COMPTE ? ── -->
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Le destinataire à Kinshasa doit-il créer un compte Scellia ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Non — c'est l'un des avantages majeurs du système.</strong> Le destinataire n'a pas besoin de créer un compte, de télécharger une application, ni même d'avoir un smartphone.
+          <br><br>
+          Tout ce dont il a besoin : <strong>un numéro de téléphone capable de recevoir des SMS et/ou WhatsApp</strong>. L'expéditeur renseigne ce numéro au moment de la création de l'envoi.
+          <br><br>
+          Le destinataire reçoit automatiquement toutes les notifications de suivi ainsi que le code OTP de validation de livraison. Il le communique verbalement au voyageur lors de la remise — c'est aussi simple que ça.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Pourquoi c'est important</span> : en RDC, une grande partie de la population utilise des téléphones basiques (feature phones). Notre système est conçu pour fonctionner avec l'écosystème réel du terrain, pas seulement avec les smartphones haut de gamme.
+        </div></div>
+      </div>
+
+      <!-- ── DISPONIBILITÉ ── -->
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Quand le service sera-t-il disponible ? Comment être parmi les premiers ?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Scellia Connect est actuellement en phase de développement actif. Le lancement officiel est prévu pour <strong>l'automne 2026</strong> sur le corridor France & Belgique → Kinshasa (RDC).
+          <br><br>
+          <strong>La roadmap en bref :</strong>
+          <br><br>
+          🔧 <strong>T2 2026 (en cours)</strong> — Développement du MVP : application web complète, paiement séquestre, matching, OTP, notifications.<br>
+          🚀 <strong>T3 2026</strong> — Pilote fermé : 50 à 100 utilisateurs sélectionnés parmi les inscrits sur la liste d'attente. Premiers envois réels sur le corridor.<br>
+          🌍 <strong>T4 2026 – T1 2027</strong> — Ouverture au public sur le corridor France-Belgique → Kinshasa.<br>
+          📱 <strong>2027</strong> — Application mobile (iOS et Android), extension à d'autres corridors (Cameroun, Sénégal, Côte d'Ivoire).
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Pour être parmi les premiers</span> : inscrivez-vous sur la liste d'attente ci-dessous. Les membres de la liste d'attente bénéficieront d'un <strong>accès prioritaire</strong> au pilote, d'un <strong>tarif de lancement préférentiel</strong>, et d'un badge « Membre fondateur » sur leur profil.
+        </div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1161,20 +1396,61 @@ async function handleEmailRegistration() {
 // Override original button click
 document.querySelector('.email-btn').onclick = handleEmailRegistration;
 
-// Load waitlist count dynamically
+// ─── Compteur waitlist temps réel ───────────────────────────────────
+function animateNumber(el, from, to, duration) {
+  if (from === to) return;
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (t < 1) requestAnimationFrame(step);
+    else el.textContent = to;
+  }
+  requestAnimationFrame(step);
+}
+
+function updateCounterDisplay(count) {
+  if (!count || count < 1) return;
+
+  // Hero counter
+  const heroCounter = document.getElementById('hero-counter');
+  const heroNum     = document.getElementById('hero-counter-num');
+  if (heroCounter && heroNum) {
+    const prev = parseInt(heroNum.textContent) || 0;
+    heroCounter.style.display = 'inline-flex';
+    animateNumber(heroNum, prev, count, 800);
+    heroNum.style.animation = 'countUp 0.4s ease both';
+  }
+
+  // Final CTA counter
+  const finalEl = document.getElementById('waitlist-count');
+  if (finalEl) {
+    finalEl.classList.add('has-data');
+    finalEl.innerHTML =
+      '<span class="live-dot"></span>' +
+      'Déjà <strong style="color:var(--gold)">' + count + '</strong> personnes sur la liste d\'attente — rejoignez-les !';
+  }
+}
+
 async function loadWaitlistCount() {
   try {
     const { count, error } = await supabase
       .from('waitlist')
       .select('*', { count: 'exact', head: true });
-    if (!error && count !== null) {
-      const el = document.getElementById('waitlist-count');
-      if (el && count > 0) {
-        el.textContent = 'Deja ' + count + ' inscrits sur la liste d\'attente';
-      }
-    }
+    if (!error && count !== null) updateCounterDisplay(count);
   } catch(e) { /* silently fail */ }
 }
+
+// Abonnement temps réel — incrémente le compteur à chaque nouveau signup
+supabase
+  .channel('waitlist-live')
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist' }, () => {
+    // Recharge le count depuis Supabase au lieu d'incrémenter localement
+    loadWaitlistCount();
+  })
+  .subscribe();
+
 loadWaitlistCount();
 </script>
 </body>
