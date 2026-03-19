@@ -721,8 +721,14 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
 
 </div>
 
-<!-- ─── UI Script (indépendant du CDN Supabase) ─── -->
+<!-- Supabase CDN — async : ne bloque pas l'exécution du JS suivant -->
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ─── Script principal (tout en un seul bloc, indépendant du timing CDN) ─── -->
 <script>
+const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
+
 // ─── Skip logic Q3 : si "Jamais", masquer sections 2-3 et aller a section 4 ───
 function applySkipLogic(inputName, inputValue) {
   if (inputName === 'q3') {
@@ -913,20 +919,13 @@ function copyShareMsg() {
   });
 }
 
-</script>
-
-<!-- Supabase CDN (chargé après le JS UI pour ne pas bloquer) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- ─── Script Supabase (dépend du CDN) ─── -->
-<script>
-const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
-let supabase = null;
-try { supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e) { console.warn('Supabase CDN not ready:', e); }
-
 // ─── Submit ───
 async function submitForm() {
+  // Initialiser Supabase au moment du clic (CDN async a eu le temps de charger)
+  let supabase = null;
+  try {
+    if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch(e) { console.warn('Supabase init error:', e); }
   const btn = document.getElementById('submit-btn');
   const originalText = btn.innerHTML;
   btn.innerHTML = 'Enregistrement...';
