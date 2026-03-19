@@ -295,7 +295,7 @@ section { padding: 100px 0; }
 .estimator-header span { font-weight: 800; font-size: 15px; color: var(--navy); }
 .estimator-header small { font-size: 13px; color: var(--gray-400); margin-left: auto; }
 .estimator-body { padding: 24px 28px; }
-.estimator-row { display: grid; grid-template-columns: 0.75fr 1fr; gap: 12px; margin-bottom: 20px; }
+.estimator-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
 .estimator-field label { display: block; font-size: 12px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
 .qty-control { display: flex; align-items: center; border: 1.5px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
 .qty-btn { width: 40px; height: 46px; background: var(--warm-50); border: none; cursor: pointer; font-size: 20px; font-weight: 700; color: var(--navy); transition: background 0.15s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -739,10 +739,10 @@ section { padding: 100px 0; }
           <div class="estimator-field">
             <label>Destination</label>
             <select class="estimator-select" id="est-dest" onchange="calcEstimate()">
-              <option value="13">Kinshasa · €13/kg</option>
-              <option value="13">Lubumbashi · €13/kg</option>
-              <option value="13" disabled>Dakar · coming soon</option>
-              <option value="13" disabled>Douala · coming soon</option>
+              <option value="13">Kinshasa</option>
+              <option value="13">Lubumbashi</option>
+              <option value="13" disabled>Dakar (coming soon)</option>
+              <option value="13" disabled>Douala (coming soon)</option>
             </select>
           </div>
         </div>
