@@ -82,16 +82,16 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
 }
 .logo-mark span { position: relative; z-index: 1; color: white; font-weight: 800; font-size: 20px; }
 .logo-text { font-weight: 800; font-size: 22px; color: var(--navy); letter-spacing: -0.5px; }
-.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links { display: flex; gap: 18px; align-items: center; }
 .nav-links a {
-  text-decoration: none; color: var(--gray-600); font-size: 15px;
-  font-weight: 500; transition: color 0.2s;
+  text-decoration: none; color: var(--gray-600); font-size: 14px;
+  font-weight: 500; transition: color 0.2s; white-space: nowrap;
 }
 .nav-links a:hover { color: var(--navy); }
 .nav-cta {
-  background: var(--coral); color: var(--navy); padding: 10px 24px;
-  border-radius: 10px; font-weight: 800; font-size: 14px;
-  text-decoration: none; transition: all 0.2s; letter-spacing: 0.2px;
+  background: var(--coral); color: white; padding: 9px 18px;
+  border-radius: 10px; font-weight: 800; font-size: 13px;
+  text-decoration: none; transition: all 0.2s; letter-spacing: 0.2px; white-space: nowrap;
 }
 .nav-cta:hover { background: #d4553d; transform: translateY(-1px); }
 .lang-switch {
@@ -854,11 +854,11 @@ section { padding: 100px 0; }
       <a href="#confiance">Confiance</a>
       <a href="#tarif">Tarif</a>
       <a href="#corridor">Corridors</a>
-      <a href="voyageur.html" style="color:var(--green);font-weight:700">&#9992;&#65039; Voyageurs</a>
-      <a href="questionnaire.html" style="color:var(--coral);font-weight:700">&#128203; Sondage</a>
-      <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="nav-prototype">&#128295; Prototype</a>
+      <a href="voyageur.html" style="color:var(--green);font-weight:700">Voyageurs</a>
+      <a href="questionnaire.html" style="color:var(--coral);font-weight:700">Sondage</a>
+      <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="nav-prototype">Prototype</a>
       <a href="index-en.html" class="lang-switch">EN</a>
-      <a href="#rejoindre" class="nav-cta">Rejoindre la liste d'attente</a>
+      <a href="#rejoindre" class="nav-cta">Rejoindre</a>
     </div>
     <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -1085,7 +1085,7 @@ section { padding: 100px 0; }
             <label>Poids (kg)</label>
             <div class="qty-control">
               <button class="qty-btn" onclick="changeQty(-1)" aria-label="Moins">&#8722;</button>
-              <input class="qty-input" id="est-kg" type="number" value="5" min="1" max="30" oninput="calcEstimate()">
+              <input class="qty-input" id="est-kg" type="number" value="5" min="1" oninput="calcEstimate()">
               <button class="qty-btn" onclick="changeQty(1)" aria-label="Plus">&#43;</button>
             </div>
           </div>
@@ -1093,6 +1093,7 @@ section { padding: 100px 0; }
             <label>Destination</label>
             <select class="estimator-select" id="est-dest" onchange="calcEstimate()">
               <option value="13">Kinshasa (RDC) &mdash; 13 &euro;/kg</option>
+              <option value="15">Lubumbashi (RDC) &mdash; 15 &euro;/kg</option>
               <option value="13" disabled>Dakar (S&eacute;n&eacute;gal) &mdash; bient&ocirc;t</option>
               <option value="13" disabled>Douala (Cameroun) &mdash; bient&ocirc;t</option>
             </select>
@@ -1579,20 +1580,51 @@ section { padding: 100px 0; }
   </div>
 </footer>
 
+<!-- Scripts indépendants (FAQ, nav scroll, calculateur) — NE DÉPENDENT PAS DE SUPABASE -->
+<script>
+/* ─── Nav scroll ─── */
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20)});
+
+/* ─── FAQ accordion ─── */
+function toggleFaq(btn){
+  var item=btn.parentElement;
+  item.classList.toggle('open');
+  var a=btn.nextElementSibling;
+  a.style.maxHeight=a.style.maxHeight?null:a.scrollHeight+'px';
+}
+
+/* ─── Estimateur de coût ─── */
+function calcEstimate(){
+  var kg=Math.max(1,parseInt(document.getElementById('est-kg').value)||1);
+  var rate=parseInt(document.getElementById('est-dest').value)||13;
+  var total=kg*rate;
+  var voyageur=Math.round(total*0.88);
+  document.getElementById('est-total').textContent=total;
+  document.getElementById('est-detail').textContent=kg+' kg × '+rate+' € — tout compris';
+  document.getElementById('est-voyageur').textContent='€'+voyageur;
+}
+function changeQty(delta){
+  var input=document.getElementById('est-kg');
+  var val=Math.max(1,(parseInt(input.value)||1)+delta);
+  input.value=val;
+  calcEstimate();
+}
+document.addEventListener('DOMContentLoaded',function(){ calcEstimate(); });
+</script>
+
 <!-- Supabase CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20)});
-function toggleFaq(btn){const item=btn.parentElement;item.classList.toggle('open');const a=btn.nextElementSibling;a.style.maxHeight=a.style.maxHeight?null:a.scrollHeight+'px'}
-
-// Initialize Supabase Client
+// Initialize Supabase Client (guarded — CDN may not be loaded yet)
 const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabase = null;
+try { supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e) { console.warn('Supabase CDN not ready:', e); }
 
 // Handle Email Registration
 async function handleEmailRegistration() {
+  if (!supabase) { alert("Service temporairement indisponible. Réessayez dans quelques secondes."); return; }
   const emailInput = document.getElementById('email');
   const email = emailInput.value.trim();
   const btn = document.querySelector('.email-btn');
@@ -1689,6 +1721,7 @@ function updateCounterDisplay(count) {
 }
 
 async function loadWaitlistCount() {
+  if (!supabase) return;
   try {
     const { count, error } = await supabase
       .from('waitlist')
@@ -1698,7 +1731,7 @@ async function loadWaitlistCount() {
 }
 
 // Abonnement temps réel — incrémente le compteur à chaque nouveau signup
-supabase
+if (supabase) supabase
   .channel('waitlist-live')
   .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist' }, () => {
     // Recharge le count depuis Supabase au lieu d'incrémenter localement
@@ -1707,24 +1740,6 @@ supabase
   .subscribe();
 
 loadWaitlistCount();
-
-// ─── Estimateur de coût ──────────────────────────────────────────────
-function calcEstimate() {
-  const kg   = Math.max(1, Math.min(30, parseInt(document.getElementById('est-kg').value) || 1));
-  const rate = parseInt(document.getElementById('est-dest').value) || 13;
-  const total = kg * rate;
-  const voyageur = Math.round(total * 0.88);
-  document.getElementById('est-total').textContent   = total;
-  document.getElementById('est-detail').textContent  = kg + ' kg × ' + rate + ' € — tout compris';
-  document.getElementById('est-voyageur').textContent = '€' + voyageur;
-}
-function changeQty(delta) {
-  const input = document.getElementById('est-kg');
-  const val = Math.max(1, Math.min(30, (parseInt(input.value) || 1) + delta));
-  input.value = val;
-  calcEstimate();
-}
-calcEstimate();
 </script>
 </body>
 </html>

@@ -690,6 +690,23 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
   <div class="submit-card" id="submit-card">
     <h3>Merci pour votre temps !</h3>
     <p>Vos reponses nous aident a construire un service d'entraide qui repond vraiment aux besoins de la communaute.</p>
+
+    <!-- Email optionnel pour recevoir un merci + être informé du lancement -->
+    <div style="margin:20px 0 24px;position:relative;z-index:1;">
+      <label style="display:block;font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px;">
+        Email (optionnel)
+      </label>
+      <input
+        type="email"
+        id="contact-email"
+        placeholder="votre@email.com — pour recevoir un merci et être informé du lancement"
+        style="width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:white;font-size:14px;outline:none;transition:border 0.2s;"
+        onfocus="this.style.borderColor='rgba(255,255,255,0.5)'"
+        onblur="this.style.borderColor='rgba(255,255,255,0.2)'"
+      >
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;">Anonyme si laissé vide &mdash; nous ne partageons jamais votre email.</div>
+    </div>
+
     <button class="btn-submit" id="submit-btn" onclick="submitForm()">
       Envoyer mes reponses <span>&#8594;</span>
     </button>
@@ -708,10 +725,11 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-// Initialize Supabase Client
+// Initialize Supabase Client (guarded — CDN may not be loaded yet)
 const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabase = null;
+try { supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e) { console.warn('Supabase CDN not ready:', e); }
 // ─── Skip logic Q3 : si "Jamais", masquer sections 2-3 et aller a section 4 ───
 function applySkipLogic(inputName, inputValue) {
   if (inputName === 'q3') {
@@ -929,8 +947,24 @@ async function submitForm() {
   // Text
   const q20Val = document.getElementById('q20-input').value.trim();
   if (q20Val) responses.q20 = q20Val;
+  // Email optionnel de contact
+  const contactEmail = document.getElementById('contact-email')?.value.trim();
+  if (contactEmail && contactEmail.includes('@')) responses.email_contact = contactEmail;
 
   console.log('Reponses questionnaire Scellia:', JSON.stringify(responses, null, 2));
+
+  // Si Supabase indisponible, on log et on affiche le merci quand même
+  if (!supabase) {
+    console.warn('Supabase non disponible — réponses sauvegardées localement uniquement.');
+    document.getElementById('submit-card').style.display = 'none';
+    document.querySelectorAll('.section-card').forEach(s => s.style.display = 'none');
+    const shareCard = document.querySelector('.share-card');
+    if (shareCard) shareCard.style.display = 'none';
+    const ty = document.getElementById('thank-you');
+    ty.classList.add('visible');
+    ty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
   try {
     const { error } = await supabase

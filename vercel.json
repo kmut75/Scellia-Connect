@@ -3,6 +3,8 @@
   "routes": [
     { "src": "/", "dest": "/index.html" },
     { "src": "/questionnaire", "dest": "/questionnaire.html" },
-    { "src": "/sondage", "dest": "/questionnaire.html" }
+    { "src": "/sondage", "dest": "/questionnaire.html" },
+    { "src": "/dashboard", "dest": "/dashboard.html" },
+    { "src": "/admin", "dest": "/dashboard.html" }
   ]
 }

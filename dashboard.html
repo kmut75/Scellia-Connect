@@ -178,6 +178,43 @@
   .progress-labels { display: flex; justify-content: space-between; margin-top: 6px; }
   .progress-labels span   { font-size: 11px; color: rgba(255,255,255,0.4); }
   .progress-labels strong { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+  /* Tabs */
+  .tabs-bar {
+    display: flex; gap: 4px; margin-bottom: 28px;
+    border-bottom: 2px solid var(--gray300); padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 700; color: var(--gray400);
+    padding: 10px 20px 12px; border-radius: 8px 8px 0 0;
+    transition: color 0.2s, background 0.2s;
+    position: relative; bottom: -2px;
+  }
+  .tab-btn.active {
+    color: var(--navy);
+    border: 2px solid var(--gray300);
+    border-bottom: 2px solid var(--white);
+    background: var(--white);
+  }
+  .tab-btn:not(.active):hover { color: var(--navy); background: var(--gray100); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Questionnaire */
+  .q-kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .q-kpi { background: var(--white); border-radius: 14px; padding: 20px; border: 1px solid var(--gray300); border-top: 3px solid #6366F1; }
+  .q-kpi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray400); margin-bottom: 6px; }
+  .q-kpi-val { font-size: 38px; font-weight: 900; color: #4338CA; letter-spacing: -2px; line-height: 1; }
+  .q-dist-card { background: var(--white); border-radius: 16px; padding: 24px; border: 1px solid var(--gray300); margin-bottom: 24px; }
+  .q-dist-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width:700px) { .q-dist-row { grid-template-columns: 1fr; } }
+  .q-response-table { background: var(--white); border-radius: 16px; padding: 24px; border: 1px solid var(--gray300); overflow: hidden; }
+  .q-details { font-size: 12px; color: var(--gray600); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  details summary { cursor: pointer; color: var(--coral); font-size: 12px; font-weight: 600; list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary { margin-bottom: 6px; }
+  details pre { font-size: 11px; color: var(--gray600); white-space: pre-wrap; word-break: break-word; background: var(--gray50); padding: 8px; border-radius: 6px; }
 </style>
 </head>
 <body>
@@ -197,6 +234,14 @@
 </header>
 
 <main>
+
+  <!-- Tabs navigation -->
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('inscrits',this)">📋 Inscrits waitlist</button>
+    <button class="tab-btn" onclick="switchTab('questionnaire',this)">📊 Questionnaire</button>
+  </div>
+
+  <div id="tab-inscrits" class="tab-panel active">
 
   <!-- KPIs -->
   <div class="kpi-row">
@@ -284,6 +329,53 @@
     </div>
     <div id="table-container"><div class="loading"><div class="spinner"></div><br>Chargement…</div></div>
   </div>
+
+  </div><!-- end tab-inscrits -->
+
+  <!-- Questionnaire tab -->
+  <div id="tab-questionnaire" class="tab-panel">
+
+    <!-- KPIs questionnaire -->
+    <div class="q-kpi-row">
+      <div class="q-kpi">
+        <div class="q-kpi-label">Réponses reçues</div>
+        <div class="q-kpi-val" id="q-total">—</div>
+      </div>
+      <div class="q-kpi" style="border-top-color:var(--coral);">
+        <div class="q-kpi-label">Aujourd'hui</div>
+        <div class="q-kpi-val" style="color:var(--coral);" id="q-today">—</div>
+      </div>
+      <div class="q-kpi" style="border-top-color:var(--green);">
+        <div class="q-kpi-label">Cette semaine</div>
+        <div class="q-kpi-val" style="color:var(--green);" id="q-week">—</div>
+      </div>
+    </div>
+
+    <!-- Distributions -->
+    <div class="q-dist-card">
+      <div class="section-title" style="margin-bottom:20px">Répartition des réponses clés</div>
+      <div class="q-dist-row">
+        <div>
+          <div class="section-title">Profil</div>
+          <div id="q-dist-profil"><div class="loading" style="padding:20px 0"><div class="spinner"></div></div></div>
+        </div>
+        <div>
+          <div class="section-title">Prix acceptable (€/kg)</div>
+          <div id="q-dist-prix"><div class="loading" style="padding:20px 0"><div class="spinner"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table des réponses -->
+    <div class="q-response-table">
+      <div class="table-header-row">
+        <div class="section-title" style="margin:0">Toutes les réponses</div>
+        <input class="table-search" type="text" id="q-search" placeholder="Rechercher…" oninput="filterQTable()">
+      </div>
+      <div id="q-table-container"><div class="loading"><div class="spinner"></div><br>Chargement…</div></div>
+    </div>
+
+  </div><!-- end tab-questionnaire -->
 
 </main>
 
@@ -495,6 +587,142 @@ function filterTable() {
 
 loadData();
 setInterval(loadData, 60000);
+
+// ─── Tabs ────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'questionnaire' && !window._qLoaded) {
+    loadQuestionnaire();
+    window._qLoaded = true;
+  }
+}
+
+// ─── Questionnaire ───────────────────────────────────────────────────
+let allQRecords = [];
+
+async function loadQuestionnaire() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/questionnaire_responses?select=id,created_at,responses&order=created_at.desc&limit=500`,
+      { headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` } }
+    );
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    allQRecords = await res.json();
+    renderQuestionnaire(allQRecords);
+  } catch(e) {
+    console.error(e);
+    document.getElementById('q-table-container').innerHTML = '<div class="empty-state">⚠️ Erreur de connexion.</div>';
+  }
+}
+
+function renderQuestionnaire(records) {
+  const today = new Date().toISOString().slice(0,10);
+  const weekAgo = new Date(Date.now() - 7*86400000).toISOString().slice(0,10);
+  const todayCount = records.filter(r => r.created_at?.slice(0,10) === today).length;
+  const weekCount  = records.filter(r => r.created_at?.slice(0,10) >= weekAgo).length;
+
+  document.getElementById('q-total').textContent = records.length;
+  document.getElementById('q-today').textContent = todayCount;
+  document.getElementById('q-week').textContent  = weekCount;
+
+  // Distribution profil (q1)
+  renderQDist('q-dist-profil', records, 'q1', {
+    'envoyeur': '📦 Envoyeur',
+    'voyageur': '✈️ Voyageur',
+    'les-deux': '🔄 Les deux'
+  });
+
+  // Distribution prix (q5)
+  renderQDist('q-dist-prix', records, 'q5', {
+    '8':  '≤ 8 €/kg',
+    '10': '10 €/kg',
+    '13': '13 €/kg',
+    '15': '15 €/kg',
+    '20': '20 €/kg'
+  });
+
+  renderQTable(records);
+}
+
+function renderQDist(containerId, records, field, labels) {
+  const counts = {};
+  records.forEach(r => {
+    const val = r.responses?.[field];
+    if (val) counts[val] = (counts[val]||0) + 1;
+  });
+  const entries = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  const total = entries.reduce((s,[,c]) => s+c, 0) || 1;
+  const colors = ['#E8624A','#1B2A4A','#22A559','#D4A843','#6366F1'];
+
+  if (!entries.length) {
+    document.getElementById(containerId).innerHTML = '<div class="empty-state" style="padding:12px 0;font-size:13px">Aucune donnée</div>';
+    return;
+  }
+
+  document.getElementById(containerId).innerHTML = entries.map(([val, count], i) => `
+    <div class="bar-group">
+      <div class="bar-label-row">
+        <span class="bar-label">${labels[val] || val}</span>
+        <span class="bar-count">${count} (${Math.round(count/total*100)}%)</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${Math.round(count/total*100)}%;background:${colors[i%colors.length]};"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderQTable(records) {
+  if (!records.length) {
+    document.getElementById('q-table-container').innerHTML = '<div class="empty-state">Aucune réponse pour l\'instant.</div>';
+    return;
+  }
+
+  const rows = records.map((r, idx) => {
+    const date  = r.created_at ? new Date(r.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}) : '—';
+    const resp  = r.responses || {};
+    const profil = resp.q1 || '—';
+    const freq   = resp.q3 || '—';
+    const prix   = resp.q5 ? resp.q5 + ' €/kg' : '—';
+    const json   = JSON.stringify(resp, null, 2);
+    return `
+      <tr data-search="${JSON.stringify(resp).toLowerCase()}">
+        <td>${date}</td>
+        <td><span class="badge" style="background:#EEF2FF;color:#4338CA;">${profil}</span></td>
+        <td>${freq}</td>
+        <td>${prix}</td>
+        <td>
+          <details>
+            <summary>Voir tout (${Object.keys(resp).length} champs)</summary>
+            <pre>${json}</pre>
+          </details>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  document.getElementById('q-table-container').innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Date</th><th>Profil</th><th>Fréquence</th><th>Prix acceptable</th><th>Détails</th>
+      </tr></thead>
+      <tbody id="q-table-body">${rows}</tbody>
+    </table>
+    <div style="font-size:12px;color:var(--gray400);margin-top:12px;text-align:right;">
+      ${records.length} réponse${records.length>1?'s':''} au total
+    </div>
+  `;
+}
+
+function filterQTable() {
+  const q = document.getElementById('q-search').value.toLowerCase();
+  document.querySelectorAll('#q-table-body tr').forEach(row => {
+    row.style.display = (row.getAttribute('data-search')||'').includes(q) ? '' : 'none';
+  });
+}
 </script>
 </body>
 </html>
