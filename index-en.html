@@ -740,7 +740,7 @@ section { padding: 100px 0; }
             <label>Destination</label>
             <select class="estimator-select" id="est-dest" onchange="calcEstimate()">
               <option value="13">Kinshasa (DRC) &mdash; &euro;13/kg</option>
-              <option value="15">Lubumbashi (DRC) &mdash; &euro;15/kg</option>
+              <option value="13">Lubumbashi (DRC) &mdash; &euro;13/kg</option>
               <option value="13" disabled>Dakar (Senegal) &mdash; coming soon</option>
               <option value="13" disabled>Douala (Cameroon) &mdash; coming soon</option>
             </select>
@@ -783,21 +783,28 @@ section { padding: 100px 0; }
       <p class="section-desc ctr">Scellia Connect is expanding progressively wherever African diaspora communities live &mdash; and wherever parcels need to travel, in every direction.</p>
     </div>
 
-    <!-- Active corridor: France & Belgium → Kinshasa -->
+    <!-- Active corridor: France & Belgium → DRC (Kinshasa + Lubumbashi) -->
     <div class="corridor-wrap">
       <div class="corridor-left">
         <div class="cc-badge active-badge" style="margin-bottom:16px;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> Active pilot &mdash; April 2026</div>
         <h3>300,000+ Congolese in Europe</h3>
         <p>Paris, Brussels, Lyon, Lille, Li&egrave;ge, Antwerp &mdash; Congolese communities are at the heart of our trust network.</p>
         <div class="corridor-stats">
-          <div class="cor-stat"><div class="cor-stat-val">14+</div><div class="cor-stat-lbl">Direct flights / week</div></div>
-          <div class="cor-stat"><div class="cor-stat-val">4</div><div class="cor-stat-lbl">Airlines</div></div>
-          <div class="cor-stat"><div class="cor-stat-val">8h30</div><div class="cor-stat-lbl">Avg. flight time</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">18+</div><div class="cor-stat-lbl">Flights / week</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">5</div><div class="cor-stat-lbl">Airlines</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">2</div><div class="cor-stat-lbl">DRC destinations</div></div>
           <div class="cor-stat"><div class="cor-stat-val">&euro;15&ndash;20</div><div class="cor-stat-lbl">Informal GP price / kg</div></div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+          <span style="background:rgba(34,165,89,0.12);color:var(--green);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600">&#9679; Kinshasa (FIH)</span>
+          <span style="background:rgba(34,165,89,0.12);color:var(--green);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600">&#9679; Lubumbashi (FBM)</span>
         </div>
       </div>
       <div class="corridor-right">
         <h3>Active routes &mdash; France &amp; Belgium &#8596; DRC</h3>
+
+        <!-- Kinshasa -->
+        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);opacity:.55;margin:4px 0 8px">Kinshasa &mdash; FIH</div>
         <div class="route-item">
           <div class="route-flag">&#127467;&#127479;</div>
           <div class="route-text"><strong>Paris CDG &rarr; Kinshasa FIH</strong><span>Air France, Ethiopian Airlines &bull; Daily</span></div>
@@ -813,6 +820,17 @@ section { padding: 100px 0; }
         <div class="route-item">
           <div class="route-flag">&#127466;&#127481;</div>
           <div class="route-text"><strong>Addis Ababa ADD &rarr; Kinshasa FIH</strong><span>Ethiopian Airlines &bull; Daily (hub)</span></div>
+        </div>
+
+        <!-- Lubumbashi -->
+        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);opacity:.55;margin:14px 0 8px;padding-top:12px;border-top:1px solid rgba(27,42,74,0.1)">Lubumbashi &mdash; FBM &nbsp;<span style="background:rgba(34,165,89,0.12);color:var(--green);border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700;text-transform:none;letter-spacing:0">Active</span></div>
+        <div class="route-item">
+          <div class="route-flag">&#127467;&#127479;</div>
+          <div class="route-text"><strong>Paris CDG &rarr; Lubumbashi FBM</strong><span>Ethiopian Airlines, Kenya Airways &bull; Via Addis / Nairobi</span></div>
+        </div>
+        <div class="route-item">
+          <div class="route-flag">&#127463;&#127466;</div>
+          <div class="route-text"><strong>Brussels BRU &rarr; Lubumbashi FBM</strong><span>Brussels Airlines &bull; Connection via Kinshasa</span></div>
         </div>
       </div>
     </div>
