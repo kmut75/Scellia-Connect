@@ -455,7 +455,7 @@ section { padding: 100px 0; }
 .estimator-header span { font-weight: 800; font-size: 15px; color: var(--navy); }
 .estimator-header small { font-size: 13px; color: var(--gray-400); margin-left: auto; }
 .estimator-body { padding: 24px 28px; }
-.estimator-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.estimator-row { display: grid; grid-template-columns: 1fr 1.7fr; gap: 16px; margin-bottom: 20px; }
 .estimator-field label {
   display: block; font-size: 12px; font-weight: 700; color: var(--gray-400);
   text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
@@ -477,11 +477,12 @@ section { padding: 100px 0; }
 }
 .estimator-select {
   width: 100%; height: 46px; border: 1.5px solid var(--gray-200);
-  border-radius: 10px; padding: 0 14px; font-size: 15px; font-weight: 600;
+  border-radius: 10px; padding: 0 34px 0 12px; font-size: 14px; font-weight: 600;
   color: var(--navy); font-family: inherit; outline: none; background: white;
   cursor: pointer; appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B978F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 14px center;
+  background-repeat: no-repeat; background-position: right 10px center;
+  text-overflow: ellipsis;
 }
 .estimator-result {
   background: var(--navy); border-radius: 14px; padding: 20px 24px;
@@ -1092,10 +1093,10 @@ section { padding: 100px 0; }
           <div class="estimator-field">
             <label>Destination</label>
             <select class="estimator-select" id="est-dest" onchange="calcEstimate()">
-              <option value="13">Kinshasa (RDC) &mdash; 13 &euro;/kg</option>
-              <option value="13">Lubumbashi (RDC) &mdash; 13 &euro;/kg</option>
-              <option value="13" disabled>Dakar (S&eacute;n&eacute;gal) &mdash; bient&ocirc;t</option>
-              <option value="13" disabled>Douala (Cameroun) &mdash; bient&ocirc;t</option>
+              <option value="13">Kinshasa — 13 €/kg</option>
+              <option value="13">Lubumbashi — 13 €/kg</option>
+              <option value="13" disabled>Dakar — bientôt</option>
+              <option value="13" disabled>Douala — bientôt</option>
             </select>
           </div>
         </div>
