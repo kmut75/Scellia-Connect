@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scellia — Send parcels home through your community</title>
+<meta name="description" content="Peer-to-peer parcel delivery between Europe and Africa. Payment escrow, real-time flight tracking, all-inclusive €13/kg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-90: #243656;
+  --navy-80: #2D4268;
+  --navy-dark: #111D33;
+  --coral: #E8624A;
+  --coral-light: #F07A65;
+  --coral-dark: #D04A32;
+  --coral-glow: rgba(232,98,74,0.12);
+  --orange: #F5943B;
+  --orange-light: #FEBA6A;
+  --gold: #D4A843;
+  --gold-light: #E8C76A;
+  --gold-soft: rgba(212,168,67,0.10);
+  --cream: #FFF9F5;
+  --warm-50: #FEF6F0;
+  --warm-100: #FCE8DA;
+  --warm-200: #F5D4C0;
+  --white: #FFFFFF;
+  --gray-50: #FAFAF9;
+  --gray-100: #F3F2F0;
+  --gray-200: #E5E3E0;
+  --gray-400: #9B978F;
+  --gray-600: #6B6760;
+  --gray-800: #2D2A26;
+  --green: #22A559;
+  --green-soft: #E6F7ED;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 1px 3px rgba(27,42,74,0.06);
+  --shadow-md: 0 4px 20px rgba(27,42,74,0.08);
+  --shadow-lg: 0 8px 36px rgba(27,42,74,0.10);
+  --shadow-xl: 0 20px 60px rgba(27,42,74,0.12);
+  --shadow-coral: 0 8px 32px rgba(232,98,74,0.20);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--gray-800); line-height: 1.65; font-size: 16px;
+  background: var(--white); -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy); line-height: 1.15; font-weight: 800; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.94); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.04); transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; max-width: 1160px; margin: 0 auto; padding: 0 24px;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark {
+  width: 40px; height: 40px; background: var(--navy); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.logo-mark::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(to top, var(--coral), transparent); opacity: 0.7;
+}
+.logo-mark span { position: relative; z-index: 1; color: white; font-weight: 800; font-size: 20px; }
+.logo-text { font-weight: 800; font-size: 22px; color: var(--navy); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--gray-600); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  background: var(--coral); color: var(--navy); padding: 10px 24px;
+  border-radius: 10px; font-weight: 800; font-size: 14px;
+  text-decoration: none; transition: all 0.2s; letter-spacing: 0.2px;
+}
+.nav-cta:hover { background: #d4553d; transform: translateY(-1px); }
+.lang-switch {
+  font-size: 13px; font-weight: 700; color: var(--gray-400);
+  text-decoration: none; border: 1px solid var(--gray-200); border-radius: 6px;
+  padding: 4px 10px; transition: all 0.2s;
+}
+.lang-switch:hover { color: var(--navy); border-color: var(--navy); }
+.mobile-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.mobile-menu svg { width: 28px; height: 28px; color: var(--navy); }
+.nav-prototype {
+  font-size: 14px; font-weight: 600; color: var(--navy);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--gold); border-radius: 8px; padding: 5px 12px;
+  transition: all 0.2s; background: var(--gold-soft);
+}
+.nav-prototype:hover { background: rgba(212,168,67,0.18); color: var(--navy); transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 140px 0 80px; background: var(--navy); position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -20%; right: -10%; width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(232,98,74,0.15) 0%, rgba(245,148,59,0.08) 40%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -40%; left: -10%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 60%); border-radius: 50%;
+}
+.hero-pattern {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,98,74,0.15); border: 1px solid rgba(232,98,74,0.25);
+  padding: 8px 18px; border-radius: 100px; margin-bottom: 28px;
+  font-size: 13px; color: var(--coral-light); font-weight: 600;
+}
+.hero-badge .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+.hero h1 { font-size: clamp(38px, 5vw, 58px); color: white; margin-bottom: 24px; letter-spacing: -1px; }
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--coral-light), var(--orange));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub { font-size: 18px; color: rgba(255,255,255,0.65); margin-bottom: 40px; max-width: 520px; line-height: 1.75; font-weight: 400; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-coral {
+  background: var(--coral); color: white; padding: 16px 36px;
+  border-radius: 12px; font-size: 16px; font-weight: 700;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+  transition: all 0.25s; border: none; cursor: pointer; box-shadow: var(--shadow-coral);
+}
+.btn-coral:hover { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232,98,74,0.30); }
+.btn-ghost {
+  background: rgba(255,255,255,0.06); color: white; padding: 16px 32px;
+  border-radius: 12px; font-size: 16px; font-weight: 600;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.12); transition: all 0.25s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+.btn-prototype {
+  background: transparent; color: rgba(255,255,255,0.72); padding: 16px 28px;
+  border-radius: 12px; font-size: 15px; font-weight: 600;
+  text-decoration: none; border: 1px solid rgba(212,168,67,0.35);
+  transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-prototype:hover { background: rgba(212,168,67,0.10); border-color: rgba(212,168,67,0.65); color: var(--gold); transform: translateY(-1px); }
+
+/* Hero counter */
+.hero-counter { margin-top: 20px; animation: fadeInUp 0.5s ease both; }
+.hero-counter-inner {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 50px; padding: 7px 16px 7px 8px; backdrop-filter: blur(10px);
+}
+.hero-counter-avatars { display: flex; }
+.hca {
+  width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 11px; font-weight: 700;
+  margin-right: -6px; border: 2px solid rgba(255,255,255,0.15); flex-shrink: 0;
+}
+.hero-counter-avatars .hca:last-child { margin-right: 0; }
+.hero-counter-num { font-weight: 800; font-size: 15px; color: var(--gold); }
+.hero-counter-label { font-size: 13px; color: rgba(255,255,255,0.72); font-weight: 500; }
+.hero-counter-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34,165,89,0.25); animation: pulse-green 2s infinite; flex-shrink: 0;
+}
+@keyframes pulse-green { 0%,100% { box-shadow: 0 0 0 3px rgba(34,165,89,0.25); } 50% { box-shadow: 0 0 0 6px rgba(34,165,89,0.10); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes countUp { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+
+/* Final-count */
+.final-count { font-size: 13px; color: rgba(255,255,255,0.38); margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.final-count.has-data { font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 600; }
+.final-count .live-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34,165,89,0.3); display: inline-block; animation: pulse-green 2s infinite;
+}
+
+/* Hero card */
+.hero-visual { display: flex; justify-content: center; position: relative; }
+.hero-card { background: white; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-xl); width: 100%; max-width: 400px; position: relative; }
+.hero-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.hero-avatar { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, var(--coral), var(--orange)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; }
+.hero-card-name { font-weight: 700; color: var(--navy); font-size: 15px; }
+.hero-card-route { font-size: 13px; color: var(--gray-400); }
+.hero-card-badge { margin-left: auto; background: var(--green-soft); color: var(--green); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+.hero-tracking { background: var(--warm-50); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+.hero-tracking-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.hero-tracking-flight { font-size: 18px; font-weight: 800; color: var(--navy); }
+.hero-tracking-status { background: linear-gradient(135deg, var(--coral), var(--orange)); color: white; padding: 5px 14px; border-radius: 100px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+.hero-route-vis { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.hero-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+.hero-dot.from { background: var(--navy); border: 3px solid var(--navy); }
+.hero-dot.to { background: white; border: 3px solid var(--gray-200); }
+.hero-line { flex: 1; height: 4px; background: var(--gray-200); border-radius: 4px; position: relative; overflow: visible; }
+.hero-line-fill { position: absolute; top: 0; left: 0; height: 100%; width: 62%; background: linear-gradient(90deg, var(--navy), var(--coral)); border-radius: 4px; }
+.hero-plane { position: absolute; top: 50%; left: 62%; transform: translate(-50%,-50%); font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.hero-route-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-400); }
+.hero-route-labels strong { color: var(--navy); font-size: 16px; font-weight: 800; display: block; }
+.hero-steps-bar { display: flex; gap: 4px; padding-top: 16px; border-top: 1px solid var(--gray-100); }
+.hero-step-pill { flex: 1; text-align: center; padding: 8px 4px; border-radius: 10px; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.hero-step-pill.done { background: var(--green-soft); color: var(--green); }
+.hero-step-pill.active { background: var(--coral-glow); color: var(--coral); }
+.hero-step-pill.pending { color: var(--gray-400); }
+.hero-step-icon { font-size: 16px; }
+
+/* Float badges */
+.float-badge {
+  position: absolute; background: white; border-radius: 14px; padding: 12px 16px;
+  box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700; color: var(--navy); animation: float 3s ease-in-out infinite;
+}
+.float-badge.a { top: -30px; right: -90px; animation-delay: 0s; }
+.float-badge.b { bottom: -30px; left: -90px; animation-delay: 1.5s; }
+@keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)} }
+.float-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.float-icon.grn { background: var(--green-soft); }
+.float-icon.gld { background: var(--gold-soft); }
+
+/* ─── TRUST BAR ─── */
+.trust-bar { background: var(--cream); padding: 28px 0; border-bottom: 1px solid var(--warm-100); }
+.trust-items { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--navy); }
+.trust-dot { width: 22px; height: 22px; border-radius: 50%; background: var(--green-soft); display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 12px; flex-shrink: 0; }
+.trust-price { color: var(--coral); font-weight: 800; }
+
+/* ─── SECTIONS ─── */
+section { padding: 100px 0; }
+.section-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--coral-glow); color: var(--coral); padding: 6px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.section-title { font-size: clamp(32px, 4vw, 46px); margin-bottom: 16px; letter-spacing: -0.5px; }
+.section-desc { font-size: 17px; color: var(--gray-600); max-width: 600px; line-height: 1.75; margin-bottom: 52px; }
+.section-desc.ctr { margin-left: auto; margin-right: auto; text-align: center; }
+.text-center { text-align: center; }
+
+/* ─── HOW IT WORKS ─── */
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.step-card { background: white; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; position: relative; transition: all 0.3s; }
+.step-card:hover { border-color: var(--coral); box-shadow: 0 8px 32px rgba(232,98,74,0.08); transform: translateY(-4px); }
+.step-num { width: 44px; height: 44px; border-radius: 12px; background: var(--navy); color: white; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.step-emoji { font-size: 40px; margin-bottom: 14px; line-height: 1; }
+.step-card h3 { font-size: 17px; margin-bottom: 8px; font-weight: 700; }
+.step-card p { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+.step-card:not(:last-child)::after { content: ''; position: absolute; top: 50%; right: -14px; width: 8px; height: 8px; border-top: 2px solid var(--coral); border-right: 2px solid var(--coral); transform: rotate(45deg) translateY(-50%); z-index: 1; }
+
+/* ─── FEATURES ─── */
+.feat-section { background: var(--cream); }
+.feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.feat-card { background: white; border: 1px solid var(--warm-100); border-radius: var(--radius-lg); padding: 32px; transition: all 0.3s; }
+.feat-card:hover { border-color: var(--coral); box-shadow: var(--shadow-md); }
+.feat-icon { width: 56px; height: 56px; border-radius: 14px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+.feat-icon.warm { background: var(--coral-glow); }
+.feat-icon.navy { background: rgba(27,42,74,0.06); }
+.feat-icon.gold { background: var(--gold-soft); }
+.feat-card h3 { font-size: 18px; margin-bottom: 8px; font-weight: 700; }
+.feat-card p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
+/* ─── PRICING ─── */
+.pricing-wrap { max-width: 540px; margin: 0 auto; }
+.pricing-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-xl); border: 2px solid var(--warm-100); }
+.pricing-top { background: var(--navy); padding: 44px 40px; text-align: center; position: relative; overflow: hidden; }
+.pricing-top::before { content: ''; position: absolute; top: -50%; right: -30%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(232,98,74,0.2) 0%, transparent 70%); border-radius: 50%; }
+.pricing-amount { font-size: 64px; color: white; font-weight: 800; line-height: 1; position: relative; }
+.pricing-amount .cur { font-size: 36px; vertical-align: top; color: var(--coral-light); }
+.pricing-amount .unit { font-size: 20px; color: rgba(255,255,255,0.5); font-weight: 500; }
+.pricing-note { color: rgba(255,255,255,0.55); margin-top: 8px; font-size: 15px; position: relative; }
+.pricing-body { padding: 32px 36px; }
+.pricing-line { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
+.pricing-line:last-child { border-bottom: none; }
+.pricing-check { width: 22px; height: 22px; border-radius: 50%; background: var(--coral-glow); color: var(--coral); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+.pricing-text { font-size: 15px; line-height: 1.5; }
+.pricing-text strong { color: var(--navy); }
+.pricing-foot { padding: 0 36px 32px; text-align: center; }
+.pricing-foot .btn-coral { width: 100%; justify-content: center; }
+.pricing-ex { margin-top: 12px; font-size: 13px; color: var(--gray-400); }
+
+/* ─── ESTIMATOR ─── */
+.estimator-wrap { max-width: 540px; margin: 24px auto 0; background: white; border-radius: var(--radius-xl); border: 2px solid var(--warm-100); box-shadow: var(--shadow-md); overflow: hidden; }
+.estimator-header { background: var(--warm-50); padding: 20px 28px; border-bottom: 1px solid var(--warm-100); display: flex; align-items: center; gap: 10px; }
+.estimator-header span { font-weight: 800; font-size: 15px; color: var(--navy); }
+.estimator-header small { font-size: 13px; color: var(--gray-400); margin-left: auto; }
+.estimator-body { padding: 24px 28px; }
+.estimator-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.estimator-field label { display: block; font-size: 12px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.qty-control { display: flex; align-items: center; border: 1.5px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+.qty-btn { width: 40px; height: 46px; background: var(--warm-50); border: none; cursor: pointer; font-size: 20px; font-weight: 700; color: var(--navy); transition: background 0.15s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.qty-btn:hover { background: var(--warm-100); }
+.qty-input { flex: 1; height: 46px; border: none; text-align: center; font-size: 18px; font-weight: 800; color: var(--navy); font-family: inherit; outline: none; background: white; min-width: 0; }
+.estimator-select { width: 100%; height: 46px; border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 0 14px; font-size: 15px; font-weight: 600; color: var(--navy); font-family: inherit; outline: none; background: white; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B978F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.estimator-result { background: var(--navy); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.estimator-result-label { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 500; }
+.estimator-result-amount { font-size: 36px; font-weight: 800; color: white; line-height: 1; }
+.estimator-result-amount span { font-size: 20px; color: var(--coral-light); }
+.estimator-result-detail { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.estimator-breakdown { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.breakdown-pill { flex: 1; min-width: 120px; background: var(--warm-50); border: 1px solid var(--warm-100); border-radius: 10px; padding: 10px 14px; text-align: center; }
+.breakdown-pill-label { font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.6px; }
+.breakdown-pill-val { font-size: 15px; font-weight: 800; color: var(--navy); }
+.estimator-cta { width: 100%; justify-content: center; }
+
+/* ─── CORRIDOR ─── */
+.corridor-wrap { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--gray-100); }
+.corridor-left { background: var(--navy); padding: 52px; color: white; position: relative; overflow: hidden; }
+.corridor-left::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, rgba(232,98,74,0.12), transparent); }
+.corridor-left > * { position: relative; z-index: 1; }
+.corridor-left h3 { color: white; font-size: 28px; margin-bottom: 16px; }
+.corridor-left p { color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 28px; }
+.corridor-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cor-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px; }
+.cor-stat-val { font-size: 28px; font-weight: 800; background: linear-gradient(135deg, var(--coral-light), var(--orange-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cor-stat-lbl { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.corridor-right { padding: 52px; }
+.corridor-right h3 { font-size: 22px; margin-bottom: 28px; }
+.route-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+.route-item:last-child { border-bottom: none; }
+.route-flag { width: 44px; height: 44px; border-radius: 12px; background: var(--warm-50); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.route-text { flex: 1; }
+.route-text strong { display: block; font-size: 14px; color: var(--navy); font-weight: 700; }
+.route-text span { font-size: 13px; color: var(--gray-400); }
+.route-next { margin-top: 24px; text-align: center; font-size: 13px; color: var(--gray-400); padding: 12px; background: var(--warm-50); border-radius: 10px; }
+
+/* ─── CORRIDOR GRID ─── */
+.corridors-upcoming { margin-top: 48px; }
+.corridors-wave-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gray-400); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.corridors-wave-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-100); }
+.corridors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 8px; }
+.corridor-card { background: white; border: 1.5px solid var(--gray-100); border-radius: 16px; padding: 20px 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; transition: all 0.2s; position: relative; }
+.corridor-card.soon { opacity: 0.75; }
+.corridor-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(27,42,74,0.09); opacity: 1; }
+.cc-flag { font-size: 30px; line-height: 1; }
+.cc-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+.cc-country { font-size: 12px; color: var(--gray-400); margin-top: -2px; }
+.cc-badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px; }
+.cc-badge.active-badge { background: rgba(34,165,89,0.12); color: var(--green); }
+.cc-badge.wave1 { background: rgba(232,98,74,0.1); color: var(--coral); }
+.cc-badge.wave2 { background: rgba(212,168,67,0.12); color: #b8872a; }
+.cc-badge.world-badge { background: rgba(27,42,74,0.07); color: var(--gray-600); }
+.corridors-vision { margin-top: 40px; text-align: center; padding: 30px 40px; background: var(--navy); border-radius: 20px; color: rgba(255,255,255,0.75); font-size: 17px; line-height: 1.7; }
+.corridors-vision strong { color: white; }
+.corridors-vision span { color: var(--coral); font-weight: 800; }
+@media (max-width: 768px) { .corridors-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .corridors-vision { padding: 24px 20px; font-size: 15px; } }
+
+/* ─── TRAVELER ─── */
+.traveler-section { background: linear-gradient(160deg, var(--coral-dark) 0%, var(--coral) 50%, var(--orange) 100%); color: white; position: relative; overflow: hidden; }
+.traveler-section::before { content: ''; position: absolute; top: -30%; right: -15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
+.traveler-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+.trav-tag { background: rgba(255,255,255,0.15); color: white; }
+.traveler-section h2 { color: white; font-size: clamp(30px,4vw,40px); margin-bottom: 16px; }
+.trav-desc { color: rgba(255,255,255,0.85); font-size: 17px; line-height: 1.75; margin-bottom: 32px; }
+.trav-perks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.trav-perk { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 16px 20px; }
+.trav-perk-icon { font-size: 28px; }
+.trav-perk-text strong { display: block; color: white; font-size: 15px; }
+.trav-perk-text span { color: rgba(255,255,255,0.65); font-size: 13px; }
+.btn-white { display: inline-flex; align-items: center; gap: 10px; background: white; color: var(--coral); padding: 16px 36px; border-radius: 12px; font-size: 16px; font-weight: 700; text-decoration: none; transition: all 0.25s; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+.trav-card { background: white; border-radius: var(--radius-xl); padding: 28px; color: var(--gray-800); box-shadow: var(--shadow-xl); }
+.trav-card h4 { color: var(--navy); margin-bottom: 20px; font-size: 17px; }
+.trav-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--gray-100); font-size: 14px; }
+.trav-row:last-child { border-bottom: none; }
+.trav-amount { font-size: 22px; font-weight: 800; color: var(--coral); }
+.trav-footnote { margin-top: 16px; font-size: 12px; color: var(--gray-400); text-align: center; }
+
+/* ─── SOCIAL PROOF ─── */
+.proof-section { background: var(--cream); }
+.proof-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.proof-card { background: white; border: 1px solid var(--warm-100); border-radius: var(--radius-lg); padding: 28px; }
+.proof-stars { color: var(--orange); font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
+.proof-text { font-size: 15px; color: var(--gray-600); line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+.proof-author { display: flex; align-items: center; gap: 12px; }
+.proof-avatar { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: white; }
+.proof-name { font-weight: 700; font-size: 14px; color: var(--navy); }
+.proof-route { font-size: 12px; color: var(--gray-400); }
+
+/* ─── FAQ ─── */
+.faq-list { max-width: 700px; margin: 0 auto; }
+.faq-item { border: 1px solid var(--gray-100); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; background: white; }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; font-weight: 700; font-size: 15px; color: var(--navy); background: none; border: none; width: 100%; text-align: left; transition: background 0.2s; font-family: inherit; }
+.faq-q:hover { background: var(--warm-50); }
+.faq-chev { transition: transform 0.3s; font-size: 18px; color: var(--gray-400); flex-shrink: 0; margin-left: 16px; }
+.faq-item.open .faq-chev { transform: rotate(180deg); color: var(--coral); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-a-inner { padding: 0 24px 20px; font-size: 15px; color: var(--gray-600); line-height: 1.75; }
+
+/* ─── FINAL CTA ─── */
+.final-cta { background: var(--navy); padding: 100px 0; text-align: center; position: relative; overflow: hidden; }
+.final-cta::before { content: ''; position: absolute; top: -40%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(232,98,74,0.12) 0%, transparent 60%); border-radius: 50%; }
+.final-cta::after { content: ''; position: absolute; bottom: -40%; left: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,148,59,0.08) 0%, transparent 60%); border-radius: 50%; }
+.final-inner { position: relative; z-index: 1; }
+.final-cta h2 { color: white; font-size: clamp(32px,4vw,46px); margin-bottom: 16px; }
+.final-cta p { color: rgba(255,255,255,0.6); font-size: 18px; margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.email-row { max-width: 480px; margin: 0 auto; display: flex; gap: 10px; }
+.email-input { flex: 1; padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: white; font-size: 16px; outline: none; font-family: inherit; transition: border-color 0.2s; }
+.email-input:focus { border-color: var(--coral); }
+.email-input::placeholder { color: rgba(255,255,255,0.3); }
+.email-btn { padding: 16px 32px; border-radius: 12px; background: white; color: var(--navy); font-weight: 800; border: none; cursor: pointer; font-size: 15px; font-family: inherit; transition: all 0.2s; white-space: nowrap; letter-spacing: 0.2px; }
+.email-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-coral); }
+
+/* ─── FOOTER ─── */
+.footer { background: var(--navy-dark); padding: 64px 0 32px; color: rgba(255,255,255,0.45); font-size: 14px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-brand .logo-text { color: white; }
+.footer-brand p { line-height: 1.7; max-width: 280px; }
+.footer h4 { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 20px; }
+.footer a { color: rgba(255,255,255,0.45); text-decoration: none; display: block; padding: 4px 0; transition: color 0.2s; }
+.footer a:hover { color: var(--coral-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { padding: 0; }
+
+/* ─── APP SECTION ─── */
+.app-section { background: var(--navy); padding: 100px 0; position: relative; overflow: hidden; }
+.app-section::before { content: ''; position: absolute; top: -30%; right: -10%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(232,98,74,0.10) 0%, transparent 65%); border-radius: 50%; }
+.app-section .section-tag { background: rgba(232,98,74,0.18); color: var(--coral-light); }
+.app-section .section-title { color: white; }
+.app-section .section-desc { color: rgba(255,255,255,0.58); }
+.app-badges-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 48px; }
+.app-badge { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 16px 28px; transition: all 0.25s; min-width: 220px; }
+.app-badge:hover { background: rgba(255,255,255,0.09); border-color: rgba(232,98,74,0.45); }
+.app-badge-icon { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 38px; }
+.app-badge-text { text-align: left; }
+.app-badge-soon { font-size: 11px; color: var(--coral-light); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 2px; }
+.app-badge-store { font-size: 19px; color: white; font-weight: 800; line-height: 1.1; display: block; }
+.app-features-row { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; }
+.app-feature { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.65); font-weight: 500; }
+.app-feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+
+/* ─── SURVEY BANNER ─── */
+.survey-banner { background: linear-gradient(135deg, var(--navy-90), var(--navy-80)); padding: 16px 0; border-bottom: 2px solid rgba(232,98,74,0.25); }
+.survey-inner { display: flex; align-items: center; gap: 16px; max-width: 1160px; margin: 0 auto; padding: 0 24px; flex-wrap: wrap; }
+.survey-icon { font-size: 22px; flex-shrink: 0; }
+.survey-inner > div { flex: 1; min-width: 200px; }
+.survey-inner strong { color: white; font-size: 15px; font-weight: 700; display: block; }
+.survey-inner span { color: rgba(255,255,255,0.6); font-size: 13px; }
+.survey-btn { background: var(--coral); color: white; padding: 10px 22px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; }
+.survey-btn:hover { background: var(--coral-dark); transform: translateY(-1px); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 968px) {
+  .hero-inner, .corridor-wrap, .traveler-inner { grid-template-columns: 1fr; }
+  .hero { text-align: center; }
+  .hero-sub { margin: 0 auto 40px; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { margin-top: 32px; }
+  .float-badge { display: none; }
+  .steps-grid { grid-template-columns: repeat(2,1fr); }
+  .step-card::after { display: none; }
+  .feat-grid, .proof-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .nav-links.show {
+    display: flex; flex-direction: column; gap: 4px;
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: white; padding: 16px 24px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    box-shadow: 0 8px 24px rgba(27,42,74,0.08); z-index: 99;
+  }
+  .nav-links.show a { padding: 10px 0; border-bottom: 1px solid var(--gray-100); font-size: 15px; }
+  .nav-links.show a:last-child { border-bottom: none; margin-top: 8px; }
+  .nav-links.show .nav-cta { text-align: center; padding: 12px 24px; }
+  .mobile-menu { display: block; }
+}
+@media (max-width: 640px) {
+  .steps-grid, .feat-grid, .proof-grid { grid-template-columns: 1fr; }
+  .corridor-stats { grid-template-columns: 1fr; }
+  .trust-items { gap: 16px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links { justify-content: center; }
+  .email-row { flex-direction: column; }
+  .pricing-top, .pricing-body, .pricing-foot { padding-left: 24px; padding-right: 24px; }
+  .estimator-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"><span>S</span></div>
+      <span class="logo-text">Scellia</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#trust">Trust</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#corridors">Corridors</a>
+      <a href="voyageur.html" style="color:var(--green);font-weight:700">&#9992;&#65039; Travellers</a>
+      <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="nav-prototype">&#128295; Prototype</a>
+      <a href="index.html" class="lang-switch">FR</a>
+      <a href="#join" class="nav-cta">Join the waitlist</a>
+    </div>
+    <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Launch corridor: France &amp; Belgium &rarr; DRC
+      </div>
+      <h1>Send parcels <span class="accent">home</span> with full confidence</h1>
+      <p class="hero-sub">The diaspora's trusted peer-to-peer network. Vetted travellers carry your parcels in their luggage. Escrow payments, real-time flight tracking, photo proof at every step.</p>
+      <div class="hero-actions">
+        <a href="#join" class="btn-coral">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+          Send a parcel
+        </a>
+        <a href="#traveller" class="btn-ghost">I'm a traveller</a>
+        <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="btn-prototype">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          View interactive prototype
+        </a>
+      </div>
+      <div class="hero-counter" id="hero-counter" style="display:none;">
+        <div class="hero-counter-inner">
+          <div class="hero-counter-avatars">
+            <div class="hca" style="background:linear-gradient(135deg,#E8624A,#F5943B)">M</div>
+            <div class="hca" style="background:linear-gradient(135deg,#1B2A4A,#2D4268)">J</div>
+            <div class="hca" style="background:linear-gradient(135deg,#D4A843,#E8C76A)">S</div>
+          </div>
+          <div>
+            <span class="hero-counter-num" id="hero-counter-num">—</span>
+            <span class="hero-counter-label"> people on the waitlist</span>
+          </div>
+          <div class="hero-counter-dot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="float-badge a"><div class="float-icon grn">&#10003;</div>Secure payment</div>
+        <div class="float-badge b"><div class="float-icon gld">&#128241;</div>Mobile app soon</div>
+        <div class="hero-card-header">
+          <div class="hero-avatar">MK</div>
+          <div>
+            <div class="hero-card-name">Marie K.</div>
+            <div class="hero-card-route">Paris CDG &rarr; Kinshasa FIH</div>
+          </div>
+          <div class="hero-card-badge">Verified</div>
+        </div>
+        <div class="hero-tracking">
+          <div class="hero-tracking-top">
+            <div class="hero-tracking-flight">Flight AF 888</div>
+            <div class="hero-tracking-status">In flight</div>
+          </div>
+          <div class="hero-route-vis">
+            <div class="hero-dot from"></div>
+            <div class="hero-line">
+              <div class="hero-line-fill"></div>
+              <span class="hero-plane">&#9992;&#65039;</span>
+            </div>
+            <div class="hero-dot to"></div>
+          </div>
+          <div class="hero-route-labels">
+            <div><strong>CDG</strong>Paris, 08:45</div>
+            <div style="text-align:right"><strong>FIH</strong>Kinshasa, 17:20</div>
+          </div>
+        </div>
+        <div class="hero-steps-bar">
+          <div class="hero-step-pill done"><span class="hero-step-icon">&#10003;</span>Handed</div>
+          <div class="hero-step-pill done"><span class="hero-step-icon">&#10003;</span>Boarded</div>
+          <div class="hero-step-pill active"><span class="hero-step-icon">&#9992;</span>In flight</div>
+          <div class="hero-step-pill pending"><span class="hero-step-icon">&#128205;</span>Landed</div>
+          <div class="hero-step-pill pending"><span class="hero-step-icon">&#128230;</span>Delivered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-items">
+      <div class="trust-item"><div class="trust-dot">&#10003;</div>Payment escrow</div>
+      <div class="trust-item"><div class="trust-dot">&#10003;</div>Real-time flight tracking</div>
+      <div class="trust-item"><div class="trust-dot">&#10003;</div>Photo proof at every step</div>
+      <div class="trust-item" title="Insurance contract being finalised with approved insurer"><div class="trust-dot">&#128274;</div>Parcel insurance (coming soon)</div>
+      <div class="trust-item"><div class="trust-dot">&#10003;</div><span class="trust-price">&euro;13/kg all-inclusive</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SURVEY BANNER -->
+<div class="survey-banner">
+  <div class="survey-inner">
+    <div class="survey-icon">&#128203;</div>
+    <div>
+      <strong>Take our 3-minute market survey &mdash; anonymous</strong>
+      <span>Your answers help us shape the service before launch. Get access to a preferential rate.</span>
+    </div>
+    <a href="questionnaire.html" class="survey-btn">Take survey &rarr;</a>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container text-center">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">Four steps, zero stress</h2>
+    <p class="section-desc ctr">Community-powered delivery, structured by technology.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-emoji">&#128230;</div>
+        <h3>Describe your parcel</h3>
+        <p>Mandatory photos of contents, weight, description. Full transparency for the traveller.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-emoji">&#129309;</div>
+        <h3>Find a traveller</h3>
+        <p>Verified community members. Ratings, reviews, trust badges.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-emoji">&#128274;</div>
+        <h3>Secure payment</h3>
+        <p>Your payment is held in escrow. The traveller is paid only after confirmed delivery.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-emoji">&#127881;</div>
+        <h3>Tracking &amp; delivery</h3>
+        <p>Follow the flight live. Confirmation code at handover. WhatsApp alert to the recipient.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES / TRUST -->
+<section id="trust" class="feat-section">
+  <div class="container text-center">
+    <div class="section-tag">Trust</div>
+    <h2 class="section-title">The safety the informal system can't offer</h2>
+    <p class="section-desc ctr">Six pillars of trust — what sets us apart from the traditional GP system.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon navy">&#128100;</div>
+        <h3>Verified identity</h3>
+        <p>KYC check for every traveller: ID document, selfie, address. Three trust levels: Verified, Confirmed, Expert.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon warm">&#128274;</div>
+        <h3>Payment escrow</h3>
+        <p>Your payment is held in a secure account. The traveller is paid only after the recipient confirms delivery.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">&#9992;&#65039;</div>
+        <h3>Live flight tracking</h3>
+        <p>Connected to real-time flight data. Departure, position, landing — you always know where your parcel is.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon navy">&#128247;</div>
+        <h3>Photo proof at every step</h3>
+        <p>Handover, boarding, arrival, delivery. Timestamped and geolocated photos at every stage.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon warm">&#128176;</div>
+        <h3>Parcel insurance included</h3>
+        <p>Every shipment is covered by ad valorem insurance. Loss, theft, damage: compensation within 72 hours, up to €500.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">&#11088;</div>
+        <h3>Two-way rating system</h3>
+        <p>Double-blind system. Sender and traveller rate each other. Ratings are revealed simultaneously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container text-center">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Fair and transparent pricing</h2>
+    <p class="section-desc ctr">Cheaper than DHL. Safer than the informal system.</p>
+    <div class="pricing-wrap">
+      <div class="pricing-card">
+        <div class="pricing-top">
+          <div class="pricing-amount"><span class="cur">&euro;</span>13<span class="unit">/kg</span></div>
+          <div class="pricing-note">All-inclusive, no hidden fees</div>
+        </div>
+        <div class="pricing-body">
+          <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>Secure escrow</strong> included in the price</div></div>
+          <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>Flight tracking</strong> real-time with push &amp; WhatsApp notifications</div></div>
+          <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>Parcel insurance</strong> included, up to &euro;500 per shipment (loss, theft, damage)</div></div>
+          <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>Digital contract</strong> automatically generated between parties</div></div>
+          <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>WhatsApp notification</strong> to the recipient in Kinshasa</div></div>
+          <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>Proof of delivery</strong> via geolocated photo + confirmation code</div></div>
+        </div>
+        <div class="pricing-foot">
+          <a href="#estimator" class="btn-coral">Estimate my shipping cost &darr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COST ESTIMATOR WIDGET -->
+    <div class="estimator-wrap" id="estimator">
+      <div class="estimator-header">
+        <span>&#128273; Calculate your shipment</span>
+        <small>Live pricing</small>
+      </div>
+      <div class="estimator-body">
+        <div class="estimator-row">
+          <div class="estimator-field">
+            <label>Weight (kg)</label>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(-1)" aria-label="Less">&#8722;</button>
+              <input class="qty-input" id="est-kg" type="number" value="5" min="1" max="30" oninput="calcEstimate()">
+              <button class="qty-btn" onclick="changeQty(1)" aria-label="More">&#43;</button>
+            </div>
+          </div>
+          <div class="estimator-field">
+            <label>Destination</label>
+            <select class="estimator-select" id="est-dest" onchange="calcEstimate()">
+              <option value="13">Kinshasa (DRC) &mdash; &euro;13/kg</option>
+              <option value="13" disabled>Dakar (Senegal) &mdash; coming soon</option>
+              <option value="13" disabled>Douala (Cameroon) &mdash; coming soon</option>
+            </select>
+          </div>
+        </div>
+        <div class="estimator-result">
+          <div>
+            <div class="estimator-result-label">Estimated total cost</div>
+            <div class="estimator-result-amount"><span>&euro;</span><span id="est-total">65</span></div>
+            <div class="estimator-result-detail" id="est-detail">5 kg &times; &euro;13 &mdash; all inclusive</div>
+          </div>
+          <div style="font-size:48px;opacity:0.15">&#128230;</div>
+        </div>
+        <div class="estimator-breakdown">
+          <div class="breakdown-pill">
+            <div class="breakdown-pill-label">Traveller share</div>
+            <div class="breakdown-pill-val" id="est-voyageur">&euro;57</div>
+          </div>
+          <div class="breakdown-pill">
+            <div class="breakdown-pill-label">Escrow included</div>
+            <div class="breakdown-pill-val" style="color:var(--green)">&#10003; Free</div>
+          </div>
+          <div class="breakdown-pill">
+            <div class="breakdown-pill-label">Insurance included</div>
+            <div class="breakdown-pill-val" style="color:var(--green)">&#10003; Up to &euro;500</div>
+          </div>
+        </div>
+        <a href="#join" class="btn-coral estimator-cta">Lock in this rate &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORRIDORS -->
+<section id="corridors" style="background: var(--cream)">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:52px">
+      <div class="section-tag">Global network</div>
+      <h2 class="section-title">One active corridor. A worldwide vision.</h2>
+      <p class="section-desc ctr">Scellia Connect is expanding progressively wherever African diaspora communities live &mdash; and wherever parcels need to travel, in every direction.</p>
+    </div>
+
+    <!-- Active corridor: France & Belgium → Kinshasa -->
+    <div class="corridor-wrap">
+      <div class="corridor-left">
+        <div class="cc-badge active-badge" style="margin-bottom:16px;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> Active pilot &mdash; April 2026</div>
+        <h3>300,000+ Congolese in Europe</h3>
+        <p>Paris, Brussels, Lyon, Lille, Li&egrave;ge, Antwerp &mdash; Congolese communities are at the heart of our trust network.</p>
+        <div class="corridor-stats">
+          <div class="cor-stat"><div class="cor-stat-val">14+</div><div class="cor-stat-lbl">Direct flights / week</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">4</div><div class="cor-stat-lbl">Airlines</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">8h30</div><div class="cor-stat-lbl">Avg. flight time</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">&euro;15&ndash;20</div><div class="cor-stat-lbl">Informal GP price / kg</div></div>
+        </div>
+      </div>
+      <div class="corridor-right">
+        <h3>Active routes &mdash; France &amp; Belgium &#8596; DRC</h3>
+        <div class="route-item">
+          <div class="route-flag">&#127467;&#127479;</div>
+          <div class="route-text"><strong>Paris CDG &rarr; Kinshasa FIH</strong><span>Air France, Ethiopian Airlines &bull; Daily</span></div>
+        </div>
+        <div class="route-item">
+          <div class="route-flag">&#127463;&#127466;</div>
+          <div class="route-text"><strong>Brussels BRU &rarr; Kinshasa FIH</strong><span>Brussels Airlines &bull; 4&times; / week</span></div>
+        </div>
+        <div class="route-item">
+          <div class="route-flag">&#127481;&#127479;</div>
+          <div class="route-text"><strong>Istanbul IST &rarr; Kinshasa FIH</strong><span>Turkish Airlines &bull; 3&times; / week</span></div>
+        </div>
+        <div class="route-item">
+          <div class="route-flag">&#127466;&#127481;</div>
+          <div class="route-text"><strong>Addis Ababa ADD &rarr; Kinshasa FIH</strong><span>Ethiopian Airlines &bull; Daily (hub)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming corridors -->
+    <div class="corridors-upcoming">
+      <div class="corridors-wave-label">Wave 1 &mdash; West &amp; Central Africa &middot; 2027</div>
+      <div class="corridors-grid">
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127480;&#127475;</div>
+          <div class="cc-name">Dakar</div>
+          <div class="cc-country">Senegal</div>
+          <div class="cc-badge wave1">M+10 &mdash; 2027</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127474;</div>
+          <div class="cc-name">Douala</div>
+          <div class="cc-country">Cameroon</div>
+          <div class="cc-badge wave1">M+16 &mdash; 2027</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127470;</div>
+          <div class="cc-name">Abidjan</div>
+          <div class="cc-country">C&ocirc;te d'Ivoire</div>
+          <div class="cc-badge wave1">M+28 &mdash; 2027</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127468;</div>
+          <div class="cc-name">Brazzaville</div>
+          <div class="cc-country">Congo</div>
+          <div class="cc-badge wave1">2027</div>
+        </div>
+      </div>
+
+      <div class="corridors-wave-label" style="margin-top:28px">Wave 2 &mdash; Continental Africa &amp; global diaspora &middot; 2027&ndash;2028</div>
+      <div class="corridors-grid">
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127474;&#127462;</div>
+          <div class="cc-name">Casablanca</div>
+          <div class="cc-country">Morocco</div>
+          <div class="cc-badge wave2">2027&ndash;2028</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127475;&#127468;</div>
+          <div class="cc-name">Lagos</div>
+          <div class="cc-country">Nigeria</div>
+          <div class="cc-badge wave2">2027&ndash;2028</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127472;&#127466;</div>
+          <div class="cc-name">Nairobi</div>
+          <div class="cc-country">Kenya</div>
+          <div class="cc-badge wave2">2027&ndash;2028</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127462;</div>
+          <div class="cc-name">Montr&eacute;al</div>
+          <div class="cc-country">Canada</div>
+          <div class="cc-badge world-badge">2028</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- World vision -->
+    <div class="corridors-vision">
+      &#127758; <strong>Scellia Connect is built to connect every African diaspora to their family</strong> &mdash; <span>in every direction</span>, across every continent, worldwide. Kinshasa is just the beginning.
+    </div>
+  </div>
+</section>
+
+<!-- TRAVELLER -->
+<section id="traveller" class="traveler-section">
+  <div class="container">
+    <div class="traveler-inner">
+      <div>
+        <div class="section-tag trav-tag">Travellers</div>
+        <h2>Travelling to Kinshasa?</h2>
+        <p class="trav-desc">Monetise your spare luggage allowance while helping the community. Every kilogram you carry makes a difference for a diaspora family.</p>
+        <div class="trav-perks">
+          <div class="trav-perk">
+            <div class="trav-perk-icon">&#128176;</div>
+            <div class="trav-perk-text"><strong>Up to &euro;230 per trip</strong><span>For 20 kg at &euro;11.50/kg (traveller's share)</span></div>
+          </div>
+          <div class="trav-perk">
+            <div class="trav-perk-icon">&#128737;</div>
+            <div class="trav-perk-text"><strong>Content verification</strong><span>Mandatory photos, banned items list, full right of refusal</span></div>
+          </div>
+          <div class="trav-perk">
+            <div class="trav-perk-icon">&#11088;</div>
+            <div class="trav-perk-text"><strong>Expert badge after 10 trips</strong><span>Priority in search results, gold badge, maximum trust</span></div>
+          </div>
+        </div>
+        <a href="#join" class="btn-white">Become a traveller &rarr;</a>
+      </div>
+      <div>
+        <div class="trav-card">
+          <h4>&#128200; Estimated earnings</h4>
+          <div class="trav-row"><span>1 trip / month (10 kg)</span><span class="trav-amount">&euro;115</span></div>
+          <div class="trav-row"><span>2 trips / month (15 kg)</span><span class="trav-amount">&euro;345</span></div>
+          <div class="trav-row"><span>Regular GP (4 trips, 20 kg)</span><span class="trav-amount">&euro;920</span></div>
+          <div class="trav-footnote">Payment via SEPA transfer or mobile money (M-Pesa, Airtel Money, Orange Money)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof-section">
+  <div class="container text-center">
+    <div class="section-tag">Community</div>
+    <h2 class="section-title">What the community is waiting for</h2>
+    <p class="section-desc ctr">During our exploratory interviews with the Congolese diaspora in France and Belgium, here is what we heard.</p>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="proof-text">"I used to hand my parcels to GPs I barely knew. Now I can see the flight live and know exactly when my mother in Kinshasa will receive it."</div>
+        <div class="proof-author">
+          <div class="proof-avatar" style="background:linear-gradient(135deg,var(--coral),var(--orange))">PL</div>
+          <div><div class="proof-name">Patrick L.</div><div class="proof-route">Paris &rarr; Kinshasa</div></div>
+        </div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="proof-text">"The escrow changes everything. I travel regularly and was always worried about not getting paid. Here it's guaranteed. The Expert badge gives me priority too."</div>
+        <div class="proof-author">
+          <div class="proof-avatar" style="background:linear-gradient(135deg,var(--navy),var(--navy-80))">SN</div>
+          <div><div class="proof-name">Sarah N.</div><div class="proof-route">Brussels &rarr; Kinshasa</div></div>
+        </div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="proof-text">"My aunt in Kin got a WhatsApp when the flight took off, then when it landed. She knew exactly when to get the code ready. Simple and efficient."</div>
+        <div class="proof-author">
+          <div class="proof-avatar" style="background:linear-gradient(135deg,var(--gold),var(--orange))">DM</div>
+          <div><div class="proof-name">David M.</div><div class="proof-route">Lyon &rarr; Kinshasa</div></div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:12px;color:var(--gray-400);font-style:italic;">* Illustrative testimonials based on our exploratory interviews with the Congolese diaspora. To be replaced by verified reviews at launch.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container text-center">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Your questions, answered</h2>
+    <p class="section-desc ctr" style="margin-bottom:40px">Everything you need to know before sending your first parcel or offering your first trip.</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is it legal to carry parcels for others in your luggage?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Yes, absolutely.</strong> Transporting goods for others in personal luggage is a common and legal practice governed by aviation regulations. Each passenger is legally responsible for the contents of their bags — which is precisely why Scellia requires content verification before any acceptance.
+          <br><br>
+          In practice, the traveller inspects the parcel, takes photos before closing the bag, and confirms the absence of prohibited items. This procedure is compliant with DGAC (French Civil Aviation Authority) requirements and protects both traveller and sender.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">What Scellia adds</span>: a formal structure to a practice that has always existed in the community — with traceability, a digital contract, and protection for both parties.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How does the escrow payment work?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          The escrow is the heart of the Scellia trust system. Here is how it works in practice:
+          <br><br>
+          <strong>1. On trip confirmation</strong> — The sender pays the agreed amount. Funds are immediately held in a secure account managed by <strong>Stripe</strong>, our PCI-DSS certified payment partner. The traveller cannot access them at this stage.
+          <br><br>
+          <strong>2. During transport</strong> — Funds remain locked regardless of circumstances. Neither the sender nor the traveller can access them without the other party's validation.
+          <br><br>
+          <strong>3. On delivery</strong> — The recipient receives a 4-digit OTP code via WhatsApp. They give it to the traveller, who enters it on the platform. This dual validation automatically triggers the bank transfer to the traveller within 2–3 business days.
+          <br><br>
+          <strong>In case of dispute</strong> — If delivery is contested within 48 hours, the Scellia team acts as a neutral mediator, uses photo evidence and the activity log, and resolves within 72 hours maximum.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What happens if my parcel is damaged or lost?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Every shipment includes a <strong>parcel protection cover</strong> in the price. Here is what it covers:
+          <br><br>
+          <strong>Total loss</strong> — You are reimbursed up to the declared value at the time of shipment creation (ceiling of &euro;500 per parcel).
+          <br><br>
+          <strong>Partial damage</strong> — Damaged items are compensated based on photos taken at handover and delivery. The value differential is refunded.
+          <br><br>
+          <strong>Significant delay</strong> — If delivery exceeds 5 days after landing without explanation, the escrow is automatically returned to the sender while the situation is resolved.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">Our key advantage</span>: every step is photographed and timestamped. In the event of a claim, you have a complete evidence file — something no informal system can offer.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How is the recipient in Kinshasa informed and notified?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          The recipient is at the heart of the tracking system, <strong>without needing to install anything</strong>. Everything happens via WhatsApp and SMS — the tools they already use every day.
+          <br><br>
+          They receive a notification at each key step:
+          <br><br>
+          📦 <strong>Shipment created</strong> — Confirmation, traveller's name, expected departure date.<br>
+          🛫 <strong>Flight departed</strong> — Flight number, estimated arrival time in Kinshasa.<br>
+          🛬 <strong>Landing confirmed</strong> — Actual arrival time, delivery estimate.<br>
+          🚗 <strong>Traveller en route</strong> — Alert 30 minutes before estimated arrival.<br>
+          🔐 <strong>OTP code</strong> — 4-digit code sent via WhatsApp and SMS to validate handover.<br>
+          🎉 <strong>Delivery confirmed</strong> — Final confirmation with digital receipt.
+          <br><br>
+          The recipient does not need a recent smartphone. The service works with any phone capable of receiving SMS.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Why €13/kg and not €6/kg like a traditional GP?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          It's the question everyone asks — and it's a fair one. Here is what you're actually paying for with each option:
+          <br><br>
+          <strong>The GP system at €6/kg</strong> — No contract, no tracking, no proof of delivery, no recourse in case of loss. If the parcel disappears or is damaged, you have no way to get reimbursed. You pay less, but you take all the risk alone.
+          <br><br>
+          <strong>Scellia at €13/kg includes</strong>: Stripe escrow, real-time flight tracking, WhatsApp notifications to the recipient, timestamped photos at every step, delivery OTP code, parcel protection up to €500, and mediation service in case of dispute.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">To put it in perspective</span>: DHL Express Paris → Kinshasa charges <strong>€40–80/kg</strong>. Informal "reliable" GPs today charge <strong>€15–20/kg</strong> in many networks. At €13/kg all-inclusive, Scellia is the safest AND cheapest option in the structured market.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What items can be sent? What is prohibited?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>✅ Allowed items</strong>
+          <br>
+          Clothing, shoes, accessories &middot; Non-perishable food (canned goods, coffee, tea, spices) &middot; Medication (prescription required for regulated products) &middot; Cosmetics &amp; beauty products &middot; Electronics (phones, tablets, small appliances — <em>with integrated battery</em>) &middot; Books, school supplies &middot; Toys &amp; children's items &middot; Non-flammable household products.
+          <br><br>
+          <strong>🚫 Strictly prohibited items</strong>
+          <br>
+          Isolated lithium batteries (unfixed powerbanks) &middot; Flammable or pressurised liquids &middot; Counterfeits &amp; pirated goods &middot; Perishables without appropriate packaging &middot; Illicit products &middot; Weapons &amp; ammunition &middot; Large amounts of banknotes &middot; Any item prohibited by DGAC cabin or hold regulations.
+          <br><br>
+          If in doubt about an item, our team responds within 2 hours via the contact form. The full list is available in our Terms of Service.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How do I become a traveller on Scellia? How much can I earn?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Becoming a Scellia traveller is straightforward. Simply sign up, verify your identity (ID document), and publish your trip with your flight number, date, and available kilos.
+          <br><br>
+          <strong>The full process in 4 steps:</strong>
+          <br><br>
+          <strong>1. Sign up &amp; identity verification</strong> — Complete profile + verified ID photo. Fast, 100% online.<br>
+          <strong>2. Publish your trip</strong> — Flight number, date, available kilos, desired price per kg.<br>
+          <strong>3. Automatic matching</strong> — Scellia suggests compatible requests for your route. You choose which ones to accept.<br>
+          <strong>4. Transport &amp; delivery</strong> — Hand over the parcel to the recipient in Kinshasa and enter the OTP code. Payment is transferred within 2–3 business days.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">How much can you earn?</span> A traveller carrying 15 kg on a Paris–Kinshasa trip receives approximately <strong>€171 net</strong> (15 kg × €11.44/kg after Scellia commission). Over the year, a regular traveller (4–6 trips) can generate <strong>€700–1,000 in supplementary income</strong>.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">When will the service be available? How do I get early access?<span class="faq-chev">&#9660;</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Scellia Connect is in its final development phase. The <strong>DRC corridor pilot launches in April 2026</strong> — just weeks away.
+          <br><br>
+          <strong>The roadmap in brief:</strong>
+          <br><br>
+          🔧 <strong>March 2026 (ongoing)</strong> — MVP finalisation: web app, escrow payments, matching, OTP, notifications.<br>
+          🚀 <strong>April 2026</strong> — Closed pilot: 50–100 selected users from the waitlist. First real shipments on the France-Belgium → Kinshasa corridor.<br>
+          🌍 <strong>Summer 2026</strong> — Progressive public launch on the France-Belgium → Kinshasa corridor.<br>
+          📱 <strong>2027</strong> — Mobile app (iOS &amp; Android), expansion to Senegal, Cameroon, C&ocirc;te d'Ivoire corridors.
+          <br><br>
+          <span style="color:var(--coral);font-weight:600">To be among the first</span>: sign up on the waitlist below. Waitlist members will receive <strong>priority access</strong> to the pilot, a <strong>preferential launch rate</strong>, and a "Founding Member" badge on their profile.
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- APP SECTION -->
+<section class="app-section">
+  <div class="container text-center" style="position:relative;z-index:1">
+    <div class="section-tag">Mobile app</div>
+    <h2 class="section-title">Scellia in your pocket</h2>
+    <p class="section-desc ctr">The service is primarily mobile — track your parcels in real time, receive notifications, confirm delivery with one tap, directly from your phone.</p>
+    <div class="app-badges-row">
+      <div class="app-badge">
+        <div class="app-badge-icon">
+          <svg viewBox="0 0 48 48" width="42" height="42" fill="none">
+            <rect width="48" height="48" rx="12" fill="rgba(255,255,255,0.08)"/>
+            <path d="M33.2 25.8c-.1-3.8 3.1-5.6 3.2-5.7-1.7-2.5-4.4-2.9-5.4-2.9-2.3-.2-4.5 1.3-5.6 1.3-1.2 0-2.9-1.3-4.8-1.3-2.5 0-4.8 1.5-6 3.7-2.6 4.5-.7 11.2 1.8 14.8 1.2 1.8 2.7 3.7 4.6 3.7 1.8-.1 2.5-1.2 4.8-1.2 2.2 0 2.9 1.2 4.8 1.1 2 0 3.2-1.8 4.4-3.5 1.4-2 2-3.9 2-4-.1 0-3.8-1.4-3.8-6z" fill="white"/>
+            <path d="M29.4 14.8c1-1.2 1.6-2.9 1.4-4.6-1.4.1-3.1.9-4.1 2.1-.9 1-1.7 2.7-1.5 4.3 1.6.1 3.2-.8 4.2-1.8z" fill="white"/>
+          </svg>
+        </div>
+        <div class="app-badge-text">
+          <span class="app-badge-soon">Coming soon</span>
+          <span class="app-badge-store">App Store</span>
+        </div>
+      </div>
+      <div class="app-badge">
+        <div class="app-badge-icon">
+          <svg viewBox="0 0 48 48" width="42" height="42" fill="none">
+            <rect width="48" height="48" rx="12" fill="rgba(255,255,255,0.08)"/>
+            <path d="M12 38.8V9.2L30.5 24Z" fill="#4CAF50"/>
+            <path d="M12 9.2L30.5 24L39 19.2L19.4 8Z" fill="#2196F3"/>
+            <path d="M12 38.8L30.5 24L39 28.8L19.4 40Z" fill="#F44336"/>
+            <path d="M30.5 24L39 19.2L42.5 24L39 28.8Z" fill="#FFC107"/>
+          </svg>
+        </div>
+        <div class="app-badge-text">
+          <span class="app-badge-soon">Coming soon</span>
+          <span class="app-badge-store">Google Play</span>
+        </div>
+      </div>
+    </div>
+    <div class="app-features-row">
+      <div class="app-feature"><div class="app-feature-dot"></div>Real-time flight tracking</div>
+      <div class="app-feature"><div class="app-feature-dot"></div>Push &amp; WhatsApp notifications</div>
+      <div class="app-feature"><div class="app-feature-dot"></div>Digital delivery code</div>
+      <div class="app-feature"><div class="app-feature-dot"></div>Timestamped &amp; geolocated photos</div>
+      <div class="app-feature"><div class="app-feature-dot"></div>Integrated secure payment</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="join" class="final-cta">
+  <div class="final-inner container">
+    <h2>Join the peer-to-peer network</h2>
+    <p>Sign up and be among the first to use the service on the France-Belgium / DRC corridor.</p>
+    <div class="email-row">
+      <input id="email" type="email" class="email-input" placeholder="Your email address">
+      <button class="email-btn">Join</button>
+    </div>
+    <div class="final-count" id="waitlist-count">Be among the first to join the waitlist</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><div class="logo-mark"><span>S</span></div><span class="logo-text">Scellia</span></a>
+        <p>Peer-to-peer parcel delivery service between Europe and Africa. Technical intermediary for peer matching.</p>
+      </div>
+      <div>
+        <h4>Service</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#corridors">Corridors</a>
+        <a href="#traveller">Become a traveller</a>
+      </div>
+      <div>
+        <h4>Trust</h4>
+        <a href="#trust">Security</a>
+        <a href="#faq">FAQ</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Instagram</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Scellia. All rights reserved.</span>
+      <div class="footer-links"><a href="#">Legal notices</a><a href="#">Terms</a><a href="#">GDPR</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20)});
+function toggleFaq(btn){const item=btn.parentElement;item.classList.toggle('open');const a=btn.nextElementSibling;a.style.maxHeight=a.style.maxHeight?null:a.scrollHeight+'px'}
+
+const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function handleEmailRegistration() {
+  const emailInput = document.getElementById('email');
+  const email = emailInput.value.trim();
+  const btn = document.querySelector('.email-btn');
+  if (!email || !email.includes('@')) { alert("Please enter a valid email address."); return; }
+  const originalText = btn.textContent;
+  btn.textContent = 'Processing...'; btn.disabled = true;
+  try {
+    const { error } = await supabase.from('waitlist').insert([{ email: email, type: 'envoyeur', source: 'EN' }]);
+    if (error && error.code === '23505') {
+      emailInput.value = ''; btn.textContent = 'Already registered ✓'; btn.style.background = 'var(--green)';
+    } else if (error) {
+      alert("An error occurred. Please try again."); btn.textContent = originalText; btn.disabled = false;
+    } else {
+      emailInput.value = ''; btn.textContent = 'Registered ✓'; btn.style.background = 'var(--green)';
+      const form = emailInput.closest('form') || emailInput.parentElement;
+      if (!document.getElementById('email-confirm-msg')) {
+        const confirm = document.createElement('p');
+        confirm.id = 'email-confirm-msg';
+        confirm.style.cssText = 'margin-top:10px;font-size:13px;color:var(--green);font-weight:600;';
+        confirm.textContent = '🎉 Welcome! You will be among the first notified when we launch in April 2026.';
+        form.appendChild(confirm);
+      }
+    }
+  } catch(err) { alert("An unexpected error occurred."); btn.textContent = originalText; btn.disabled = false; }
+}
+document.querySelector('.email-btn').onclick = handleEmailRegistration;
+
+function animateNumber(el, from, to, duration) {
+  if (from === to) return;
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (t < 1) requestAnimationFrame(step); else el.textContent = to;
+  }
+  requestAnimationFrame(step);
+}
+function updateCounterDisplay(count) {
+  if (!count || count < 1) return;
+  const heroCounter = document.getElementById('hero-counter');
+  const heroNum = document.getElementById('hero-counter-num');
+  if (heroCounter && heroNum) {
+    const prev = parseInt(heroNum.textContent) || 0;
+    heroCounter.style.display = 'inline-flex';
+    animateNumber(heroNum, prev, count, 800);
+  }
+  const finalEl = document.getElementById('waitlist-count');
+  if (finalEl) {
+    finalEl.classList.add('has-data');
+    finalEl.innerHTML = '<span class="live-dot"></span>' + count + ' people already on the waitlist';
+  }
+}
+async function loadWaitlistCount() {
+  try {
+    const { count } = await supabase.from('waitlist').select('*', { count: 'exact', head: true });
+    if (count) updateCounterDisplay(count);
+  } catch(e) {}
+}
+supabase.channel('waitlist-changes-en').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist' }, payload => {
+  loadWaitlistCount();
+}).subscribe();
+loadWaitlistCount();
+
+// Estimator
+function calcEstimate() {
+  const kg = Math.max(1, Math.min(30, parseInt(document.getElementById('est-kg').value) || 1));
+  const rate = parseInt(document.getElementById('est-dest').value) || 13;
+  const total = kg * rate;
+  const traveller = Math.round(total * 0.88);
+  document.getElementById('est-total').textContent = total;
+  document.getElementById('est-detail').textContent = kg + ' kg × €' + rate + ' — all inclusive';
+  document.getElementById('est-voyageur').textContent = '€' + traveller;
+}
+function changeQty(delta) {
+  const input = document.getElementById('est-kg');
+  const val = Math.max(1, Math.min(30, (parseInt(input.value) || 1) + delta));
+  input.value = val; calcEstimate();
+}
+calcEstimate();
+</script>
+</body>
+</html>

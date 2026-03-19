@@ -89,11 +89,17 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
 }
 .nav-links a:hover { color: var(--navy); }
 .nav-cta {
-  background: var(--coral); color: white; padding: 10px 24px;
-  border-radius: 10px; font-weight: 700; font-size: 14px;
+  background: var(--coral); color: var(--navy); padding: 10px 24px;
+  border-radius: 10px; font-weight: 800; font-size: 14px;
   text-decoration: none; transition: all 0.2s; letter-spacing: 0.2px;
 }
-.nav-cta:hover { background: var(--coral-dark); transform: translateY(-1px); }
+.nav-cta:hover { background: #d4553d; transform: translateY(-1px); }
+.lang-switch {
+  font-size: 13px; font-weight: 700; color: var(--gray-400) !important;
+  border: 1.5px solid var(--gray-200); border-radius: 6px;
+  padding: 4px 10px !important; transition: all 0.2s;
+}
+.lang-switch:hover { color: var(--navy) !important; border-color: var(--navy); }
 .mobile-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .mobile-menu svg { width: 28px; height: 28px; color: var(--navy); }
 
@@ -179,7 +185,6 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
 /* ─── Hero counter ─── */
 .hero-counter {
   margin-top: 20px;
-  display: inline-flex !important;
   animation: fadeInUp 0.5s ease both;
 }
 .hero-counter-inner {
@@ -222,10 +227,10 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
   from { opacity: 0; transform: scale(0.85); }
   to   { opacity: 1; transform: scale(1); }
 }
-/* Final-count amélioré */
+/* Final-count — compteur liste d'attente */
 .final-count {
-  font-size: 14px; color: rgba(255,255,255,0.55);
-  margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 13px; color: rgba(255,255,255,0.38);
+  margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .final-count.has-data {
   font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 600;
@@ -318,8 +323,8 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
   font-size: 13px; font-weight: 700; color: var(--navy);
   animation: float 3s ease-in-out infinite;
 }
-.float-badge.a { top: -18px; right: -48px; animation-delay: 0s; }
-.float-badge.b { bottom: -18px; left: -48px; animation-delay: 1.5s; }
+.float-badge.a { top: -30px; right: -90px; animation-delay: 0s; }
+.float-badge.b { bottom: -30px; left: -90px; animation-delay: 1.5s; }
 @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)} }
 .float-icon {
   width: 36px; height: 36px; border-radius: 10px;
@@ -435,6 +440,68 @@ section { padding: 100px 0; }
 .pricing-foot .btn-coral { width: 100%; justify-content: center; }
 .pricing-ex { margin-top: 12px; font-size: 13px; color: var(--gray-400); }
 
+/* ─── ESTIMATEUR ─── */
+.estimator-wrap {
+  max-width: 540px; margin: 24px auto 0;
+  background: white; border-radius: var(--radius-xl);
+  border: 2px solid var(--warm-100); box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.estimator-header {
+  background: var(--warm-50); padding: 20px 28px;
+  border-bottom: 1px solid var(--warm-100);
+  display: flex; align-items: center; gap: 10px;
+}
+.estimator-header span { font-weight: 800; font-size: 15px; color: var(--navy); }
+.estimator-header small { font-size: 13px; color: var(--gray-400); margin-left: auto; }
+.estimator-body { padding: 24px 28px; }
+.estimator-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.estimator-field label {
+  display: block; font-size: 12px; font-weight: 700; color: var(--gray-400);
+  text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
+}
+.qty-control {
+  display: flex; align-items: center; border: 1.5px solid var(--gray-200);
+  border-radius: 10px; overflow: hidden;
+}
+.qty-btn {
+  width: 40px; height: 46px; background: var(--warm-50); border: none; cursor: pointer;
+  font-size: 20px; font-weight: 700; color: var(--navy); transition: background 0.15s;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.qty-btn:hover { background: var(--warm-100); }
+.qty-input {
+  flex: 1; height: 46px; border: none; text-align: center;
+  font-size: 18px; font-weight: 800; color: var(--navy);
+  font-family: inherit; outline: none; background: white; min-width: 0;
+}
+.estimator-select {
+  width: 100%; height: 46px; border: 1.5px solid var(--gray-200);
+  border-radius: 10px; padding: 0 14px; font-size: 15px; font-weight: 600;
+  color: var(--navy); font-family: inherit; outline: none; background: white;
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B978F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+}
+.estimator-result {
+  background: var(--navy); border-radius: 14px; padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
+}
+.estimator-result-label { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 500; }
+.estimator-result-amount { font-size: 36px; font-weight: 800; color: white; line-height: 1; }
+.estimator-result-amount span { font-size: 20px; color: var(--coral-light); }
+.estimator-result-detail { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.estimator-breakdown {
+  display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.breakdown-pill {
+  flex: 1; min-width: 120px; background: var(--warm-50); border: 1px solid var(--warm-100);
+  border-radius: 10px; padding: 10px 14px; text-align: center;
+}
+.breakdown-pill-label { font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.6px; }
+.breakdown-pill-val { font-size: 15px; font-weight: 800; color: var(--navy); }
+.estimator-cta { width: 100%; justify-content: center; }
+
 /* ─── CORRIDOR ─── */
 .corridor-wrap {
   background: white; border-radius: var(--radius-xl); overflow: hidden;
@@ -481,6 +548,50 @@ section { padding: 100px 0; }
 .route-next {
   margin-top: 24px; text-align: center; font-size: 13px; color: var(--gray-400);
   padding: 12px; background: var(--warm-50); border-radius: 10px;
+}
+
+/* ─── CORRIDOR GRID ─── */
+.corridors-upcoming { margin-top: 48px; }
+.corridors-wave-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--gray-400); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.corridors-wave-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--gray-100);
+}
+.corridors-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin-bottom: 8px;
+}
+.corridor-card {
+  background: white; border: 1.5px solid var(--gray-100); border-radius: 16px;
+  padding: 20px 14px; display: flex; flex-direction: column; align-items: center;
+  gap: 8px; text-align: center; transition: all 0.2s; position: relative;
+}
+.corridor-card.soon { opacity: 0.75; }
+.corridor-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(27,42,74,0.09); opacity: 1; }
+.cc-flag { font-size: 30px; line-height: 1; }
+.cc-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+.cc-country { font-size: 12px; color: var(--gray-400); margin-top: -2px; }
+.cc-badge {
+  font-size: 10px; font-weight: 700; padding: 3px 9px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px;
+}
+.cc-badge.active-badge { background: rgba(34,165,89,0.12); color: var(--green); }
+.cc-badge.wave1 { background: rgba(232,98,74,0.1); color: var(--coral); }
+.cc-badge.wave2 { background: rgba(212,168,67,0.12); color: #b8872a; }
+.cc-badge.world-badge { background: rgba(27,42,74,0.07); color: var(--gray-600); }
+.corridors-vision {
+  margin-top: 40px; text-align: center; padding: 30px 40px;
+  background: var(--navy); border-radius: 20px; color: rgba(255,255,255,0.75);
+  font-size: 17px; line-height: 1.7;
+}
+.corridors-vision strong { color: white; }
+.corridors-vision span { color: var(--coral); font-weight: 800; }
+@media (max-width: 768px) {
+  .corridors-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .corridors-vision { padding: 24px 20px; font-size: 15px; }
 }
 
 /* ─── TRAVELER ─── */
@@ -598,13 +709,13 @@ section { padding: 100px 0; }
 .email-input::placeholder { color: rgba(255,255,255,0.3); }
 .email-btn {
   padding: 16px 32px; border-radius: 12px;
-  background: linear-gradient(135deg, var(--coral), var(--orange));
-  color: white; font-weight: 700; border: none; cursor: pointer;
+  background: white;
+  color: var(--navy); font-weight: 800; border: none; cursor: pointer;
   font-size: 15px; font-family: inherit; transition: all 0.2s;
-  white-space: nowrap;
+  white-space: nowrap; letter-spacing: 0.2px;
 }
 .email-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-coral); }
-.final-count { margin-top: 14px; font-size: 13px; color: rgba(255,255,255,0.35); }
+/* .final-count défini plus haut (ligne ~225) — pas de redéfinition */
 
 /* ─── FOOTER ─── */
 .footer {
@@ -704,6 +815,17 @@ section { padding: 100px 0; }
   .feat-grid, .proof-grid { grid-template-columns: repeat(2,1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
+  .nav-links.show {
+    display: flex; flex-direction: column; gap: 4px;
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: white; padding: 16px 24px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    box-shadow: 0 8px 24px rgba(27,42,74,0.08);
+    z-index: 99;
+  }
+  .nav-links.show a { padding: 10px 0; border-bottom: 1px solid var(--gray-100); font-size: 15px; }
+  .nav-links.show a:last-child { border-bottom: none; margin-top: 8px; }
+  .nav-links.show .nav-cta { text-align: center; padding: 12px 24px; }
   .mobile-menu { display: block; }
 }
 @media (max-width: 640px) {
@@ -732,9 +854,10 @@ section { padding: 100px 0; }
       <a href="#confiance">Confiance</a>
       <a href="#tarif">Tarif</a>
       <a href="#corridor">Corridors</a>
+      <a href="voyageur.html" style="color:var(--green);font-weight:700">&#9992;&#65039; Voyageurs</a>
       <a href="questionnaire.html" style="color:var(--coral);font-weight:700">&#128203; Sondage</a>
-      <!-- PROTOTYPE_URL : remplacer par l'URL Vercel après déploiement -->
       <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="nav-prototype">&#128295; Prototype</a>
+      <a href="index-en.html" class="lang-switch">EN</a>
       <a href="#rejoindre" class="nav-cta">Rejoindre la liste d'attente</a>
     </div>
     <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
@@ -753,14 +876,13 @@ section { padding: 100px 0; }
         Corridor de lancement : France &amp; Belgique → RDC
       </div>
       <h1>Envoyez vos colis<br><span class="accent">au pays</span> en toute confiance</h1>
-      <p class="hero-sub">Le reseau d'entraide de la diaspora. Des voyageurs de confiance transportent vos colis dans leurs bagages. Sequestre, suivi de vol en temps reel, preuves photo.</p>
+      <p class="hero-sub">Le réseau d'entraide de la diaspora. Des voyageurs de confiance transportent vos colis dans leurs bagages. Séquestre, suivi de vol en temps réel, preuves photo.</p>
       <div class="hero-actions">
         <a href="#rejoindre" class="btn-coral">
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
           Envoyer un colis
         </a>
         <a href="#voyageur" class="btn-ghost">Je suis voyageur</a>
-        <!-- PROTOTYPE_URL : remplacer par l'URL Vercel après déploiement -->
         <a href="https://scellia-prototype.vercel.app" target="_blank" rel="noopener" class="btn-prototype">
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           Voir la maquette interactive
@@ -946,9 +1068,62 @@ section { padding: 100px 0; }
           <div class="pricing-line"><span class="pricing-check">&#10003;</span><div class="pricing-text"><strong>Preuve de remise</strong> par photo geolocalisee + code de confirmation</div></div>
         </div>
         <div class="pricing-foot">
-          <a href="#rejoindre" class="btn-coral">Estimer le cout de mon envoi</a>
-          <div class="pricing-ex">Exemple : un colis de 5 kg = 65 &euro; tout compris</div>
+          <a href="#estimateur" class="btn-coral">Estimer le co&ucirc;t de mon envoi &darr;</a>
         </div>
+      </div>
+    </div>
+
+    <!-- ESTIMATEUR WIDGET -->
+    <div class="estimator-wrap" id="estimateur">
+      <div class="estimator-header">
+        <span>&#128273; Calculez votre envoi</span>
+        <small>Prix en temps r&eacute;el</small>
+      </div>
+      <div class="estimator-body">
+        <div class="estimator-row">
+          <div class="estimator-field">
+            <label>Poids (kg)</label>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(-1)" aria-label="Moins">&#8722;</button>
+              <input class="qty-input" id="est-kg" type="number" value="5" min="1" max="30" oninput="calcEstimate()">
+              <button class="qty-btn" onclick="changeQty(1)" aria-label="Plus">&#43;</button>
+            </div>
+          </div>
+          <div class="estimator-field">
+            <label>Destination</label>
+            <select class="estimator-select" id="est-dest" onchange="calcEstimate()">
+              <option value="13">Kinshasa (RDC) &mdash; 13 &euro;/kg</option>
+              <option value="13" disabled>Dakar (S&eacute;n&eacute;gal) &mdash; bient&ocirc;t</option>
+              <option value="13" disabled>Douala (Cameroun) &mdash; bient&ocirc;t</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="estimator-result">
+          <div>
+            <div class="estimator-result-label">Co&ucirc;t total estim&eacute;</div>
+            <div class="estimator-result-amount"><span>&euro;</span><span id="est-total">65</span></div>
+            <div class="estimator-result-detail" id="est-detail">5 kg &times; 13 &euro; &mdash; tout compris</div>
+          </div>
+          <div style="font-size:48px;opacity:0.15">&#128230;</div>
+        </div>
+
+        <div class="estimator-breakdown">
+          <div class="breakdown-pill">
+            <div class="breakdown-pill-label">Part voyageur</div>
+            <div class="breakdown-pill-val" id="est-voyageur">&euro;57</div>
+          </div>
+          <div class="breakdown-pill">
+            <div class="breakdown-pill-label">S&eacute;questre inclus</div>
+            <div class="breakdown-pill-val" style="color:var(--green)">&#10003; Gratuit</div>
+          </div>
+          <div class="breakdown-pill">
+            <div class="breakdown-pill-label">Assurance incluse</div>
+            <div class="breakdown-pill-val" style="color:var(--green)">&#10003; 500 &euro; max</div>
+          </div>
+        </div>
+
+        <a href="#rejoindre" class="btn-coral estimator-cta">R&eacute;server ce tarif &rarr;</a>
       </div>
     </div>
   </div>
@@ -958,23 +1133,26 @@ section { padding: 100px 0; }
 <section id="corridor" style="background: var(--cream)">
   <div class="container">
     <div class="text-center" style="margin-bottom:52px">
-      <div class="section-tag">Premier corridor</div>
-      <h2 class="section-title">France &amp; Belgique &#8596; RDC Congo</h2>
-      <p class="section-desc ctr">Notre corridor de lancement connecte les plus grandes communautes congolaises d'Europe a Kinshasa.</p>
+      <div class="section-tag">R&eacute;seau mondial</div>
+      <h2 class="section-title">Un corridor actif. Une vision mondiale.</h2>
+      <p class="section-desc ctr">Scellia Connect se d&eacute;ploie progressivement l&agrave; o&ugrave; vivent les diasporas africaines &mdash; et partout o&ugrave; des colis doivent voyager, dans tous les sens.</p>
     </div>
+
+    <!-- Corridor actif : France & Belgique → Kinshasa -->
     <div class="corridor-wrap">
       <div class="corridor-left">
+        <div class="cc-badge active-badge" style="margin-bottom:16px;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> Pilote actif &mdash; Avril 2026</div>
         <h3>300 000+ Congolais en Europe</h3>
-        <p>Paris, Bruxelles, Lyon, Lille, Liege, Anvers — les communautes congolaises sont au coeur de notre reseau d'entraide.</p>
+        <p>Paris, Bruxelles, Lyon, Lille, Li&egrave;ge, Anvers &mdash; les communaut&eacute;s congolaises sont au c&oelig;ur de notre r&eacute;seau d&rsquo;entraide.</p>
         <div class="corridor-stats">
           <div class="cor-stat"><div class="cor-stat-val">14+</div><div class="cor-stat-lbl">Vols directs / semaine</div></div>
-          <div class="cor-stat"><div class="cor-stat-val">4</div><div class="cor-stat-lbl">Compagnies aeriennes</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">4</div><div class="cor-stat-lbl">Compagnies a&eacute;riennes</div></div>
           <div class="cor-stat"><div class="cor-stat-val">8h30</div><div class="cor-stat-lbl">Temps de vol moyen</div></div>
-          <div class="cor-stat"><div class="cor-stat-val">15-20&euro;</div><div class="cor-stat-lbl">Prix GP informel / kg</div></div>
+          <div class="cor-stat"><div class="cor-stat-val">15&ndash;20 &euro;</div><div class="cor-stat-lbl">Prix GP informel / kg</div></div>
         </div>
       </div>
       <div class="corridor-right">
-        <h3>Routes actives</h3>
+        <h3>Routes actives &mdash; France &amp; Belgique &#8596; RDC</h3>
         <div class="route-item">
           <div class="route-flag">&#127467;&#127479;</div>
           <div class="route-text"><strong>Paris CDG &rarr; Kinshasa FIH</strong><span>Air France, Ethiopian Airlines &bull; Quotidien</span></div>
@@ -991,8 +1169,71 @@ section { padding: 100px 0; }
           <div class="route-flag">&#127466;&#127481;</div>
           <div class="route-text"><strong>Addis-Abeba ADD &rarr; Kinshasa FIH</strong><span>Ethiopian Airlines &bull; Quotidien (hub)</span></div>
         </div>
-        <div class="route-next">Prochains corridors : Senegal (M10), Cameroun (M16), Cote d'Ivoire (M28)</div>
       </div>
+    </div>
+
+    <!-- Prochains corridors -->
+    <div class="corridors-upcoming">
+      <div class="corridors-wave-label">Vague 1 &mdash; Afrique de l&rsquo;Ouest &amp; Centrale &middot; 2027</div>
+      <div class="corridors-grid">
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127480;&#127475;</div>
+          <div class="cc-name">Dakar</div>
+          <div class="cc-country">S&eacute;n&eacute;gal</div>
+          <div class="cc-badge wave1">M10 &mdash; 2027</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127474;</div>
+          <div class="cc-name">Douala</div>
+          <div class="cc-country">Cameroun</div>
+          <div class="cc-badge wave1">M16 &mdash; 2027</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127470;</div>
+          <div class="cc-name">Abidjan</div>
+          <div class="cc-country">C&ocirc;te d&rsquo;Ivoire</div>
+          <div class="cc-badge wave1">M28 &mdash; 2027</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127468;</div>
+          <div class="cc-name">Brazzaville</div>
+          <div class="cc-country">Congo</div>
+          <div class="cc-badge wave1">2027</div>
+        </div>
+      </div>
+
+      <div class="corridors-wave-label" style="margin-top:28px">Vague 2 &mdash; Afrique continentale &amp; diaspora mondiale &middot; 2027&ndash;2028</div>
+      <div class="corridors-grid">
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127474;&#127462;</div>
+          <div class="cc-name">Casablanca</div>
+          <div class="cc-country">Maroc</div>
+          <div class="cc-badge wave2">2027&ndash;2028</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127475;&#127468;</div>
+          <div class="cc-name">Lagos</div>
+          <div class="cc-country">Nigeria</div>
+          <div class="cc-badge wave2">2027&ndash;2028</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127472;&#127466;</div>
+          <div class="cc-name">Nairobi</div>
+          <div class="cc-country">Kenya</div>
+          <div class="cc-badge wave2">2027&ndash;2028</div>
+        </div>
+        <div class="corridor-card soon">
+          <div class="cc-flag">&#127464;&#127462;</div>
+          <div class="cc-name">Montr&eacute;al</div>
+          <div class="cc-country">Canada</div>
+          <div class="cc-badge world-badge">2028</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision mondiale -->
+    <div class="corridors-vision">
+      &#127758; <strong>Scellia Connect a vocation &agrave; connecter chaque diaspora africaine &agrave; sa famille</strong> &mdash; <span>dans tous les sens</span>, sur tous les continents, partout dans le monde. Kinshasa n&rsquo;est que le d&eacute;but.
     </div>
   </div>
 </section>
@@ -1066,6 +1307,7 @@ section { padding: 100px 0; }
         </div>
       </div>
     </div>
+    <p style="margin-top:28px;font-size:12px;color:var(--gray-400);font-style:italic;">* T&eacute;moignages illustratifs, bas&eacute;s sur nos entretiens exploratoires avec la diaspora congolaise. Ils seront remplac&eacute;s par des avis v&eacute;rifi&eacute;s lors du lancement.</p>
   </div>
 </section>
 
@@ -1223,14 +1465,14 @@ section { padding: 100px 0; }
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Quand le service sera-t-il disponible ? Comment être parmi les premiers ?<span class="faq-chev">&#9660;</span></button>
         <div class="faq-a"><div class="faq-a-inner">
-          Scellia Connect est actuellement en phase de développement actif. Le lancement officiel est prévu pour <strong>l'automne 2026</strong> sur le corridor France & Belgique → Kinshasa (RDC).
+          Scellia Connect est en phase finale de développement. Le lancement du <strong>pilote corridor RDC est prévu pour Avril 2026</strong> — dans quelques semaines.
           <br><br>
           <strong>La roadmap en bref :</strong>
           <br><br>
-          🔧 <strong>T2 2026 (en cours)</strong> — Développement du MVP : application web complète, paiement séquestre, matching, OTP, notifications.<br>
-          🚀 <strong>T3 2026</strong> — Pilote fermé : 50 à 100 utilisateurs sélectionnés parmi les inscrits sur la liste d'attente. Premiers envois réels sur le corridor.<br>
-          🌍 <strong>T4 2026 – T1 2027</strong> — Ouverture au public sur le corridor France-Belgique → Kinshasa.<br>
-          📱 <strong>2027</strong> — Application mobile (iOS et Android), extension à d'autres corridors (Cameroun, Sénégal, Côte d'Ivoire).
+          🔧 <strong>Mars 2026 (en cours)</strong> — Finalisation du MVP : application web, paiement séquestre, matching, OTP, notifications.<br>
+          🚀 <strong>Avril 2026</strong> — Pilote fermé : 50 à 100 utilisateurs sélectionnés parmi les inscrits. Premiers envois réels sur le corridor France-Belgique → Kinshasa.<br>
+          🌍 <strong>Été 2026</strong> — Ouverture progressive au public sur le corridor France-Belgique → Kinshasa.<br>
+          📱 <strong>2027</strong> — Application mobile (iOS et Android), extension aux corridors Sénégal, Cameroun, Côte d'Ivoire.
           <br><br>
           <span style="color:var(--coral);font-weight:600">Pour être parmi les premiers</span> : inscrivez-vous sur la liste d'attente ci-dessous. Les membres de la liste d'attente bénéficieront d'un <strong>accès prioritaire</strong> au pilote, d'un <strong>tarif de lancement préférentiel</strong>, et d'un badge « Membre fondateur » sur leur profil.
         </div></div>
@@ -1264,14 +1506,11 @@ section { padding: 100px 0; }
         <div class="app-badge-icon">
           <svg viewBox="0 0 48 48" width="42" height="42" fill="none">
             <rect width="48" height="48" rx="12" fill="rgba(255,255,255,0.08)"/>
-            <path d="M14 10.5L27.5 24 14 37.5" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
-            <path d="M34 10.5L20.5 24 34 37.5" stroke="#F44336" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="12" cy="24" r="2.5" fill="#2196F3"/>
-            <circle cx="36" cy="24" r="2.5" fill="#FFEB3B"/>
-            <path d="M12 24L24 10" stroke="#2196F3" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M36 24L24 10" stroke="#FFEB3B" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M12 24L24 38" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M36 24L24 38" stroke="#F44336" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Google Play logo - 4 triangles -->
+            <path d="M12 38.8V9.2L30.5 24Z" fill="#4CAF50"/>
+            <path d="M12 9.2L30.5 24L39 19.2L19.4 8Z" fill="#2196F3"/>
+            <path d="M12 38.8L30.5 24L39 28.8L19.4 40Z" fill="#F44336"/>
+            <path d="M30.5 24L39 19.2L42.5 24L39 28.8Z" fill="#FFC107"/>
           </svg>
         </div>
         <div class="app-badge-text">
@@ -1371,19 +1610,35 @@ async function handleEmailRegistration() {
   try {
     const { error } = await supabase
       .from('waitlist')
-      .insert([{ email: email }]);
+      .insert([{
+        email:  email,
+        type:   'envoyeur',
+        source: 'FR'
+      }]);
 
-    if (error) {
+    if (error && error.code === '23505') {
+      // Duplicate (email, type) — already registered
+      emailInput.value = '';
+      btn.textContent = 'Déjà inscrit ✓';
+      btn.style.background = 'var(--green)';
+    } else if (error) {
       console.error('Supabase error:', error);
       alert("Une erreur s'est produite. Veuillez réessayer.");
       btn.textContent = originalText;
       btn.disabled = false;
     } else {
-      // Success
       emailInput.value = '';
-      btn.textContent = 'Merci !';
+      btn.textContent = 'Inscrit ✓';
       btn.style.background = 'var(--green)';
-      // Keep it disabled to prevent resubmission
+      // Affiche confirmation visuelle
+      const form = emailInput.closest('form') || emailInput.parentElement;
+      const confirm = document.createElement('p');
+      confirm.style.cssText = 'margin-top:10px;font-size:13px;color:var(--green);font-weight:600;';
+      confirm.textContent = '🎉 Bienvenue ! Vous serez parmi les premiers informés du lancement en Avril 2026.';
+      if (!document.getElementById('email-confirm-msg')) {
+        confirm.id = 'email-confirm-msg';
+        form.appendChild(confirm);
+      }
     }
   } catch (err) {
     console.error('Unexpected error:', err);
@@ -1452,6 +1707,24 @@ supabase
   .subscribe();
 
 loadWaitlistCount();
+
+// ─── Estimateur de coût ──────────────────────────────────────────────
+function calcEstimate() {
+  const kg   = Math.max(1, Math.min(30, parseInt(document.getElementById('est-kg').value) || 1));
+  const rate = parseInt(document.getElementById('est-dest').value) || 13;
+  const total = kg * rate;
+  const voyageur = Math.round(total * 0.88);
+  document.getElementById('est-total').textContent   = total;
+  document.getElementById('est-detail').textContent  = kg + ' kg × ' + rate + ' € — tout compris';
+  document.getElementById('est-voyageur').textContent = '€' + voyageur;
+}
+function changeQty(delta) {
+  const input = document.getElementById('est-kg');
+  const val = Math.max(1, Math.min(30, (parseInt(input.value) || 1) + delta));
+  input.value = val;
+  calcEstimate();
+}
+calcEstimate();
 </script>
 </body>
 </html>

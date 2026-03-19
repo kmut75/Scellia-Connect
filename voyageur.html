@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devenez Voyageur Scellia — Rentabilisez vos bagages, aidez la diaspora</title>
+<meta name="description" content="Voyagez vers Kinshasa ? Transportez des colis vérifiés pour la diaspora congolaise et gagnez jusqu'à 230 € par valise (20 kg). Séquestre, assurance, plateforme sécurisée.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --navy: #1B2A4A;
+  --coral: #E8624A;
+  --coral-dark: #C94A32;
+  --orange: #F07830;
+  --gold: #D4A843;
+  --green: #22A559;
+  --cream: #FFF9F5;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-400: #9CA3AF;
+  --gray-600: #4B5563;
+  --warm-50: #FFF5EE;
+  --radius-xl: 24px;
+  --shadow-lg: 0 20px 60px rgba(27,42,74,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: var(--navy); background: #fff; -webkit-font-smoothing: antialiased; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-100);
+}
+.nav-inner {
+  max-width: 1140px; margin: 0 auto; padding: 0 24px;
+  height: 68px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark {
+  width: 34px; height: 34px; background: var(--coral); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.logo-text { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+.logo-sub { font-size: 11px; font-weight: 600; color: var(--coral); letter-spacing: 0.5px; margin-top: -2px; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--gray-600); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  background: var(--coral); color: white !important; padding: 10px 22px;
+  border-radius: 10px; font-weight: 800; font-size: 13px; letter-spacing: 0.2px;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--coral-dark); transform: translateY(-1px); }
+.mobile-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.mobile-menu svg { width: 26px; height: 26px; color: var(--navy); }
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.show {
+    display: flex; flex-direction: column; gap: 4px;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: white; padding: 16px 24px 20px;
+    border-bottom: 1px solid var(--gray-100); box-shadow: 0 8px 24px rgba(27,42,74,0.08);
+    z-index: 99;
+  }
+  .nav-links.show a { padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+  .nav-links.show a:last-child { border-bottom: none; }
+  .nav-links.show .nav-cta { text-align: center; padding: 12px 24px; margin-top: 6px; }
+  .mobile-menu { display: block; }
+}
+
+/* ─── LAYOUT ─── */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+section { padding: 96px 0; }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 140px 0 90px;
+  background: var(--navy);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -20%; right: -10%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(232,98,74,0.18) 0%, transparent 65%);
+  border-radius: 50%;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,98,74,0.15); border: 1px solid rgba(232,98,74,0.3);
+  color: #ffb3a3; font-size: 12px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; color: white;
+  line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
+}
+.hero h1 span { color: var(--coral); }
+.hero-sub {
+  font-size: 17px; color: rgba(255,255,255,0.68); line-height: 1.75; margin-bottom: 36px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-coral {
+  background: var(--coral); color: white; padding: 15px 32px;
+  border-radius: 12px; font-weight: 800; font-size: 15px; text-decoration: none;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-coral:hover { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,98,74,0.35); }
+.btn-outline {
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85);
+  border: 1.5px solid rgba(255,255,255,0.2); padding: 15px 28px;
+  border-radius: 12px; font-weight: 600; font-size: 15px; text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.12); }
+.hero-earn-card {
+  background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl); padding: 36px; color: white;
+}
+.earn-amount {
+  font-size: 64px; font-weight: 900; letter-spacing: -2px; line-height: 1;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,179,163,0.9) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.earn-sub { font-size: 14px; color: rgba(255,255,255,0.55); margin-top: 4px; margin-bottom: 28px; }
+.earn-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 14px; }
+.earn-row:last-child { border-bottom: none; }
+.earn-row-label { color: rgba(255,255,255,0.55); }
+.earn-row-val { font-weight: 700; color: white; }
+.earn-row-val.green { color: #6fdb97; }
+@media (max-width: 860px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-earn-card { max-width: 400px; }
+}
+
+/* ─── SECTION TAGS ─── */
+.section-tag {
+  display: inline-block; background: rgba(232,98,74,0.08); color: var(--coral);
+  font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(26px, 3.5vw, 42px); font-weight: 900; letter-spacing: -1px; line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-desc { font-size: 17px; color: var(--gray-600); line-height: 1.75; }
+.section-desc.ctr { max-width: 620px; margin: 0 auto; text-align: center; }
+.text-center { text-align: center; }
+
+/* ─── HOW IT WORKS ─── */
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 52px;
+}
+.step-card {
+  background: white; border: 1.5px solid var(--gray-100); border-radius: 20px;
+  padding: 32px 24px; text-align: center; transition: all 0.2s;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,42,74,0.09); }
+.step-num {
+  width: 44px; height: 44px; background: var(--coral); color: white;
+  border-radius: 12px; font-size: 18px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+}
+.step-icon { font-size: 36px; margin-bottom: 12px; }
+.step-card h4 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.step-card p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+@media (max-width: 768px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .steps-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── EARNINGS CALCULATOR ─── */
+.earn-section { background: var(--cream); }
+.earn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 52px; }
+.earn-table { background: white; border-radius: 20px; border: 1.5px solid var(--gray-100); overflow: hidden; box-shadow: var(--shadow-lg); }
+.earn-table-head {
+  background: var(--navy); color: white; padding: 20px 28px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+}
+.earn-table-row {
+  padding: 16px 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+  border-bottom: 1px solid var(--gray-100); font-size: 14px; align-items: center;
+}
+.earn-table-row:last-child { border-bottom: none; }
+.earn-table-row.featured { background: rgba(232,98,74,0.04); font-weight: 700; }
+.earn-table-row .kg { font-weight: 600; }
+.earn-table-row .total { color: var(--gray-600); }
+.earn-table-row .share { color: var(--green); font-weight: 800; }
+.earn-info { }
+.earn-info h3 { font-size: 24px; font-weight: 800; margin-bottom: 20px; }
+.earn-detail {
+  display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--gray-100);
+  font-size: 14px; align-items: flex-start;
+}
+.earn-detail:last-child { border-bottom: none; }
+.earn-detail-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.earn-detail-text strong { display: block; font-weight: 700; margin-bottom: 2px; }
+.earn-detail-text span { color: var(--gray-600); line-height: 1.6; }
+@media (max-width: 768px) {
+  .earn-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── SAFETY ─── */
+.safety-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+.safety-card {
+  background: var(--cream); border-radius: 20px; padding: 32px; border: 1.5px solid var(--gray-100); transition: all 0.2s;
+}
+.safety-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(27,42,74,0.08); }
+.safety-icon { font-size: 40px; margin-bottom: 16px; }
+.safety-card h4 { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+.safety-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+@media (max-width: 768px) {
+  .safety-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── REQUIREMENTS ─── */
+.req-section { background: var(--navy); color: white; }
+.req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.req-list { margin-top: 28px; }
+.req-item {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.req-item:last-child { border-bottom: none; }
+.req-check {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px; margin-top: 1px;
+}
+.req-check.ok { background: rgba(34,165,89,0.15); }
+.req-check.warn { background: rgba(212,168,67,0.15); }
+.req-text strong { font-size: 14px; font-weight: 700; color: white; display: block; margin-bottom: 3px; }
+.req-text span { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.req-visual {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl); padding: 40px; text-align: center;
+}
+.req-visual-num {
+  font-size: 80px; font-weight: 900; letter-spacing: -3px;
+  background: linear-gradient(135deg, var(--coral) 0%, var(--orange) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1;
+}
+.req-visual-label { font-size: 15px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+.req-visual-sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+@media (max-width: 768px) {
+  .req-grid { grid-template-columns: 1fr; }
+  .req-visual { display: none; }
+}
+
+/* ─── SIGNUP ─── */
+.signup-section { background: var(--cream); }
+.signup-wrap {
+  max-width: 620px; margin: 0 auto; background: white; border-radius: var(--radius-xl);
+  padding: 52px; box-shadow: var(--shadow-lg); border: 1.5px solid var(--gray-100);
+}
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+.form-input {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-200);
+  border-radius: 10px; font-size: 15px; font-family: inherit; color: var(--navy);
+  outline: none; transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--coral); }
+.form-select {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-200);
+  border-radius: 10px; font-size: 15px; font-family: inherit; color: var(--navy);
+  outline: none; background: white; cursor: pointer; transition: border-color 0.2s;
+}
+.form-select:focus { border-color: var(--coral); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-submit {
+  width: 100%; padding: 16px; background: var(--coral); color: white;
+  border: none; border-radius: 12px; font-size: 16px; font-weight: 800;
+  cursor: pointer; font-family: inherit; transition: all 0.2s; margin-top: 8px;
+}
+.form-submit:hover { background: var(--coral-dark); transform: translateY(-1px); }
+.form-note { font-size: 12px; color: var(--gray-400); text-align: center; margin-top: 14px; line-height: 1.6; }
+.form-success {
+  display: none; text-align: center; padding: 20px;
+  background: rgba(34,165,89,0.08); border-radius: 14px; border: 1.5px solid rgba(34,165,89,0.2);
+  color: var(--green); font-weight: 700; font-size: 15px; margin-top: 16px;
+}
+@media (max-width: 560px) {
+  .signup-wrap { padding: 32px 24px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--navy); color: rgba(255,255,255,0.5); padding: 36px 24px;
+  text-align: center; font-size: 13px; line-height: 1.8;
+}
+footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+footer a:hover { color: white; }
+footer strong { color: white; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">&#128230;</div>
+      <div>
+        <div class="logo-text">Scellia</div>
+        <div class="logo-sub">Connect</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#comment-ca-marche">Fonctionnement</a>
+      <a href="#revenus">Revenus</a>
+      <a href="#securite">S&eacute;curit&eacute;</a>
+      <a href="#conditions">Conditions</a>
+      <a href="index.html" style="color:var(--gray-400);font-size:13px;border:1.5px solid var(--gray-200);border-radius:6px;padding:4px 10px !important">&#8592; Envoyeurs</a>
+      <a href="#inscription" class="nav-cta">Je deviens voyageur</a>
+    </div>
+    <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">&#9992;&#65039; Voyageurs vers Kinshasa</div>
+        <h1>Vos kilos disponibles<br>valent de <span>l'argent.</span></h1>
+        <p class="hero-sub">
+          Vous voyagez vers Kinshasa ? Transportez des colis v&eacute;rifi&eacute;s pour la diaspora congolaise dans vos bagages. S&eacute;questre garanti, contenu contr&ocirc;l&eacute;, droit de refus total.
+        </p>
+        <div class="hero-ctas">
+          <a href="#inscription" class="btn-coral">&#128293; Je m'inscris comme voyageur</a>
+          <a href="#comment-ca-marche" class="btn-outline">Comment &ccedil;a fonctionne &darr;</a>
+        </div>
+      </div>
+      <div class="hero-earn-card">
+        <div class="earn-amount">&euro;230</div>
+        <div class="earn-sub">jusqu&rsquo;&agrave; 230 &euro; par valise (20 kg)</div>
+        <div class="earn-row">
+          <span class="earn-row-label">R&eacute;mun&eacute;ration</span>
+          <span class="earn-row-val">11,50 &euro;/kg (part voyageur)</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-row-label">S&eacute;questre</span>
+          <span class="earn-row-val green">&#10003; Garanti avant le vol</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-row-label">Contenu</span>
+          <span class="earn-row-val green">&#10003; V&eacute;rifi&eacute; + photos</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-row-label">Droit de refus</span>
+          <span class="earn-row-val green">&#10003; Total &amp; sans justification</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-row-label">Assurance colis</span>
+          <span class="earn-row-val green">&#10003; Incluse jusqu&rsquo;&agrave; 500 &euro;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT CA MARCHE -->
+<section id="comment-ca-marche" style="background:#fff">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-tag">Fonctionnement</div>
+      <h2 class="section-title">Simple. S&eacute;curis&eacute;. 4 &eacute;tapes.</h2>
+      <p class="section-desc ctr">De votre inscription jusqu&rsquo;&agrave; la r&eacute;mun&eacute;ration — tout est pris en charge par Scellia.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-icon">&#128203;</div>
+        <h4>Vous publiez votre vol</h4>
+        <p>Indiquez votre trajet, votre date de d&eacute;part et vos kilos disponibles. La plateforme g&egrave;re le matching automatiquement.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-icon">&#128272;</div>
+        <h4>Vous acceptez une demande</h4>
+        <p>Consultez la description du colis, les photos, le poids. Vous acceptez ou refusez librement — aucune obligation.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-icon">&#9992;&#65039;</div>
+        <h4>Vous transportez</h4>
+        <p>L&rsquo;argent est d&eacute;j&agrave; en s&eacute;questre. Vous remettez le colis au destinataire et confirmez la livraison avec un OTP.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-icon">&#128176;</div>
+        <h4>Vous &ecirc;tes pay&eacute;</h4>
+        <p>Le s&eacute;questre est lib&eacute;r&eacute; automatiquement apr&egrave;s confirmation. Virement sur votre compte sous 24–48h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUS -->
+<section id="revenus" class="earn-section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-tag">Revenus</div>
+      <h2 class="section-title">Combien pouvez-vous gagner&nbsp;?</h2>
+      <p class="section-desc ctr">Votre r&eacute;mun&eacute;ration est de <strong>11,50 &euro;/kg</strong> (88 % du tarif total de 13 &euro;/kg). Une valise de 20 kg = <strong>230 &euro;</strong>. Deux valises = <strong>460 &euro;</strong>.</p>
+    </div>
+    <div class="earn-grid">
+      <div class="earn-table">
+        <div class="earn-table-head">
+          <span>Kilos transportés</span>
+          <span>Tarif total</span>
+          <span>Votre part</span>
+        </div>
+        <div class="earn-table-row">
+          <span class="kg">5 kg</span>
+          <span class="total">65 &euro;</span>
+          <span class="share">57 &euro;</span>
+        </div>
+        <div class="earn-table-row">
+          <span class="kg">10 kg</span>
+          <span class="total">130 &euro;</span>
+          <span class="share">114 &euro;</span>
+        </div>
+        <div class="earn-table-row">
+          <span class="kg">15 kg</span>
+          <span class="total">195 &euro;</span>
+          <span class="share">172 &euro;</span>
+        </div>
+        <div class="earn-table-row featured">
+          <span class="kg">20 kg &#11088; (1 valise)</span>
+          <span class="total">260 &euro;</span>
+          <span class="share">230 &euro;</span>
+        </div>
+        <div class="earn-table-row">
+          <span class="kg">23 kg (max)</span>
+          <span class="total">299 &euro;</span>
+          <span class="share">263 &euro;</span>
+        </div>
+      </div>
+      <div class="earn-info">
+        <h3>Ce que comprend votre r&eacute;mun&eacute;ration</h3>
+        <div class="earn-detail">
+          <div class="earn-detail-icon">&#128176;</div>
+          <div class="earn-detail-text">
+            <strong>Paiement garanti avant le vol</strong>
+            <span>Le montant est bloqu&eacute; en s&eacute;questre d&egrave;s que vous acceptez la mission. Vous ne partez jamais sans garantie.</span>
+          </div>
+        </div>
+        <div class="earn-detail">
+          <div class="earn-detail-icon">&#128293;</div>
+          <div class="earn-detail-text">
+            <strong>Bonus de ponctualit&eacute;</strong>
+            <span>Un bonus de 5 &euro; est attribu&eacute; &agrave; chaque livraison effectu&eacute;e dans les d&eacute;lais convenus.</span>
+          </div>
+        </div>
+        <div class="earn-detail">
+          <div class="earn-detail-icon">&#11088;</div>
+          <div class="earn-detail-text">
+            <strong>Programme fid&eacute;lit&eacute;</strong>
+            <span>Plus vous voyagez, plus votre profil est mis en avant. Voyageurs &laquo; Certifi&eacute;s &raquo; acc&egrave;dent aux colis prioritaires.</span>
+          </div>
+        </div>
+        <div class="earn-detail">
+          <div class="earn-detail-icon">&#128274;</div>
+          <div class="earn-detail-text">
+            <strong>Assurance incluse</strong>
+            <span>Chaque mission est couverte jusqu&rsquo;&agrave; 500 &euro;. Vous n&rsquo;&ecirc;tes jamais expos&eacute; en cas de perte ou de dommage.</span>
+          </div>
+        </div>
+        <a href="#inscription" class="btn-coral" style="margin-top:28px;display:inline-flex">Je commence maintenant &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITE -->
+<section id="securite" style="background:#fff">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-tag">S&eacute;curit&eacute;</div>
+      <h2 class="section-title">Vous &ecirc;tes prot&eacute;g&eacute; &agrave; chaque &eacute;tape.</h2>
+      <p class="section-desc ctr">Scellia est con&ccedil;u pour que vous ne preniez aucun risque douanier, financier ou personnel.</p>
+    </div>
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="safety-icon">&#128247;</div>
+        <h4>Photos obligatoires du contenu</h4>
+        <p>L&rsquo;envoyeur doit fournir des photos du colis ouvert avant envoi. Vous voyez exactement ce que vous transportez.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">&#128683;</div>
+        <h4>Droit de refus total</h4>
+        <p>Vous pouvez refuser n&rsquo;importe quelle demande, &agrave; n&rsquo;importe quel moment, sans justification. Votre d&eacute;cision est souveraine.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">&#128274;</div>
+        <h4>S&eacute;questre avant le vol</h4>
+        <p>Le paiement est bloqu&eacute; d&egrave;s l&rsquo;acceptation. Vous ne d&eacute;pendez jamais de la bonne volont&eacute; de l&rsquo;envoyeur pour &ecirc;tre pay&eacute;.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">&#128220;</div>
+        <h4>Liste des objets interdits</h4>
+        <p>Une liste claire des articles non accept&eacute;s (espèces, documents officiels, produits r&eacute;glement&eacute;s) est int&eacute;gr&eacute;e &agrave; chaque mission.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">&#127881;</div>
+        <h4>Profils v&eacute;rifi&eacute;s</h4>
+        <p>Chaque envoyeur est v&eacute;rifi&eacute; (pi&egrave;ce d&rsquo;identit&eacute;, num&eacute;ro de t&eacute;l&eacute;phone, adresse) avant de pouvoir publier une demande.</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">&#128737;</div>
+        <h4>Assurance 500 &euro; incluse</h4>
+        <p>En cas de perte ou de dommage constat&eacute; &agrave; l&rsquo;arriv&eacute;e, l&rsquo;assurance prend en charge jusqu&rsquo;&agrave; 500 &euro; par mission.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<section id="conditions" class="req-section">
+  <div class="container">
+    <div class="req-grid">
+      <div>
+        <div class="section-tag" style="background:rgba(232,98,74,0.15);color:#ffb3a3">Conditions</div>
+        <h2 class="section-title" style="color:white">Ce qu&rsquo;il vous faut pour commencer.</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,0.6)">Les conditions sont volontairement simples. Pas de statut professionnel requis.</p>
+        <div class="req-list">
+          <div class="req-item">
+            <div class="req-check ok">&#10003;</div>
+            <div class="req-text">
+              <strong>Un vol confirm&eacute; vers Kinshasa (RDC)</strong>
+              <span>Depuis Paris, Bruxelles, Istanbul, ou Addis-Abeba. Tout op&eacute;rateur accept&eacute;.</span>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-check ok">&#10003;</div>
+            <div class="req-text">
+              <strong>Kilos disponibles dans vos bagages</strong>
+              <span>M&ecirc;me 5 kg vous permettent de gagner 57 &euro;. Vous choisissez combien vous acceptez.</span>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-check ok">&#10003;</div>
+            <div class="req-text">
+              <strong>Pi&egrave;ce d&rsquo;identit&eacute; valide</strong>
+              <span>Pour la v&eacute;rification de votre profil. Passeport ou carte nationale d&rsquo;identit&eacute;.</span>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-check ok">&#10003;</div>
+            <div class="req-text">
+              <strong>Compte bancaire europ&eacute;en (IBAN)</strong>
+              <span>Pour recevoir votre r&eacute;mun&eacute;ration dans les 24 &agrave; 48h apr&egrave;s livraison.</span>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-check warn">&#9888;</div>
+            <div class="req-text">
+              <strong>18 ans minimum</strong>
+              <span>Requis pour s&rsquo;inscrire sur la plateforme et signer les conditions d&rsquo;utilisation.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="req-visual">
+        <div class="req-visual-num">88%</div>
+        <div class="req-visual-label">du tarif vous revient directement</div>
+        <div class="req-visual-sub">11,50 &euro;/kg sur un tarif de 13 &euro;/kg</div>
+        <div style="margin-top:32px;border-top:1px solid rgba(255,255,255,0.1);padding-top:28px">
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700">Les 12 % restants couvrent</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:2">
+            S&eacute;questre &amp; traitement bancaire<br>
+            Assurance colis (500 &euro; max)<br>
+            Maintenance de la plateforme<br>
+            Support 7j/7
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIPTION -->
+<section id="inscription" class="signup-section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:44px">
+      <div class="section-tag">&#128293; Pilote Avril 2026</div>
+      <h2 class="section-title">Rejoignez les premiers voyageurs Scellia.</h2>
+      <p class="section-desc ctr">Les 100 premiers voyageurs inscrits b&eacute;n&eacute;ficient du badge <strong>&laquo;&nbsp;Voyageur Fondateur&nbsp;&raquo;</strong>, d&rsquo;un acc&egrave;s prioritaire aux missions et d&rsquo;un tarif pr&eacute;f&eacute;rentiel garanti pour les 6 premiers mois.</p>
+    </div>
+    <div class="signup-wrap">
+      <form id="voyageur-form" onsubmit="submitVoyageur(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="v-prenom">Pr&eacute;nom</label>
+            <input class="form-input" id="v-prenom" type="text" placeholder="Marie" required>
+          </div>
+          <div class="form-group">
+            <label for="v-nom">Nom</label>
+            <input class="form-input" id="v-nom" type="text" placeholder="Ngoma" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="v-email">Adresse e-mail</label>
+          <input class="form-input" id="v-email" type="email" placeholder="marie.ngoma@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="v-tel">T&eacute;l&eacute;phone (WhatsApp de pr&eacute;f&eacute;rence)</label>
+          <input class="form-input" id="v-tel" type="tel" placeholder="+33 6 12 34 56 78">
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="v-depart">Ville de d&eacute;part</label>
+            <select class="form-select" id="v-depart">
+              <option value="">S&eacute;lectionner...</option>
+              <option>Paris</option>
+              <option>Bruxelles</option>
+              <option>Lyon</option>
+              <option>Lille</option>
+              <option>Amsterdam</option>
+              <option>Londres</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="v-freq">Fr&eacute;quence de voyage</label>
+            <select class="form-select" id="v-freq">
+              <option value="">S&eacute;lectionner...</option>
+              <option>1 fois par an</option>
+              <option>2&ndash;3 fois par an</option>
+              <option>4 fois et plus par an</option>
+              <option>Premier voyage pr&eacute;vu</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="v-kilos">Kilos disponibles par voyage (estimation)</label>
+          <select class="form-select" id="v-kilos">
+            <option value="">S&eacute;lectionner...</option>
+            <option>Moins de 5 kg</option>
+            <option>5 &agrave; 10 kg</option>
+            <option>10 &agrave; 15 kg</option>
+            <option>Plus de 15 kg</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">&#128293; Je rejoins les premiers voyageurs</button>
+        <p class="form-note">En vous inscrivant, vous acceptez d&rsquo;&ecirc;tre contact&eacute; par l&rsquo;&eacute;quipe Scellia pour la phase pilote. Aucune obligation, annulation gratuite &agrave; tout moment.</p>
+      </form>
+      <div class="form-success" id="v-success">
+        &#127881; Inscription enregistr&eacute;e ! L&rsquo;&eacute;quipe Scellia vous contactera d&egrave;s l&rsquo;ouverture du pilote en Avril 2026. Merci de rejoindre l&rsquo;aventure.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Scellia Connect</strong> &mdash; La plateforme d&rsquo;entraide des diasporas africaines<br>
+  <a href="index.html">&#8592; Retour &agrave; l&rsquo;accueil envoyeurs</a> &bull;
+  <a href="index-en.html">English version</a>
+  <br><br>
+  <small>Paris, France &mdash; Lancement pilote : Avril 2026 &mdash; Corridor France-Belgique &#8596; Kinshasa (RDC)</small>
+</footer>
+
+<script>
+const SUPABASE_URL  = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
+
+async function submitVoyageur(e) {
+  e.preventDefault();
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+
+  const payload = {
+    email:              document.getElementById('v-email').value.trim(),
+    type:               'voyageur',
+    source:             'FR',
+    prenom:             document.getElementById('v-prenom').value.trim(),
+    nom:                document.getElementById('v-nom').value.trim(),
+    telephone:          document.getElementById('v-tel').value.trim(),
+    ville_depart:       document.getElementById('v-depart').value,
+    frequence_voyage:   document.getElementById('v-freq').value,
+    kilos_disponibles:  document.getElementById('v-kilos').value
+  };
+
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.status === 409) {
+      // Déjà inscrit comme voyageur
+      document.getElementById('voyageur-form').style.display = 'none';
+      document.getElementById('v-success').innerHTML =
+        '✅ Vous êtes déjà inscrit comme voyageur. L\'équipe Scellia vous contactera avant le pilote d\'Avril 2026.';
+      document.getElementById('v-success').style.display = 'block';
+    } else {
+      document.getElementById('voyageur-form').style.display = 'none';
+      document.getElementById('v-success').style.display = 'block';
+    }
+  } catch (err) {
+    // Fallback silencieux — ne pas bloquer l'UX sur une erreur réseau
+    document.getElementById('voyageur-form').style.display = 'none';
+    document.getElementById('v-success').style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
