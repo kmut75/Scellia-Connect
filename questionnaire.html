@@ -387,7 +387,7 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
     <h3>&#128172; Message de diffusion</h3>
     <div class="msg-box" id="share-msg">
       <button class="copy-btn" id="copy-btn" onclick="copyShareMsg()">Copier</button>
-      Bonjour la communaute ! Nous preparons un nouveau service d'entraide entre particuliers pour l'envoi de colis securise entre la France/Belgique et Kinshasa. Paiement securise, suivi de vol en temps reel, assurance colis incluse. Avant de lancer, nous souhaitons comprendre vos besoins et vos habitudes. Ce questionnaire anonyme prend 3 minutes. Vos reponses nous aideront a creer un service qui repond vraiment a vos attentes. Merci d'avance !
+      Bonjour la communaute ! Nous preparons un nouveau service d'entraide entre particuliers pour l'envoi de colis securise entre la France/Belgique et la RDC (Kinshasa et Lubumbashi). Paiement securise, suivi de vol en temps reel, assurance colis incluse. Avant de lancer, nous souhaitons comprendre vos besoins et vos habitudes. Ce questionnaire anonyme prend 3 minutes. Vos reponses nous aideront a creer un service qui repond vraiment a vos attentes. Merci d'avance !
     </div>
   </div>
 
@@ -721,15 +721,8 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--navy
 
 </div>
 
-<!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+<!-- ─── UI Script (indépendant du CDN Supabase) ─── -->
 <script>
-// Initialize Supabase Client (guarded — CDN may not be loaded yet)
-const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
-let supabase = null;
-try { supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e) { console.warn('Supabase CDN not ready:', e); }
 // ─── Skip logic Q3 : si "Jamais", masquer sections 2-3 et aller a section 4 ───
 function applySkipLogic(inputName, inputValue) {
   if (inputName === 'q3') {
@@ -752,22 +745,18 @@ function applySkipLogic(inputName, inputValue) {
   }
 }
 
-// ─── Option selection logic ───
-document.querySelectorAll('.option-item').forEach(item => {
-  item.addEventListener('click', function(e) {
-    e.preventDefault();
-    const input = this.querySelector('input');
-    if (input.type === 'radio') {
-      const name = input.name;
-      document.querySelectorAll('input[name="' + name + '"]').forEach(r => {
+// ─── Option selection logic (change event sur les inputs — sans double-déclenchement) ───
+document.querySelectorAll('.option-item input').forEach(function(input) {
+  input.addEventListener('change', function() {
+    if (this.type === 'radio') {
+      var name = this.name;
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
         r.closest('.option-item').classList.remove('selected');
       });
-      input.checked = true;
-      this.classList.add('selected');
-      applySkipLogic(name, input.value);
+      this.closest('.option-item').classList.add('selected');
+      applySkipLogic(name, this.value);
     } else {
-      input.checked = !input.checked;
-      this.classList.toggle('selected', input.checked);
+      this.closest('.option-item').classList.toggle('selected', this.checked);
     }
     updateProgress();
   });
@@ -923,6 +912,18 @@ function copyShareMsg() {
     setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
   });
 }
+
+</script>
+
+<!-- Supabase CDN (chargé après le JS UI pour ne pas bloquer) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- ─── Script Supabase (dépend du CDN) ─── -->
+<script>
+const SUPABASE_URL = 'https://fgmoqfkvhetxuxgmqhvm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnbW9xZmt2aGV0eHV4Z21xaHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjY1NjcsImV4cCI6MjA4OTM0MjU2N30.RQw8wRnHJgcQJv8bcxtB3BGAPslN3vZN59y8du5-wGQ';
+let supabase = null;
+try { supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e) { console.warn('Supabase CDN not ready:', e); }
 
 // ─── Submit ───
 async function submitForm() {
